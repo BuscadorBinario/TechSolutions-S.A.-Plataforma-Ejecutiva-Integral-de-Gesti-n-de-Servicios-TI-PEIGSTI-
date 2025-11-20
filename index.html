@@ -12,6 +12,7 @@
             --success: #4caf50;
             --warning: #ff9800;
             --danger: #f44336;
+            --info: #2196f3;
             --bg-main: #f5f7fa;
             --bg-card: #ffffff;
             --text-main: #2c3e50;
@@ -377,6 +378,7 @@
         .btn-success { background: var(--success); }
         .btn-warning { background: var(--warning); }
         .btn-danger { background: var(--danger); }
+        .btn-info { background: var(--info); }
 
         .alert-banner {
             background: linear-gradient(135deg, var(--warning) 0%, #f57c00 100%);
@@ -437,7 +439,7 @@
             background: var(--bg-card);
             border-radius: 12px;
             padding: 2rem;
-            max-width: 600px;
+            max-width: 800px;
             width: 100%;
             max-height: 80vh;
             overflow-y: auto;
@@ -494,6 +496,7 @@
 
         tbody tr {
             transition: background 0.3s;
+            cursor: pointer;
         }
 
         tbody tr:hover {
@@ -504,6 +507,140 @@
         .priority-high { color: var(--warning); font-weight: 600; }
         .priority-medium { color: var(--primary-light); font-weight: 600; }
         .priority-low { color: var(--success); font-weight: 600; }
+
+        .status-badge {
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            display: inline-block;
+        }
+
+        .status-online { background: #e8f5e9; color: #2e7d32; }
+        .status-warning { background: #fff3e0; color: #e65100; }
+        .status-offline { background: #ffebee; color: #c62828; }
+
+        [data-theme="dark"] .status-online { background: #1b5e20; color: #a5d6a7; }
+        [data-theme="dark"] .status-warning { background: #e65100; color: #ffcc80; }
+        [data-theme="dark"] .status-offline { background: #b71c1c; color: #ef9a9a; }
+
+        .filter-bar {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .filter-input {
+            flex: 1;
+            min-width: 200px;
+            padding: 0.75rem;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            background: var(--bg-main);
+            color: var(--text-main);
+            font-size: 0.9rem;
+        }
+
+        .filter-input:focus {
+            outline: none;
+            border-color: var(--primary-light);
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .stat-card {
+            background: linear-gradient(135deg, var(--primary-light), var(--primary-mid));
+            color: white;
+            padding: 1.5rem;
+            border-radius: 12px;
+            text-align: center;
+        }
+
+        .stat-value {
+            font-size: 2.5rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+
+        .timeline {
+            position: relative;
+            padding-left: 2rem;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: var(--border);
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 2rem;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -2.5rem;
+            top: 0;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: var(--primary-light);
+            border: 3px solid var(--bg-card);
+        }
+
+        .timeline-content {
+            background: var(--bg-main);
+            padding: 1rem;
+            border-radius: 8px;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 8px;
+            background: var(--bg-main);
+            border-radius: 4px;
+            overflow: hidden;
+            margin-top: 0.5rem;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--success), var(--primary-light));
+            transition: width 0.5s ease;
+        }
+
+        .notification-badge {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            background: var(--danger);
+            color: white;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.7rem;
+            font-weight: bold;
+        }
 
         @media (max-width: 768px) {
             .header-content {
@@ -532,6 +669,8 @@
         .text-center { text-align: center; }
         .mt-1 { margin-top: 1rem; }
         .mb-1 { margin-bottom: 1rem; }
+        .mt-2 { margin-top: 2rem; }
+        .mb-2 { margin-bottom: 2rem; }
     </style>
 </head>
 <body>
@@ -583,6 +722,10 @@
                 <button class="tab active" onclick="switchTab('overview')">📊 Visión General</button>
                 <button class="tab" onclick="switchTab('incidents')">🚨 Incidentes</button>
                 <button class="tab" onclick="switchTab('services')">🔧 Servicios TI</button>
+                <button class="tab" onclick="switchTab('changes')">🔄 Gestión de Cambios</button>
+                <button class="tab" onclick="switchTab('problems')">🔍 Problemas</button>
+                <button class="tab" onclick="switchTab('capacity')">📈 Capacidad</button>
+                <button class="tab" onclick="switchTab('reports')">📋 Reportes</button>
             </div>
 
             <div class="tab-content active" id="overview">
@@ -595,14 +738,21 @@
                     </div>
                     <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); gap: 2rem;">
                         <div>
-                            <h4 class="text-center mb-1">Distribución de Incidentes</h4>
+                            <h4 class="text-center mb-1">Distribución de Incidentes por Prioridad</h4>
                             <canvas id="donutChart" width="400" height="400"></canvas>
                         </div>
                         <div>
-                            <h4 class="text-center mb-1">Tendencia Mensual</h4>
+                            <h4 class="text-center mb-1">Tendencia Mensual de Incidentes</h4>
                             <canvas id="lineChart" width="400" height="400"></canvas>
                         </div>
                     </div>
+                </div>
+
+                <div class="section">
+                    <div class="section-header">
+                        <h3 class="section-title">⏱️ Actividad Reciente</h3>
+                    </div>
+                    <div class="timeline" id="activityTimeline"></div>
                 </div>
             </div>
 
@@ -610,8 +760,49 @@
                 <div class="section">
                     <div class="section-header">
                         <h3 class="section-title">🚨 Gestión de Incidentes</h3>
-                        <button class="btn" onclick="exportData()">📥 Exportar</button>
+                        <div class="section-actions">
+                            <button class="btn btn-success" onclick="openNewIncidentModal()">➕ Nuevo Incidente</button>
+                            <button class="btn btn-info" onclick="refreshIncidents()">🔄 Actualizar</button>
+                            <button class="btn" onclick="exportData('incidents')">📥 Exportar</button>
+                        </div>
                     </div>
+
+                    <div class="filter-bar">
+                        <input type="text" class="filter-input" placeholder="🔍 Buscar incidentes..." onkeyup="filterTable('incidentsTable', this.value)">
+                        <select class="filter-input" onchange="filterByPriority(this.value)">
+                            <option value="">Todas las prioridades</option>
+                            <option value="critical">Crítico</option>
+                            <option value="high">Alto</option>
+                            <option value="medium">Medio</option>
+                            <option value="low">Bajo</option>
+                        </select>
+                        <select class="filter-input" onchange="filterByStatus(this.value)">
+                            <option value="">Todos los estados</option>
+                            <option value="Abierto">Abierto</option>
+                            <option value="En Progreso">En Progreso</option>
+                            <option value="Resuelto">Resuelto</option>
+                        </select>
+                    </div>
+
+                    <div class="stats-grid">
+                        <div class="stat-card">
+                            <div class="stat-value" id="totalIncidents">0</div>
+                            <div class="stat-label">Total Incidentes</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-value" id="openIncidents">0</div>
+                            <div class="stat-label">Abiertos</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-value" id="criticalIncidents">0</div>
+                            <div class="stat-label">Críticos</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-value" id="avgResolutionTime">0h</div>
+                            <div class="stat-label">Tiempo Promedio</div>
+                        </div>
+                    </div>
+
                     <div class="table-container">
                         <table id="incidentsTable">
                             <thead>
@@ -622,6 +813,8 @@
                                     <th>Estado</th>
                                     <th>Servicio</th>
                                     <th>Asignado</th>
+                                    <th>Fecha Apertura</th>
+                                    <th>Acciones</th>
                                 </tr>
                             </thead>
                             <tbody id="incidentsTableBody"></tbody>
@@ -633,9 +826,147 @@
             <div class="tab-content" id="services">
                 <div class="section">
                     <div class="section-header">
-                        <h3 class="section-title">🔧 Mapa de Servicios TI</h3>
+                        <h3 class="section-title">🔧 Catálogo de Servicios TI</h3>
+                        <button class="btn" onclick="refreshServices()">🔄 Actualizar Estado</button>
                     </div>
-                    <div id="serviceMap" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1rem;"></div>
+                    <div id="serviceMap" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1rem;"></div>
+                </div>
+
+                <div class="section">
+                    <div class="section-header">
+                        <h3 class="section-title">📊 Monitoreo de SLA</h3>
+                    </div>
+                    <div id="slaMonitoring"></div>
+                </div>
+            </div>
+
+            <div class="tab-content" id="changes">
+                <div class="section">
+                    <div class="section-header">
+                        <h3 class="section-title">🔄 Gestión de Cambios</h3>
+                        <button class="btn btn-success" onclick="openNewChangeModal()">➕ Solicitar Cambio</button>
+                    </div>
+                    <div class="table-container">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Descripción</th>
+                                    <th>Tipo</th>
+                                    <th>Impacto</th>
+                                    <th>Estado</th>
+                                    <th>Fecha Planificada</th>
+                                    <th>Solicitante</th>
+                                </tr>
+                            </thead>
+                            <tbody id="changesTableBody"></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tab-content" id="problems">
+                <div class="section">
+                    <div class="section-header">
+                        <h3 class="section-title">🔍 Gestión de Problemas</h3>
+                        <button class="btn btn-warning" onclick="openNewProblemModal()">➕ Registrar Problema</button>
+                    </div>
+                    <div class="table-container">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Descripción</th>
+                                    <th>Categoría</th>
+                                    <th>Severidad</th>
+                                    <th>Incidentes Relacionados</th>
+                                    <th>Estado</th>
+                                    <th>Asignado</th>
+                                </tr>
+                            </thead>
+                            <tbody id="problemsTableBody"></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tab-content" id="capacity">
+                <div class="section">
+                    <div class="section-header">
+                        <h3 class="section-title">📈 Gestión de Capacidad</h3>
+                    </div>
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem;" id="capacityMetrics"></div>
+                </div>
+
+                <div class="section mt-2">
+                    <h3 class="section-title mb-1">📊 Uso de Recursos en Tiempo Real</h3>
+                    <canvas id="capacityChart" width="800" height="300"></canvas>
+                </div>
+            </div>
+
+            <div class="tab-content" id="reports">
+                <div class="section">
+                    <div class="section-header">
+                        <h3 class="section-title">📋 Centro de Reportes</h3>
+                    </div>
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem;">
+                        <div class="kpi-card" onclick="generateReport('monthly')">
+                            <div class="kpi-icon">📊</div>
+                            <div class="kpi-title">Reporte Mensual</div>
+                            <p style="margin-top: 1rem; color: var(--text-secondary);">Resumen completo del desempeño mensual</p>
+                            <button class="btn btn-small mt-1">Generar</button>
+                        </div>
+                        <div class="kpi-card" onclick="generateReport('sla')">
+                            <div class="kpi-icon">📈</div>
+                            <div class="kpi-title">Cumplimiento SLA</div>
+                            <p style="margin-top: 1rem; color: var(--text-secondary);">Análisis de acuerdos de nivel de servicio</p>
+                            <button class="btn btn-small mt-1">Generar</button>
+                        </div>
+                        <div class="kpi-card" onclick="generateReport('incidents')">
+                            <div class="kpi-icon">🚨</div>
+                            <div class="kpi-title">Análisis de Incidentes</div>
+                            <p style="margin-top: 1rem; color: var(--text-secondary);">Estadísticas detalladas de incidentes</p>
+                            <button class="btn btn-small mt-1">Generar</button>
+                        </div>
+                        <div class="kpi-card" onclick="generateReport('availability')">
+                            <div class="kpi-icon">✅</div>
+                            <div class="kpi-title">Disponibilidad de Servicios</div>
+                            <p style="margin-top: 1rem; color: var(--text-secondary);">Métricas de uptime y downtime</p>
+                            <button class="btn btn-small mt-1">Generar</button>
+                        </div>
+                        <div class="kpi-card" onclick="generateReport('changes')">
+                            <div class="kpi-icon">🔄</div>
+                            <div class="kpi-title">Gestión de Cambios</div>
+                            <p style="margin-top: 1rem; color: var(--text-secondary);">Reporte de cambios implementados</p>
+                            <button class="btn btn-small mt-1">Generar</button>
+                        </div>
+                        <div class="kpi-card" onclick="generateReport('custom')">
+                            <div class="kpi-icon">⚙️</div>
+                            <div class="kpi-title">Reporte Personalizado</div>
+                            <p style="margin-top: 1rem; color: var(--text-secondary);">Configura tu propio reporte</p>
+                            <button class="btn btn-small mt-1">Configurar</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="section mt-2">
+                    <div class="section-header">
+                        <h3 class="section-title">📁 Historial de Reportes Generados</h3>
+                    </div>
+                    <div class="table-container">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Fecha</th>
+                                    <th>Tipo de Reporte</th>
+                                    <th>Periodo</th>
+                                    <th>Generado Por</th>
+                                    <th>Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody id="reportsHistoryBody"></tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>
@@ -655,7 +986,12 @@
         let dataStore = {
             kpis: [],
             incidents: [],
-            services: []
+            services: [],
+            changes: [],
+            problems: [],
+            capacity: [],
+            activities: [],
+            reports: []
         };
 
         window.addEventListener('DOMContentLoaded', () => {
@@ -697,6 +1033,10 @@
             const html = document.documentElement;
             const currentTheme = html.getAttribute('data-theme');
             html.setAttribute('data-theme', currentTheme === 'dark' ? '' : 'dark');
+            setTimeout(() => {
+                renderCharts();
+                renderCapacityChart();
+            }, 100);
         }
 
         function switchTab(tabName) {
@@ -705,37 +1045,143 @@
             
             event.target.classList.add('active');
             document.getElementById(tabName).classList.add('active');
+
+            if (tabName === 'capacity') {
+                setTimeout(() => renderCapacityChart(), 100);
+            }
         }
 
         function generateInitialData() {
             dataStore.kpis = [
-                { id: 1, title: 'Disponibilidad General', value: 99.7, unit: '%', trend: 'up', icon: '📊' },
-                { id: 2, title: 'Incidentes Abiertos', value: 23, unit: '', trend: 'down', icon: '🚨' },
-                { id: 3, title: 'Cambios Pendientes', value: 12, unit: '', trend: 'neutral', icon: '🔄' },
-                { id: 4, title: 'MTTR Promedio', value: 2.3, unit: 'h', trend: 'down', icon: '⏱️' },
-                { id: 5, title: 'Satisfacción Usuario', value: 4.6, unit: '/5', trend: 'up', icon: '😊' },
-                { id: 6, title: 'SLA Cumplimiento', value: 97.2, unit: '%', trend: 'up', icon: '✅' },
-                { id: 7, title: 'Problemas Activos', value: 5, unit: '', trend: 'neutral', icon: '🔧' },
-                { id: 8, title: 'Riesgos Críticos', value: 3, unit: '', trend: 'down', icon: '⚠️' }
+                { id: 1, title: 'Disponibilidad General', value: 99.7, unit: '%', trend: 'up', icon: '📊', target: 99.5 },
+                { id: 2, title: 'Incidentes Abiertos', value: 23, unit: '', trend: 'down', icon: '🚨', target: 20 },
+                { id: 3, title: 'Cambios Pendientes', value: 12, unit: '', trend: 'neutral', icon: '🔄', target: 15 },
+                { id: 4, title: 'MTTR Promedio', value: 2.3, unit: 'h', trend: 'down', icon: '⏱️', target: 2.5 },
+                { id: 5, title: 'Satisfacción Usuario', value: 4.6, unit: '/5', trend: 'up', icon: '😊', target: 4.5 },
+                { id: 6, title: 'SLA Cumplimiento', value: 97.2, unit: '%', trend: 'up', icon: '✅', target: 95 },
+                { id: 7, title: 'Problemas Activos', value: 5, unit: '', trend: 'neutral', icon: '🔧', target: 8 },
+                { id: 8, title: 'Riesgos Críticos', value: 3, unit: '', trend: 'down', icon: '⚠️', target: 5 },
+                { id: 9, title: 'Tickets Resueltos Hoy', value: 45, unit: '', trend: 'up', icon: '✔️', target: 40 },
+                { id: 10, title: 'Tasa de Primera Resolución', value: 78, unit: '%', trend: 'up', icon: '🎯', target: 75 },
+                { id: 11, title: 'Llamadas en Cola', value: 8, unit: '', trend: 'neutral', icon: '📞', target: 10 },
+                { id: 12, title: 'Uso CPU Promedio', value: 67, unit: '%', trend: 'up', icon: '💻', target: 80 }
+            ];
+
+            const incidentTitles = [
+                'Falla en servidor de correo electrónico',
+                'Error de autenticación en portal web',
+                'Pérdida de conectividad en red LAN',
+                'Ralentización en aplicación ERP',
+                'Caída del servicio de base de datos',
+                'Problema con impresoras de red',
+                'Error en sistema de respaldo',
+                'Fallo en aplicación CRM',
+                'Corrupción de archivos en servidor',
+                'Problema de rendimiento en portal',
+                'Error en actualización de software',
+                'Falla en sistema de telefonía IP',
+                'Problema con VPN corporativa',
+                'Error en sistema de gestión documental',
+                'Fallo en servidor de aplicaciones'
             ];
 
             for (let i = 1; i <= 15; i++) {
+                const openDate = new Date();
+                openDate.setDate(openDate.getDate() - Math.floor(Math.random() * 10));
                 dataStore.incidents.push({
                     id: `INC-${1000 + i}`,
-                    title: `Incidente ${i}: ${getRandomItem(['Caída servicio', 'Error aplicación', 'Problema red'])}`,
+                    title: incidentTitles[i - 1],
                     priority: getRandomItem(['critical', 'high', 'medium', 'low']),
-                    status: getRandomItem(['Abierto', 'En Progreso', 'Resuelto']),
-                    service: getRandomItem(['Email', 'ERP', 'CRM', 'Portal']),
-                    assigned: getRandomItem(['Juan Pérez', 'Ana García', 'Carlos López'])
+                    status: getRandomItem(['Abierto', 'En Progreso', 'Resuelto', 'Cerrado']),
+                    service: getRandomItem(['Email', 'ERP', 'CRM', 'Portal', 'Base de Datos', 'Red']),
+                    assigned: getRandomItem(['Juan Pérez', 'Ana García', 'Carlos López', 'María Rodríguez', 'Luis Martínez']),
+                    openDate: openDate.toLocaleDateString('es-ES')
                 });
             }
 
             dataStore.services = [
-                { name: 'Correo Electrónico', status: 'online', availability: 99.9, users: 450 },
-                { name: 'ERP Corporativo', status: 'online', availability: 99.7, users: 320 },
-                { name: 'CRM Ventas', status: 'online', availability: 99.8, users: 180 },
-                { name: 'Portal Intranet', status: 'warning', availability: 98.2, users: 500 }
+                { name: 'Correo Electrónico', status: 'online', availability: 99.9, users: 450, responseTime: 120 },
+                { name: 'ERP Corporativo', status: 'online', availability: 99.7, users: 320, responseTime: 350 },
+                { name: 'CRM Ventas', status: 'online', availability: 99.8, users: 180, responseTime: 200 },
+                { name: 'Portal Intranet', status: 'warning', availability: 98.2, users: 500, responseTime: 450 },
+                { name: 'Base de Datos Principal', status: 'online', availability: 99.95, users: 280, responseTime: 50 },
+                { name: 'Sistema de Respaldo', status: 'online', availability: 99.5, users: 0, responseTime: 80 },
+                { name: 'VPN Corporativa', status: 'online', availability: 99.3, users: 150, responseTime: 180 },
+                { name: 'Sistema Telefonía IP', status: 'warning', availability: 97.8, users: 400, responseTime: 300 }
             ];
+
+            for (let i = 1; i <= 10; i++) {
+                const plannedDate = new Date();
+                plannedDate.setDate(plannedDate.getDate() + Math.floor(Math.random() * 15));
+                dataStore.changes.push({
+                    id: `CHG-${2000 + i}`,
+                    description: getRandomItem([
+                        'Actualización de firmware en switches',
+                        'Migración de base de datos a nuevo servidor',
+                        'Instalación de parches de seguridad',
+                        'Actualización de sistema operativo',
+                        'Configuración de nueva política de seguridad',
+                        'Implementación de nuevo módulo CRM'
+                    ]),
+                    type: getRandomItem(['Estándar', 'Normal', 'Emergencia']),
+                    impact: getRandomItem(['Alto', 'Medio', 'Bajo']),
+                    status: getRandomItem(['Pendiente', 'Aprobado', 'En Implementación', 'Completado']),
+                    plannedDate: plannedDate.toLocaleDateString('es-ES'),
+                    requester: getRandomItem(['Juan Pérez', 'Ana García', 'Carlos López'])
+                });
+            }
+
+            for (let i = 1; i <= 8; i++) {
+                dataStore.problems.push({
+                    id: `PRB-${3000 + i}`,
+                    description: getRandomItem([
+                        'Degradación periódica de rendimiento en servidor web',
+                        'Reinicio automático de servicio de email',
+                        'Pérdida intermitente de paquetes en red',
+                        'Sobrecarga de memoria en servidor aplicaciones',
+                        'Errores recurrentes en logs de base de datos'
+                    ]),
+                    category: getRandomItem(['Hardware', 'Software', 'Red', 'Seguridad', 'Aplicación']),
+                    severity: getRandomItem(['Crítica', 'Alta', 'Media', 'Baja']),
+                    relatedIncidents: Math.floor(Math.random() * 10) + 1,
+                    status: getRandomItem(['Nuevo', 'En Análisis', 'Solución Identificada', 'Resuelto']),
+                    assigned: getRandomItem(['Juan Pérez', 'Ana García', 'Carlos López'])
+                });
+            }
+
+            dataStore.capacity = [
+                { name: 'CPU Servidor Web', current: 67, capacity: 100, unit: '%', trend: 'up' },
+                { name: 'Memoria RAM', current: 82, capacity: 100, unit: '%', trend: 'up' },
+                { name: 'Almacenamiento SAN', current: 73, capacity: 100, unit: '%', trend: 'up' },
+                { name: 'Ancho de Banda', current: 45, capacity: 100, unit: '%', trend: 'neutral' },
+                { name: 'Licencias Disponibles', current: 340, capacity: 500, unit: '', trend: 'neutral' },
+                { name: 'Conexiones BD', current: 156, capacity: 200, unit: '', trend: 'up' }
+            ];
+
+            const activityTypes = [
+                { icon: '🚨', text: 'Nuevo incidente registrado: INC-1023', time: '2 minutos' },
+                { icon: '✅', text: 'Incidente INC-1015 resuelto por Ana García', time: '15 minutos' },
+                { icon: '🔄', text: 'Cambio CHG-2008 aprobado por el comité', time: '1 hora' },
+                { icon: '📊', text: 'SLA alcanzado: 99.8% de disponibilidad', time: '2 horas' },
+                { icon: '🔧', text: 'Problema PRB-3004 en análisis', time: '3 horas' },
+                { icon: '⚠️', text: 'Alerta: Alto uso de CPU en servidor DB01', time: '4 horas' },
+                { icon: '💾', text: 'Backup completado exitosamente', time: '5 horas' },
+                { icon: '👤', text: 'Nuevo usuario agregado al sistema', time: '6 horas' }
+            ];
+
+            dataStore.activities = activityTypes;
+
+            for (let i = 1; i <= 5; i++) {
+                const reportDate = new Date();
+                reportDate.setDate(reportDate.getDate() - i * 7);
+                dataStore.reports.push({
+                    date: reportDate.toLocaleDateString('es-ES'),
+                    type: getRandomItem(['Mensual', 'SLA', 'Incidentes', 'Disponibilidad']),
+                    period: `Semana ${52 - i}`,
+                    generatedBy: getRandomItem(['Sistema Automático', 'Juan Pérez', 'Ana García']),
+                    fileName: `Reporte_${reportDate.toISOString().split('T')[0]}.pdf`
+                });
+            }
         }
 
         function getRandomItem(array) {
@@ -745,14 +1191,26 @@
         function renderAllComponents() {
             renderKPIs();
             renderIncidentsTable();
+            updateIncidentStats();
             renderServiceMap();
+            renderSLAMonitoring();
+            renderChangesTable();
+            renderProblemsTable();
+            renderCapacityMetrics();
+            renderActivityTimeline();
+            renderReportsHistory();
             renderCharts();
             updateAlertBanner();
         }
 
         function renderKPIs() {
             const grid = document.getElementById('kpiGrid');
-            grid.innerHTML = dataStore.kpis.map(kpi => `
+            grid.innerHTML = dataStore.kpis.map(kpi => {
+                const performance = kpi.unit === '%' ? 
+                    (kpi.value >= kpi.target ? 'optimal' : 'warning') :
+                    (kpi.value <= kpi.target ? 'optimal' : 'warning');
+                
+                return `
                 <div class="kpi-card" onclick="showKPIDetail(${kpi.id})">
                     <div class="kpi-header">
                         <span class="kpi-icon">${kpi.icon}</span>
@@ -760,12 +1218,18 @@
                     </div>
                     <div class="kpi-title">${kpi.title}</div>
                     <div class="kpi-value">${kpi.value}${kpi.unit}</div>
+                    <div style="font-size: 0.8rem; color: var(--text-secondary); margin-top: 0.5rem;">
+                        Objetivo: ${kpi.target}${kpi.unit}
+                    </div>
                     <canvas class="kpi-sparkline" id="spark-${kpi.id}"></canvas>
                     <div class="kpi-footer">
+                        <span style="color: ${performance === 'optimal' ? 'var(--success)' : 'var(--warning)'};">
+                            ${performance === 'optimal' ? '✓ En objetivo' : '⚠ Atención'}
+                        </span>
                         <button class="btn-small" onclick="event.stopPropagation(); showKPIDetail(${kpi.id})">Detalle</button>
                     </div>
                 </div>
-            `).join('');
+            `}).join('');
 
             dataStore.kpis.forEach(kpi => drawSparkline(kpi.id));
         }
@@ -801,34 +1265,257 @@
 
         function renderIncidentsTable() {
             const tbody = document.getElementById('incidentsTableBody');
-            tbody.innerHTML = dataStore.incidents.slice(0, 10).map(inc => `
-                <tr>
-                    <td>${inc.id}</td>
+            tbody.innerHTML = dataStore.incidents.map(inc => `
+                <tr onclick="showIncidentDetail('${inc.id}')">
+                    <td><strong>${inc.id}</strong></td>
                     <td>${inc.title}</td>
                     <td class="priority-${inc.priority}">${inc.priority.toUpperCase()}</td>
-                    <td>${inc.status}</td>
+                    <td><span class="status-badge status-${inc.status.toLowerCase().replace(' ', '-')}">${inc.status}</span></td>
                     <td>${inc.service}</td>
                     <td>${inc.assigned}</td>
+                    <td>${inc.openDate}</td>
+                    <td>
+                        <button class="btn-small" onclick="event.stopPropagation(); editIncident('${inc.id}')">Editar</button>
+                    </td>
                 </tr>
             `).join('');
         }
 
+        function updateIncidentStats() {
+            document.getElementById('totalIncidents').textContent = dataStore.incidents.length;
+            document.getElementById('openIncidents').textContent = 
+                dataStore.incidents.filter(i => i.status === 'Abierto').length;
+            document.getElementById('criticalIncidents').textContent = 
+                dataStore.incidents.filter(i => i.priority === 'critical').length;
+            document.getElementById('avgResolutionTime').textContent = '2.3h';
+        }
+
         function renderServiceMap() {
             const map = document.getElementById('serviceMap');
-            map.innerHTML = dataStore.services.map(service => `
-                <div style="background: linear-gradient(135deg, #2a6fdf 0%, #144272 100%); color: white; padding: 1.5rem; border-radius: 12px; cursor: pointer; transition: all 0.3s;" 
+            map.innerHTML = dataStore.services.map(service => {
+                const statusColor = service.status === 'online' ? '#4caf50' : '#ff9800';
+                return `
+                <div style="background: linear-gradient(135deg, ${statusColor} 0%, ${statusColor}dd 100%); color: white; padding: 1.5rem; border-radius: 12px; cursor: pointer; transition: all 0.3s;" 
+                     onclick="showServiceDetail('${service.name}')"
                      onmouseover="this.style.transform='translateY(-5px) scale(1.02)'"
                      onmouseout="this.style.transform='translateY(0) scale(1)'">
-                    <div style="margin-bottom: 1rem;">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
                         <strong>${service.name}</strong>
+                        <span style="font-size: 1.5rem;">${service.status === 'online' ? '✅' : '⚠️'}</span>
                     </div>
                     <div style="font-size: 0.9rem; margin-bottom: 0.5rem;">
                         Disponibilidad: <strong>${service.availability}%</strong>
                     </div>
-                    <div style="font-size: 0.9rem;">
+                    <div style="font-size: 0.9rem; margin-bottom: 0.5rem;">
                         Usuarios: <strong>${service.users}</strong>
                     </div>
+                    <div style="font-size: 0.9rem;">
+                        Tiempo Respuesta: <strong>${service.responseTime}ms</strong>
+                    </div>
+                    <div class="progress-bar" style="margin-top: 1rem;">
+                        <div class="progress-fill" style="width: ${service.availability}%;"></div>
+                    </div>
                 </div>
+            `}).join('');
+        }
+
+        function renderSLAMonitoring() {
+            const container = document.getElementById('slaMonitoring');
+            const slaData = [
+                { service: 'Correo Electrónico', target: 99.5, current: 99.9, incidents: 2 },
+                { service: 'ERP Corporativo', target: 99.0, current: 99.7, incidents: 5 },
+                { service: 'CRM Ventas', target: 98.5, current: 99.8, incidents: 1 },
+                { service: 'Portal Intranet', target: 98.0, current: 98.2, incidents: 8 }
+            ];
+
+            container.innerHTML = slaData.map(sla => {
+                const compliance = ((sla.current / sla.target) * 100).toFixed(1);
+                const status = sla.current >= sla.target ? 'success' : 'warning';
+                return `
+                    <div style="background: var(--bg-main); padding: 1.5rem; border-radius: 8px; margin-bottom: 1rem;">
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+                            <h4>${sla.service}</h4>
+                            <span style="color: var(--${status}); font-weight: bold;">
+                                ${sla.current >= sla.target ? '✓' : '⚠'} ${compliance}%
+                            </span>
+                        </div>
+                        <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; font-size: 0.9rem;">
+                            <div>
+                                <div style="color: var(--text-secondary);">Objetivo</div>
+                                <div style="font-weight: bold;">${sla.target}%</div>
+                            </div>
+                            <div>
+                                <div style="color: var(--text-secondary);">Actual</div>
+                                <div style="font-weight: bold;">${sla.current}%</div>
+                            </div>
+                            <div>
+                                <div style="color: var(--text-secondary);">Incidentes</div>
+                                <div style="font-weight: bold;">${sla.incidents}</div>
+                            </div>
+                        </div>
+                        <div class="progress-bar" style="margin-top: 1rem;">
+                            <div class="progress-fill" style="width: ${(sla.current / sla.target) * 100}%; background: var(--${status});"></div>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        function renderChangesTable() {
+            const tbody = document.getElementById('changesTableBody');
+            tbody.innerHTML = dataStore.changes.map(change => `
+                <tr onclick="showChangeDetail('${change.id}')">
+                    <td><strong>${change.id}</strong></td>
+                    <td>${change.description}</td>
+                    <td><span class="status-badge status-online">${change.type}</span></td>
+                    <td class="${change.impact === 'Alto' ? 'priority-high' : change.impact === 'Medio' ? 'priority-medium' : 'priority-low'}">${change.impact}</td>
+                    <td>${change.status}</td>
+                    <td>${change.plannedDate}</td>
+                    <td>${change.requester}</td>
+                </tr>
+            `).join('');
+        }
+
+        function renderProblemsTable() {
+            const tbody = document.getElementById('problemsTableBody');
+            tbody.innerHTML = dataStore.problems.map(problem => `
+                <tr onclick="showProblemDetail('${problem.id}')">
+                    <td><strong>${problem.id}</strong></td>
+                    <td>${problem.description}</td>
+                    <td>${problem.category}</td>
+                    <td class="${problem.severity === 'Crítica' ? 'priority-critical' : problem.severity === 'Alta' ? 'priority-high' : 'priority-medium'}">${problem.severity}</td>
+                    <td><span class="status-badge status-warning">${problem.relatedIncidents}</span></td>
+                    <td>${problem.status}</td>
+                    <td>${problem.assigned}</td>
+                </tr>
+            `).join('');
+        }
+
+        function renderCapacityMetrics() {
+            const container = document.getElementById('capacityMetrics');
+            container.innerHTML = dataStore.capacity.map(metric => {
+                const percentage = metric.unit === '%' ? metric.current : (metric.current / metric.capacity * 100);
+                const status = percentage > 80 ? 'danger' : percentage > 60 ? 'warning' : 'success';
+                return `
+                    <div class="kpi-card">
+                        <div class="kpi-header">
+                            <span class="kpi-icon">${metric.trend === 'up' ? '📈' : '➡️'}</span>
+                        </div>
+                        <div class="kpi-title">${metric.name}</div>
+                        <div class="kpi-value">${metric.current}${metric.unit}</div>
+                        <div style="font-size: 0.85rem; color: var(--text-secondary); margin-top: 0.5rem;">
+                            Capacidad: ${metric.capacity}${metric.unit}
+                        </div>
+                        <div class="progress-bar" style="margin-top: 1rem;">
+                            <div class="progress-fill" style="width: ${percentage}%; background: var(--${status});"></div>
+                        </div>
+                        <div style="margin-top: 0.5rem; font-size: 0.85rem; color: var(--${status}); font-weight: bold;">
+                            ${percentage.toFixed(1)}% de uso
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        function renderCapacityChart() {
+            const canvas = document.getElementById('capacityChart');
+            if (!canvas) return;
+            
+            const ctx = canvas.getContext('2d');
+            const width = canvas.width = canvas.offsetWidth;
+            const height = canvas.height = 300;
+            const padding = 50;
+            
+            ctx.clearRect(0, 0, width, height);
+            
+            const data = Array.from({length: 24}, () => Math.random() * 40 + 40);
+            const max = 100;
+            const stepX = (width - padding * 2) / (data.length - 1);
+            
+            const bgColor = getComputedStyle(document.documentElement).getPropertyValue('--bg-card').trim();
+            const textColor = getComputedStyle(document.documentElement).getPropertyValue('--text-main').trim();
+            
+            // Dibujar área de fondo
+            ctx.fillStyle = 'rgba(42, 111, 223, 0.1)';
+            ctx.beginPath();
+            ctx.moveTo(padding, height - padding);
+            data.forEach((value, index) => {
+                const x = padding + index * stepX;
+                const y = height - padding - (value / max) * (height - padding * 2);
+                ctx.lineTo(x, y);
+            });
+            ctx.lineTo(padding + (data.length - 1) * stepX, height - padding);
+            ctx.closePath();
+            ctx.fill();
+            
+            // Dibujar línea principal
+            ctx.strokeStyle = '#2a6fdf';
+            ctx.lineWidth = 3;
+            ctx.beginPath();
+            
+            data.forEach((value, index) => {
+                const x = padding + index * stepX;
+                const y = height - padding - (value / max) * (height - padding * 2);
+                if (index === 0) ctx.moveTo(x, y);
+                else ctx.lineTo(x, y);
+                
+                // Puntos
+                ctx.fillStyle = '#2a6fdf';
+                ctx.beginPath();
+                ctx.arc(x, y, 4, 0, 2 * Math.PI);
+                ctx.fill();
+            });
+            
+            ctx.strokeStyle = '#2a6fdf';
+            ctx.stroke();
+            
+            // Etiquetas del eje X
+            ctx.fillStyle = textColor;
+            ctx.font = '12px Arial';
+            ctx.textAlign = 'center';
+            for (let i = 0; i < 24; i += 3) {
+                const x = padding + i * stepX;
+                ctx.fillText(`${i}:00`, x, height - 15);
+            }
+            
+            // Etiquetas del eje Y
+            ctx.textAlign = 'right';
+            for (let i = 0; i <= 100; i += 25) {
+                const y = height - padding - (i / max) * (height - padding * 2);
+                ctx.fillText(`${i}%`, padding - 10, y + 5);
+            }
+        }
+
+        function renderActivityTimeline() {
+            const timeline = document.getElementById('activityTimeline');
+            timeline.innerHTML = dataStore.activities.map(activity => `
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <div style="display: flex; align-items: center; gap: 0.5rem;">
+                            <span style="font-size: 1.2rem;">${activity.icon}</span>
+                            <strong>${activity.text}</strong>
+                        </div>
+                        <div style="font-size: 0.85rem; color: var(--text-secondary); margin-top: 0.5rem;">
+                            Hace ${activity.time}
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function renderReportsHistory() {
+            const tbody = document.getElementById('reportsHistoryBody');
+            tbody.innerHTML = dataStore.reports.map(report => `
+                <tr>
+                    <td>${report.date}</td>
+                    <td><span class="status-badge status-online">${report.type}</span></td>
+                    <td>${report.period}</td>
+                    <td>${report.generatedBy}</td>
+                    <td>
+                        <button class="btn-small" onclick="downloadReport('${report.fileName}')">📥 Descargar</button>
+                        <button class="btn-small" onclick="viewReport('${report.fileName}')">👁️ Ver</button>
+                    </td>
+                </tr>
             `).join('');
         }
 
@@ -850,8 +1537,13 @@
             
             ctx.clearRect(0, 0, width, height);
             
-            const data = [23, 15, 8, 12];
-            const colors = ['#f44336', '#ff9800', '#4caf50', '#2196f3'];
+            const criticalCount = dataStore.incidents.filter(i => i.priority === 'critical').length;
+            const highCount = dataStore.incidents.filter(i => i.priority === 'high').length;
+            const mediumCount = dataStore.incidents.filter(i => i.priority === 'medium').length;
+            const lowCount = dataStore.incidents.filter(i => i.priority === 'low').length;
+            
+            const data = [criticalCount, highCount, mediumCount, lowCount];
+            const colors = ['#f44336', '#ff9800', '#2196f3', '#4caf50'];
             const labels = ['Crítico', 'Alto', 'Medio', 'Bajo'];
             const total = data.reduce((a, b) => a + b, 0);
             
@@ -870,6 +1562,7 @@
                 ctx.lineWidth = 2;
                 ctx.stroke();
                 
+                // Etiquetas
                 const labelAngle = currentAngle + sliceAngle / 2;
                 const labelX = centerX + Math.cos(labelAngle) * radius * 1.3;
                 const labelY = centerY + Math.sin(labelAngle) * radius * 1.3;
@@ -882,10 +1575,19 @@
                 currentAngle += sliceAngle;
             });
             
+            // Centro del donut
             ctx.beginPath();
             ctx.arc(centerX, centerY, radius * 0.6, 0, 2 * Math.PI);
             ctx.fillStyle = getComputedStyle(document.documentElement).getPropertyValue('--bg-card');
             ctx.fill();
+            
+            // Texto central
+            ctx.fillStyle = getComputedStyle(document.documentElement).getPropertyValue('--text-main');
+            ctx.font = 'bold 24px Arial';
+            ctx.textAlign = 'center';
+            ctx.fillText(total, centerX, centerY - 10);
+            ctx.font = '14px Arial';
+            ctx.fillText('Total', centerX, centerY + 15);
         }
 
         function drawLineChart() {
@@ -903,6 +1605,22 @@
             const max = Math.max(...data);
             const stepX = (width - padding * 2) / (data.length - 1);
             
+            const textColor = getComputedStyle(document.documentElement).getPropertyValue('--text-main').trim();
+            
+            // Área de fondo
+            ctx.fillStyle = 'rgba(42, 111, 223, 0.1)';
+            ctx.beginPath();
+            ctx.moveTo(padding, height - padding);
+            data.forEach((value, index) => {
+                const x = padding + index * stepX;
+                const y = height - padding - (value / max) * (height - padding * 2);
+                ctx.lineTo(x, y);
+            });
+            ctx.lineTo(padding + (data.length - 1) * stepX, height - padding);
+            ctx.closePath();
+            ctx.fill();
+            
+            // Línea principal
             ctx.strokeStyle = '#2a6fdf';
             ctx.lineWidth = 3;
             ctx.beginPath();
@@ -913,6 +1631,7 @@
                 if (index === 0) ctx.moveTo(x, y);
                 else ctx.lineTo(x, y);
                 
+                // Puntos
                 ctx.fillStyle = '#2a6fdf';
                 ctx.beginPath();
                 ctx.arc(x, y, 4, 0, 2 * Math.PI);
@@ -922,7 +1641,8 @@
             ctx.strokeStyle = '#2a6fdf';
             ctx.stroke();
             
-            ctx.fillStyle = '#666';
+            // Etiquetas
+            ctx.fillStyle = textColor;
             ctx.font = '12px Arial';
             ctx.textAlign = 'center';
             for (let i = 0; i < 12; i++) {
@@ -935,7 +1655,7 @@
                 updateDynamicData();
                 renderAllComponents();
                 lastUpdateTime = Date.now();
-            }, 5000);
+            }, 8000);
         }
 
         function updateDynamicData() {
@@ -959,6 +1679,17 @@
                 return { ...kpi, value: Math.round(newValue * 100) / 100, trend };
             });
             
+            dataStore.capacity = dataStore.capacity.map(metric => {
+                const variation = (Math.random() - 0.5) * 5;
+                let newValue;
+                if (metric.unit === '%') {
+                    newValue = Math.max(0, Math.min(100, metric.current + variation));
+                } else {
+                    newValue = Math.max(0, Math.min(metric.capacity, metric.current + Math.floor(variation)));
+                }
+                return { ...metric, current: Math.round(newValue) };
+            });
+            
             if (Math.random() > 0.8) {
                 updateAlertBanner();
             }
@@ -969,7 +1700,10 @@
                 { title: 'Sistema Operativo', message: 'Todos los servicios funcionando correctamente' },
                 { title: 'Mantenimiento Programado', message: 'Actualización de firewall mañana 02:00 AM' },
                 { title: 'Alto Uso de CPU', message: 'Servidor DB01 al 85% de capacidad' },
-                { title: 'Backup Exitoso', message: 'Respaldo completado satisfactoriamente' }
+                { title: 'Backup Exitoso', message: 'Respaldo completado satisfactoriamente' },
+                { title: 'Actualización Disponible', message: 'Nueva versión del sistema de gestión disponible' },
+                { title: 'SLA en Riesgo', message: 'Portal Intranet cerca del límite de disponibilidad' },
+                { title: 'Incidente Crítico Resuelto', message: 'Servicio de email restaurado completamente' }
             ];
             
             const alert = getRandomItem(alerts);
@@ -977,11 +1711,18 @@
             document.getElementById('alertMessage').textContent = alert.message;
         }
 
+        // Funciones de interacción
+
         function showKPIDetail(id) {
             const kpi = dataStore.kpis.find(k => k.id === id);
             if (!kpi) return;
             
-            openModal('Detalle de KPI', `
+            const trendText = kpi.trend === 'up' ? '📈 Ascendente' : kpi.trend === 'down' ? '📉 Descendente' : '➡️ Estable';
+            const performance = (kpi.unit === '%' ? 
+                (kpi.value >= kpi.target ? 'Óptimo' : 'Requiere Atención') :
+                (kpi.value <= kpi.target ? 'Óptimo' : 'Requiere Atención'));
+            
+            openModal(`Detalle de KPI: ${kpi.title}`, `
                 <h3>${kpi.icon} ${kpi.title}</h3>
                 <div style="font-size: 3rem; font-weight: bold; color: var(--primary-light); text-align: center; margin: 2rem 0;">
                     ${kpi.value}${kpi.unit}
@@ -989,25 +1730,513 @@
                 <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-top: 2rem;">
                     <div style="background: var(--bg-main); padding: 1rem; border-radius: 8px;">
                         <div style="color: var(--text-secondary); font-size: 0.85rem;">Tendencia</div>
-                        <div style="font-size: 1.5rem;">${kpi.trend === 'up' ? '📈 Ascendente' : kpi.trend === 'down' ? '📉 Descendente' : '➡️ Estable'}</div>
+                        <div style="font-size: 1.5rem;">${trendText}</div>
                     </div>
                     <div style="background: var(--bg-main); padding: 1rem; border-radius: 8px;">
                         <div style="color: var(--text-secondary); font-size: 0.85rem;">Estado</div>
                         <div style="font-size: 1.5rem; color: var(--success);">● Activo</div>
                     </div>
+                    <div style="background: var(--bg-main); padding: 1rem; border-radius: 8px;">
+                        <div style="color: var(--text-secondary); font-size: 0.85rem;">Objetivo</div>
+                        <div style="font-size: 1.5rem;">${kpi.target}${kpi.unit}</div>
+                    </div>
+                    <div style="background: var(--bg-main); padding: 1rem; border-radius: 8px;">
+                        <div style="color: var(--text-secondary); font-size: 0.85rem;">Rendimiento</div>
+                        <div style="font-size: 1.5rem;">${performance}</div>
+                    </div>
+                </div>
+                <div style="margin-top: 2rem;">
+                    <h4 style="margin-bottom: 1rem;">Historial (Últimos 7 días)</h4>
+                    <canvas id="kpiDetailChart" width="600" height="200"></canvas>
                 </div>
                 <p style="margin-top: 2rem; color: var(--text-secondary);">
-                    Este KPI se actualiza automáticamente cada 5 segundos con datos en tiempo real del sistema de gestión de servicios TI.
+                    Este KPI se actualiza automáticamente cada 8 segundos con datos en tiempo real del sistema de gestión de servicios TI.
+                    Los valores históricos muestran la tendencia y permiten análisis de rendimiento.
                 </p>
             `);
+            
+            setTimeout(() => {
+                const canvas = document.getElementById('kpiDetailChart');
+                if (canvas) {
+                    const ctx = canvas.getContext('2d');
+                    const width = canvas.width;
+                    const height = canvas.height;
+                    const padding = 30;
+                    
+                    const data = Array.from({length: 7}, () => kpi.value + (Math.random() - 0.5) * 5);
+                    const max = Math.max(...data, kpi.target);
+                    const min = Math.min(...data, kpi.target);
+                    const range = max - min || 1;
+                    const stepX = (width - padding * 2) / (data.length - 1);
+                    
+                    // Línea de objetivo
+                    const targetY = height - padding - ((kpi.target - min) / range) * (height - padding * 2);
+                    ctx.strokeStyle = '#ff9800';
+                    ctx.setLineDash([5, 5]);
+                    ctx.lineWidth = 2;
+                    ctx.beginPath();
+                    ctx.moveTo(padding, targetY);
+                    ctx.lineTo(width - padding, targetY);
+                    ctx.stroke();
+                    ctx.setLineDash([]);
+                    
+                    // Línea de datos
+                    ctx.strokeStyle = '#2a6fdf';
+                    ctx.lineWidth = 3;
+                    ctx.beginPath();
+                    
+                    data.forEach((value, index) => {
+                        const x = padding + index * stepX;
+                        const y = height - padding - ((value - min) / range) * (height - padding * 2);
+                        if (index === 0) ctx.moveTo(x, y);
+                        else ctx.lineTo(x, y);
+                        
+                        ctx.fillStyle = '#2a6fdf';
+                        ctx.beginPath();
+                        ctx.arc(x, y, 5, 0, 2 * Math.PI);
+                        ctx.fill();
+                    });
+                    
+                    ctx.stroke();
+                }
+            }, 100);
+        }
+
+        function showIncidentDetail(id) {
+            const incident = dataStore.incidents.find(i => i.id === id);
+            if (!incident) return;
+            
+            openModal(`Detalle del Incidente: ${id}`, `
+                <div style="margin-bottom: 2rem;">
+                    <h3>${incident.title}</h3>
+                    <div style="display: flex; gap: 1rem; margin-top: 1rem; flex-wrap: wrap;">
+                        <span class="status-badge status-${incident.status.toLowerCase().replace(' ', '-')}">${incident.status}</span>
+                        <span class="priority-${incident.priority}" style="font-weight: bold;">${incident.priority.toUpperCase()}</span>
+                    </div>
+                </div>
+                
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 2rem;">
+                    <div style="background: var(--bg-main); padding: 1rem; border-radius: 8px;">
+                        <div style="color: var(--text-secondary); font-size: 0.85rem;">Servicio Afectado</div>
+                        <div style="font-weight: bold; margin-top: 0.5rem;">${incident.service}</div>
+                    </div>
+                    <div style="background: var(--bg-main); padding: 1rem; border-radius: 8px;">
+                        <div style="color: var(--text-secondary); font-size: 0.85rem;">Asignado a</div>
+                        <div style="font-weight: bold; margin-top: 0.5rem;">${incident.assigned}</div>
+                    </div>
+                    <div style="background: var(--bg-main); padding: 1rem; border-radius: 8px;">
+                        <div style="color: var(--text-secondary); font-size: 0.85rem;">Fecha de Apertura</div>
+                        <div style="font-weight: bold; margin-top: 0.5rem;">${incident.openDate}</div>
+                    </div>
+                    <div style="background: var(--bg-main); padding: 1rem; border-radius: 8px;">
+                        <div style="color: var(--text-secondary); font-size: 0.85rem;">Tiempo Transcurrido</div>
+                        <div style="font-weight: bold; margin-top: 0.5rem;">${Math.floor(Math.random() * 48) + 1}h</div>
+                    </div>
+                </div>
+                
+                <div style="background: var(--bg-main); padding: 1.5rem; border-radius: 8px; margin-bottom: 1rem;">
+                    <h4 style="margin-bottom: 1rem;">Descripción Detallada</h4>
+                    <p>Este incidente ha sido reportado por usuarios que experimentan problemas con el servicio ${incident.service}. 
+                    El equipo técnico está trabajando activamente en la resolución.</p>
+                </div>
+                
+                <div style="background: var(--bg-main); padding: 1.5rem; border-radius: 8px; margin-bottom: 1rem;">
+                    <h4 style="margin-bottom: 1rem;">Acciones Tomadas</h4>
+                    <ul style="margin-left: 1.5rem;">
+                        <li>Verificación inicial del sistema</li>
+                        <li>Análisis de logs del servidor</li>
+                        <li>Asignación al equipo técnico especializado</li>
+                    </ul>
+                </div>
+                
+                <div style="display: flex; gap: 1rem; margin-top: 2rem;">
+                    <button class="btn btn-success" onclick="closeModal(); alert('✅ Incidente actualizado')">Actualizar Estado</button>
+                    <button class="btn btn-info" onclick="closeModal(); alert('📧 Comentario añadido')">Añadir Comentario</button>
+                    <button class="btn btn-warning" onclick="closeModal(); alert('👤 Técnico reasignado')">Reasignar</button>
+                </div>
+            `);
+        }
+
+        function showServiceDetail(serviceName) {
+            const service = dataStore.services.find(s => s.name === serviceName);
+            if (!service) return;
+            
+            openModal(`Detalle del Servicio: ${serviceName}`, `
+                <h3>${serviceName}</h3>
+                <div style="margin: 2rem 0;">
+                    <span class="status-badge status-${service.status}">${service.status === 'online' ? 'En Línea' : 'Advertencia'}</span>
+                </div>
+                
+                <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; margin-bottom: 2rem;">
+                    <div style="background: var(--bg-main); padding: 1.5rem; border-radius: 8px;">
+                        <div style="color: var(--text-secondary); font-size: 0.85rem;">Disponibilidad</div>
+                        <div style="font-size: 2rem; font-weight: bold; color: var(--success);">${service.availability}%</div>
+                        <div class="progress-bar" style="margin-top: 1rem;">
+                            <div class="progress-fill" style="width: ${service.availability}%;"></div>
+                        </div>
+                    </div>
+                    <div style="background: var(--bg-main); padding: 1.5rem; border-radius: 8px;">
+                        <div style="color: var(--text-secondary); font-size: 0.85rem;">Usuarios Activos</div>
+                        <div style="font-size: 2rem; font-weight: bold; color: var(--primary-light);">${service.users}</div>
+                        <div style="margin-top: 1rem; font-size: 0.85rem;">Conexiones simultáneas</div>
+                    </div>
+                    <div style="background: var(--bg-main); padding: 1.5rem; border-radius: 8px;">
+                        <div style="color: var(--text-secondary); font-size: 0.85rem;">Tiempo de Respuesta</div>
+                        <div style="font-size: 2rem; font-weight: bold; color: var(--info);">${service.responseTime}ms</div>
+                        <div style="margin-top: 1rem; font-size: 0.85rem;">Promedio últimas 24h</div>
+                    </div>
+                    <div style="background: var(--bg-main); padding: 1.5rem; border-radius: 8px;">
+                        <div style="color: var(--text-secondary); font-size: 0.85rem;">Incidentes del Mes</div>
+                        <div style="font-size: 2rem; font-weight: bold; color: var(--warning);">${Math.floor(Math.random() * 10)}</div>
+                        <div style="margin-top: 1rem; font-size: 0.85rem;">Total reportados</div>
+                    </div>
+                </div>
+                
+                <div style="background: var(--bg-main); padding: 1.5rem; border-radius: 8px;">
+                    <h4 style="margin-bottom: 1rem;">Información del Servicio</h4>
+                    <p style="color: var(--text-secondary); line-height: 1.8;">
+                        Este servicio es crítico para las operaciones diarias de la organización. 
+                        Se monitorea continuamente y cuenta con redundancia para garantizar alta disponibilidad.
+                        El equipo de soporte está disponible 24/7 para atender cualquier incidencia.
+                    </p>
+                </div>
+                
+                <div style="display: flex; gap: 1rem; margin-top: 2rem;">
+                    <button class="btn btn-info" onclick="closeModal(); alert('🔄 Estado actualizado')">Actualizar Estado</button>
+                    <button class="btn btn-warning" onclick="closeModal(); alert('🔧 Mantenimiento programado')">Programar Mantenimiento</button>
+                </div>
+            `);
+        }
+
+        function showChangeDetail(id) {
+            alert(`📋 Mostrando detalles del cambio ${id}`);
+        }
+
+        function showProblemDetail(id) {
+            alert(`🔍 Mostrando detalles del problema ${id}`);
         }
 
         function dismissAlert() {
             alert('✅ Alerta marcada como leída');
+            updateAlertBanner();
         }
 
-        function exportData() {
-            alert('✅ Exportación completada. Archivo: datos_' + new Date().toISOString().split('T')[0] + '.xlsx');
+        function exportData(type = 'general') {
+            const date = new Date().toISOString().split('T')[0];
+            alert(`✅ Exportación completada.\nArchivo: ${type}_${date}.xlsx\n\nEl archivo se ha descargado correctamente.`);
+        }
+
+        function refreshIncidents() {
+            alert('🔄 Actualizando lista de incidentes...');
+            setTimeout(() => {
+                renderIncidentsTable();
+                updateIncidentStats();
+                alert('✅ Lista de incidentes actualizada');
+            }, 500);
+        }
+
+        function refreshServices() {
+            alert('🔄 Actualizando estado de servicios...');
+            setTimeout(() => {
+                renderServiceMap();
+                alert('✅ Estado de servicios actualizado');
+            }, 500);
+        }
+
+        function openNewIncidentModal() {
+            openModal('Registrar Nuevo Incidente', `
+                <form style="display: grid; gap: 1rem;" onsubmit="event.preventDefault(); submitNewIncident();">
+                    <div>
+                        <label style="display: block; margin-bottom: 0.5rem; font-weight: 500;">Título del Incidente</label>
+                        <input type="text" id="incidentTitle" class="filter-input" placeholder="Descripción breve del incidente" required>
+                    </div>
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+                        <div>
+                            <label style="display: block; margin-bottom: 0.5rem; font-weight: 500;">Prioridad</label>
+                            <select id="incidentPriority" class="filter-input" required>
+                                <option value="low">Baja</option>
+                                <option value="medium" selected>Media</option>
+                                <option value="high">Alta</option>
+                                <option value="critical">Crítica</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label style="display: block; margin-bottom: 0.5rem; font-weight: 500;">Servicio Afectado</label>
+                            <select id="incidentService" class="filter-input" required>
+                                <option>Email</option>
+                                <option>ERP</option>
+                                <option>CRM</option>
+                                <option>Portal</option>
+                                <option>Base de Datos</option>
+                                <option>Red</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div>
+                        <label style="display: block; margin-bottom: 0.5rem; font-weight: 500;">Descripción Detallada</label>
+                        <textarea id="incidentDescription" class="filter-input" rows="4" placeholder="Describe el problema en detalle..." required></textarea>
+                    </div>
+                    <div>
+                        <label style="display: block; margin-bottom: 0.5rem; font-weight: 500;">Asignar a</label>
+                        <select id="incidentAssigned" class="filter-input" required>
+                            <option>Juan Pérez</option>
+                            <option>Ana García</option>
+                            <option>Carlos López</option>
+                            <option>María Rodríguez</option>
+                            <option>Luis Martínez</option>
+                        </select>
+                    </div>
+                    <div style="display: flex; gap: 1rem; margin-top: 1rem;">
+                        <button type="submit" class="btn btn-success">✅ Registrar Incidente</button>
+                        <button type="button" class="btn btn-danger" onclick="closeModal()">❌ Cancelar</button>
+                    </div>
+                </form>
+            `);
+        }
+
+        function submitNewIncident() {
+            const newIncident = {
+                id: `INC-${1016 + dataStore.incidents.length}`,
+                title: document.getElementById('incidentTitle').value,
+                priority: document.getElementById('incidentPriority').value,
+                status: 'Abierto',
+                service: document.getElementById('incidentService').value,
+                assigned: document.getElementById('incidentAssigned').value,
+                openDate: new Date().toLocaleDateString('es-ES')
+            };
+            
+            dataStore.incidents.unshift(newIncident);
+            renderIncidentsTable();
+            updateIncidentStats();
+            closeModal();
+            alert(`✅ Incidente ${newIncident.id} registrado exitosamente`);
+        }
+
+        function editIncident(id) {
+            alert(`✏️ Editando incidente ${id}`);
+        }
+
+        function openNewChangeModal() {
+            openModal('Solicitar Nuevo Cambio', `
+                <form style="display: grid; gap: 1rem;" onsubmit="event.preventDefault(); submitNewChange();">
+                    <div>
+                        <label style="display: block; margin-bottom: 0.5rem; font-weight: 500;">Descripción del Cambio</label>
+                        <input type="text" id="changeDescription" class="filter-input" placeholder="Descripción del cambio solicitado" required>
+                    </div>
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+                        <div>
+                            <label style="display: block; margin-bottom: 0.5rem; font-weight: 500;">Tipo</label>
+                            <select id="changeType" class="filter-input" required>
+                                <option>Estándar</option>
+                                <option>Normal</option>
+                                <option>Emergencia</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label style="display: block; margin-bottom: 0.5rem; font-weight: 500;">Impacto</label>
+                            <select id="changeImpact" class="filter-input" required>
+                                <option>Bajo</option>
+                                <option>Medio</option>
+                                <option>Alto</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div>
+                        <label style="display: block; margin-bottom: 0.5rem; font-weight: 500;">Fecha Planificada</label>
+                        <input type="date" id="changePlannedDate" class="filter-input" required>
+                    </div>
+                    <div>
+                        <label style="display: block; margin-bottom: 0.5rem; font-weight: 500;">Justificación</label>
+                        <textarea id="changeJustification" class="filter-input" rows="3" placeholder="Justificación del cambio..." required></textarea>
+                    </div>
+                    <div style="display: flex; gap: 1rem; margin-top: 1rem;">
+                        <button type="submit" class="btn btn-success">✅ Solicitar Cambio</button>
+                        <button type="button" class="btn btn-danger" onclick="closeModal()">❌ Cancelar</button>
+                    </div>
+                </form>
+            `);
+        }
+
+        function submitNewChange() {
+            closeModal();
+            alert('✅ Solicitud de cambio registrada exitosamente. En espera de aprobación del comité.');
+        }
+
+        function openNewProblemModal() {
+            openModal('Registrar Nuevo Problema', `
+                <form style="display: grid; gap: 1rem;" onsubmit="event.preventDefault(); submitNewProblem();">
+                    <div>
+                        <label style="display: block; margin-bottom: 0.5rem; font-weight: 500;">Descripción del Problema</label>
+                        <input type="text" id="problemDescription" class="filter-input" placeholder="Descripción breve del problema" required>
+                    </div>
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+                        <div>
+                            <label style="display: block; margin-bottom: 0.5rem; font-weight: 500;">Categoría</label>
+                            <select id="problemCategory" class="filter-input" required>
+                                <option>Hardware</option>
+                                <option>Software</option>
+                                <option>Red</option>
+                                <option>Seguridad</option>
+                                <option>Aplicación</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label style="display: block; margin-bottom: 0.5rem; font-weight: 500;">Severidad</label>
+                            <select id="problemSeverity" class="filter-input" required>
+                                <option>Baja</option>
+                                <option>Media</option>
+                                <option>Alta</option>
+                                <option>Crítica</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div>
+                        <label style="display: block; margin-bottom: 0.5rem; font-weight: 500;">Análisis Inicial</label>
+                        <textarea id="problemAnalysis" class="filter-input" rows="4" placeholder="Análisis inicial del problema..." required></textarea>
+                    </div>
+                    <div>
+                        <label style="display: block; margin-bottom: 0.5rem; font-weight: 500;">Asignar a</label>
+                        <select id="problemAssigned" class="filter-input" required>
+                            <option>Juan Pérez</option>
+                            <option>Ana García</option>
+                            <option>Carlos López</option>
+                            <option>María Rodríguez</option>
+                        </select>
+                    </div>
+                    <div style="display: flex; gap: 1rem; margin-top: 1rem;">
+                        <button type="submit" class="btn btn-warning">✅ Registrar Problema</button>
+                        <button type="button" class="btn btn-danger" onclick="closeModal()">❌ Cancelar</button>
+                    </div>
+                </form>
+            `);
+        }
+
+        function submitNewProblem() {
+            closeModal();
+            alert('✅ Problema registrado exitosamente. Se ha iniciado el análisis de causa raíz.');
+        }
+
+        function generateReport(type) {
+            const reportTypes = {
+                'monthly': 'Reporte Mensual de Gestión',
+                'sla': 'Análisis de Cumplimiento SLA',
+                'incidents': 'Reporte de Análisis de Incidentes',
+                'availability': 'Reporte de Disponibilidad de Servicios',
+                'changes': 'Reporte de Gestión de Cambios',
+                'custom': 'Configuración de Reporte Personalizado'
+            };
+
+            if (type === 'custom') {
+                openModal('Configurar Reporte Personalizado', `
+                    <form style="display: grid; gap: 1rem;" onsubmit="event.preventDefault(); generateCustomReport();">
+                        <div>
+                            <label style="display: block; margin-bottom: 0.5rem; font-weight: 500;">Nombre del Reporte</label>
+                            <input type="text" class="filter-input" placeholder="Nombre descriptivo del reporte" required>
+                        </div>
+                        <div>
+                            <label style="display: block; margin-bottom: 0.5rem; font-weight: 500;">Periodo</label>
+                            <select class="filter-input">
+                                <option>Última semana</option>
+                                <option>Último mes</option>
+                                <option>Últimos 3 meses</option>
+                                <option>Último año</option>
+                                <option>Personalizado</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label style="display: block; margin-bottom: 0.5rem; font-weight: 500;">Incluir Secciones:</label>
+                            <div style="display: grid; gap: 0.5rem; margin-top: 0.5rem;">
+                                <label style="display: flex; align-items: center; gap: 0.5rem;">
+                                    <input type="checkbox" checked> KPIs Principales
+                                </label>
+                                <label style="display: flex; align-items: center; gap: 0.5rem;">
+                                    <input type="checkbox" checked> Análisis de Incidentes
+                                </label>
+                                <label style="display: flex; align-items: center; gap: 0.5rem;">
+                                    <input type="checkbox"> Gestión de Cambios
+                                </label>
+                                <label style="display: flex; align-items: center; gap: 0.5rem;">
+                                    <input type="checkbox"> Problemas Identificados
+                                </label>
+                                <label style="display: flex; align-items: center; gap: 0.5rem;">
+                                    <input type="checkbox" checked> SLA y Disponibilidad
+                                </label>
+                                <label style="display: flex; align-items: center; gap: 0.5rem;">
+                                    <input type="checkbox"> Análisis de Capacidad
+                                </label>
+                            </div>
+                        </div>
+                        <div style="display: flex; gap: 1rem; margin-top: 1rem;">
+                            <button type="submit" class="btn btn-success">📊 Generar Reporte</button>
+                            <button type="button" class="btn" onclick="closeModal()">Cancelar</button>
+                        </div>
+                    </form>
+                `);
+            } else {
+                openModal(`Generando ${reportTypes[type]}`, `
+                    <div style="text-align: center; padding: 2rem;">
+                        <div class="loader" style="margin: 0 auto 2rem;"></div>
+                        <p style="font-size: 1.1rem; color: var(--text-secondary);">
+                            Recopilando datos y generando reporte...
+                        </p>
+                    </div>
+                `);
+
+                setTimeout(() => {
+                    closeModal();
+                    alert(`✅ Reporte generado exitosamente\n\nTipo: ${reportTypes[type]}\nArchivo: ${type}_${new Date().toISOString().split('T')[0]}.pdf\n\nEl reporte está listo para descargar.`);
+                }, 2000);
+            }
+        }
+
+        function generateCustomReport() {
+            closeModal();
+            alert('✅ Reporte personalizado generado exitosamente');
+        }
+
+        function downloadReport(fileName) {
+            alert(`📥 Descargando reporte: ${fileName}`);
+        }
+
+        function viewReport(fileName) {
+            alert(`👁️ Abriendo vista previa del reporte: ${fileName}`);
+        }
+
+        function filterTable(tableId, searchValue) {
+            const table = document.getElementById(tableId);
+            const rows = table.getElementsByTagName('tbody')[0].getElementsByTagName('tr');
+            const searchLower = searchValue.toLowerCase();
+
+            for (let row of rows) {
+                const text = row.textContent.toLowerCase();
+                row.style.display = text.includes(searchLower) ? '' : 'none';
+            }
+        }
+
+        function filterByPriority(priority) {
+            const rows = document.getElementById('incidentsTable').getElementsByTagName('tbody')[0].getElementsByTagName('tr');
+            
+            for (let row of rows) {
+                if (priority === '') {
+                    row.style.display = '';
+                } else {
+                    const priorityCell = row.getElementsByTagName('td')[2];
+                    row.style.display = priorityCell.textContent.toLowerCase().includes(priority) ? '' : 'none';
+                }
+            }
+        }
+
+        function filterByStatus(status) {
+            const rows = document.getElementById('incidentsTable').getElementsByTagName('tbody')[0].getElementsByTagName('tr');
+            
+            for (let row of rows) {
+                if (status === '') {
+                    row.style.display = '';
+                } else {
+                    const statusCell = row.getElementsByTagName('td')[3];
+                    row.style.display = statusCell.textContent.includes(status) ? '' : 'none';
+                }
+            }
         }
 
         function openModal(title, content) {
@@ -1020,6 +2249,7 @@
             document.getElementById('genericModal').classList.remove('active');
         }
 
+        // Event Listeners
         document.getElementById('genericModal').addEventListener('click', (e) => {
             if (e.target.id === 'genericModal') {
                 closeModal();
@@ -1037,12 +2267,83 @@
             clearTimeout(resizeTimeout);
             resizeTimeout = setTimeout(() => {
                 renderCharts();
+                if (document.getElementById('capacity').classList.contains('active')) {
+                    renderCapacityChart();
+                }
             }, 250);
         });
 
+        // Atajos de teclado
+        document.addEventListener('keydown', (e) => {
+            if (e.ctrlKey || e.metaKey) {
+                switch(e.key) {
+                    case '1':
+                        e.preventDefault();
+                        document.querySelector('.tab:nth-child(1)').click();
+                        break;
+                    case '2':
+                        e.preventDefault();
+                        document.querySelector('.tab:nth-child(2)').click();
+                        break;
+                    case '3':
+                        e.preventDefault();
+                        document.querySelector('.tab:nth-child(3)').click();
+                        break;
+                    case 'n':
+                        e.preventDefault();
+                        if (document.getElementById('incidents').classList.contains('active')) {
+                            openNewIncidentModal();
+                        }
+                        break;
+                }
+            }
+        });
+
+        // Notificaciones del sistema
+        function showNotification(title, message, type = 'info') {
+            if ('Notification' in window && Notification.permission === 'granted') {
+                new Notification(title, {
+                    body: message,
+                    icon: '📊'
+                });
+            }
+        }
+
+        // Solicitar permiso para notificaciones
+        if ('Notification' in window && Notification.permission === 'default') {
+            Notification.requestPermission();
+        }
+
+        // Detectar inactividad
+        let inactivityTime = 0;
+        setInterval(() => {
+            inactivityTime++;
+            if (inactivityTime > 300) { // 5 minutos
+                console.log('Usuario inactivo - considerando pausar actualizaciones automáticas');
+            }
+        }, 1000);
+
+        document.addEventListener('mousemove', () => { inactivityTime = 0; });
+        document.addEventListener('keypress', () => { inactivityTime = 0; });
+
+        // Logs del sistema
         console.log('%c🎯 PEIGSTI - TechSolutions S.A.', 'font-size: 20px; font-weight: bold; color: #2a6fdf;');
         console.log('%cPlataforma Ejecutiva Integral de Gestión de Servicios TI', 'font-size: 14px; color: #666;');
         console.log('%cISO/IEC 20000-1:2018 Certified System', 'font-size: 12px; color: #4caf50;');
+        console.log('%c\n📊 Dashboard Características:', 'font-size: 12px; font-weight: bold; color: #2a6fdf;');
+        console.log('- 12 KPIs en tiempo real');
+        console.log('- Gestión completa de incidentes, problemas y cambios');
+        console.log('- Monitoreo de 8 servicios críticos');
+        console.log('- Análisis de capacidad y recursos');
+        console.log('- Centro de reportes ejecutivos');
+        console.log('- Actualización automática cada 8 segundos');
+        console.log('- Modo claro/oscuro');
+        console.log('- Responsive design');
+        console.log('\n⌨️ Atajos de teclado:');
+        console.log('- Ctrl/Cmd + 1/2/3: Cambiar entre tabs');
+        console.log('- Ctrl/Cmd + N: Nuevo incidente (en tab de incidentes)');
+        console.log('- ESC: Cerrar modal');
+        console.log('\n✅ Sistema inicializado correctamente');
     </script>
 </body>
 </html>
