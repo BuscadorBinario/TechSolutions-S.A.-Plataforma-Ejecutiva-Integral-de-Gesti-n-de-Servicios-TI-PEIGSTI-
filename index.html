@@ -1655,10 +1655,14 @@
                 updateDynamicData();
                 renderAllComponents();
                 lastUpdateTime = Date.now();
-            }, 8000);
+                
+                // Mostrar notificación de actualización
+                showUpdateNotification();
+            }, 5000); // Actualización cada 5 segundos
         }
 
         function updateDynamicData() {
+            // Actualizar KPIs
             dataStore.kpis = dataStore.kpis.map(kpi => {
                 let newValue = kpi.value;
                 const variation = (Math.random() - 0.5) * 2;
@@ -1679,6 +1683,7 @@
                 return { ...kpi, value: Math.round(newValue * 100) / 100, trend };
             });
             
+            // Actualizar capacidad
             dataStore.capacity = dataStore.capacity.map(metric => {
                 const variation = (Math.random() - 0.5) * 5;
                 let newValue;
@@ -1690,8 +1695,164 @@
                 return { ...metric, current: Math.round(newValue) };
             });
             
+            // Actualizar servicios aleatoriamente
+            if (Math.random() > 0.7) {
+                const randomService = dataStore.services[Math.floor(Math.random() * dataStore.services.length)];
+                randomService.availability = Math.max(97, Math.min(100, randomService.availability + (Math.random() - 0.5) * 0.5));
+                randomService.responseTime = Math.max(50, randomService.responseTime + Math.floor((Math.random() - 0.5) * 50));
+            }
+            
+            // Agregar nuevo incidente aleatoriamente (cada 15 segundos aprox)
+            if (Math.random() > 0.7) {
+                addRandomIncident();
+            }
+            
+            // Resolver incidentes aleatoriamente
+            if (Math.random() > 0.6 && dataStore.incidents.length > 5) {
+                resolveRandomIncident();
+            }
+            
+            // Agregar nuevo cambio aleatoriamente
+            if (Math.random() > 0.8) {
+                addRandomChange();
+            }
+            
+            // Actualizar estado de cambios
+            if (Math.random() > 0.7) {
+                updateRandomChangeStatus();
+            }
+            
+            // Agregar actividad reciente
+            if (Math.random() > 0.6) {
+                addRandomActivity();
+            }
+            
+            // Actualizar alertas
             if (Math.random() > 0.8) {
                 updateAlertBanner();
+            }
+        }
+
+        function addRandomIncident() {
+            const incidentTitles = [
+                'Error de conexión en servidor de aplicaciones',
+                'Fallo intermitente en sistema de email',
+                'Lentitud en acceso a base de datos',
+                'Problema de autenticación de usuarios',
+                'Caída parcial del servicio web',
+                'Error en procesamiento de transacciones',
+                'Problema con certificados SSL',
+                'Fallo en servicio de DNS',
+                'Alta latencia en red corporativa',
+                'Error en sistema de respaldo automático'
+            ];
+
+            const newIncident = {
+                id: `INC-${1000 + dataStore.incidents.length + Math.floor(Math.random() * 100)}`,
+                title: getRandomItem(incidentTitles),
+                priority: getRandomItem(['critical', 'high', 'medium', 'low']),
+                status: 'Abierto',
+                service: getRandomItem(['Email', 'ERP', 'CRM', 'Portal', 'Base de Datos', 'Red']),
+                assigned: getRandomItem(['Juan Pérez', 'Ana García', 'Carlos López', 'María Rodríguez', 'Luis Martínez']),
+                openDate: new Date().toLocaleDateString('es-ES')
+            };
+
+            dataStore.incidents.unshift(newIncident);
+            
+            // Limitar a 20 incidentes máximo
+            if (dataStore.incidents.length > 20) {
+                dataStore.incidents.pop();
+            }
+
+            console.log(`🆕 Nuevo incidente agregado: ${newIncident.id}`);
+        }
+
+        function resolveRandomIncident() {
+            const openIncidents = dataStore.incidents.filter(i => i.status === 'Abierto' || i.status === 'En Progreso');
+            if (openIncidents.length > 0) {
+                const incident = getRandomItem(openIncidents);
+                incident.status = Math.random() > 0.5 ? 'Resuelto' : 'En Progreso';
+                console.log(`✅ Incidente ${incident.id} actualizado a: ${incident.status}`);
+            }
+        }
+
+        function addRandomChange() {
+            const changeDescriptions = [
+                'Actualización de parches de seguridad en servidores',
+                'Migración de datos a nueva plataforma',
+                'Configuración de nuevas políticas de firewall',
+                'Instalación de actualizaciones críticas',
+                'Optimización de base de datos',
+                'Actualización de certificados digitales'
+            ];
+
+            const plannedDate = new Date();
+            plannedDate.setDate(plannedDate.getDate() + Math.floor(Math.random() * 15) + 1);
+
+            const newChange = {
+                id: `CHG-${2000 + dataStore.changes.length + Math.floor(Math.random() * 100)}`,
+                description: getRandomItem(changeDescriptions),
+                type: getRandomItem(['Estándar', 'Normal', 'Emergencia']),
+                impact: getRandomItem(['Alto', 'Medio', 'Bajo']),
+                status: 'Pendiente',
+                plannedDate: plannedDate.toLocaleDateString('es-ES'),
+                requester: getRandomItem(['Juan Pérez', 'Ana García', 'Carlos López'])
+            };
+
+            dataStore.changes.unshift(newChange);
+            
+            // Limitar a 15 cambios máximo
+            if (dataStore.changes.length > 15) {
+                dataStore.changes.pop();
+            }
+
+            console.log(`🔄 Nuevo cambio agregado: ${newChange.id}`);
+        }
+
+        function updateRandomChangeStatus() {
+            const pendingChanges = dataStore.changes.filter(c => c.status === 'Pendiente' || c.status === 'Aprobado');
+            if (pendingChanges.length > 0) {
+                const change = getRandomItem(pendingChanges);
+                const statuses = ['Aprobado', 'En Implementación', 'Completado'];
+                const currentIndex = statuses.indexOf(change.status);
+                if (currentIndex < statuses.length - 1) {
+                    change.status = statuses[currentIndex + 1] || statuses[0];
+                }
+            }
+        }
+
+        function addRandomActivity() {
+            const activityTemplates = [
+                { icon: '🚨', text: 'Nuevo incidente registrado', time: 'Justo ahora' },
+                { icon: '✅', text: 'Incidente resuelto exitosamente', time: '1 minuto' },
+                { icon: '🔄', text: 'Cambio aprobado por el comité', time: '2 minutos' },
+                { icon: '📊', text: 'Reporte mensual generado', time: '3 minutos' },
+                { icon: '🔧', text: 'Mantenimiento preventivo completado', time: '5 minutos' },
+                { icon: '⚠️', text: 'Alerta de capacidad detectada', time: '7 minutos' },
+                { icon: '💾', text: 'Backup automático ejecutado', time: '10 minutos' },
+                { icon: '👤', text: 'Nueva asignación de técnico', time: '12 minutos' },
+                { icon: '📈', text: 'SLA objetivo alcanzado', time: '15 minutos' },
+                { icon: '🔍', text: 'Análisis de problema iniciado', time: '18 minutos' }
+            ];
+
+            const newActivity = getRandomItem(activityTemplates);
+            dataStore.activities.unshift(newActivity);
+            
+            // Limitar a 10 actividades
+            if (dataStore.activities.length > 10) {
+                dataStore.activities.pop();
+            }
+        }
+
+        function showUpdateNotification() {
+            // Visual feedback de actualización
+            const header = document.querySelector('header');
+            if (header) {
+                header.style.transition = 'box-shadow 0.3s';
+                header.style.boxShadow = '0 4px 20px rgba(42, 111, 223, 0.4)';
+                setTimeout(() => {
+                    header.style.boxShadow = '0 4px 20px var(--shadow)';
+                }, 300);
             }
         }
 
@@ -1750,8 +1911,8 @@
                     <canvas id="kpiDetailChart" width="600" height="200"></canvas>
                 </div>
                 <p style="margin-top: 2rem; color: var(--text-secondary);">
-                    Este KPI se actualiza automáticamente cada 8 segundos con datos en tiempo real del sistema de gestión de servicios TI.
-                    Los valores históricos muestran la tendencia y permiten análisis de rendimiento.
+                    Este KPI se actualiza automáticamente cada 5 segundos con datos en tiempo real del sistema de gestión de servicios TI.
+                    Los valores históricos muestran la tendencia y permiten análisis de rendimiento. Los datos se generan y agregan dinámicamente.
                 </p>
             `);
             
@@ -2336,13 +2497,19 @@
         console.log('- Monitoreo de 8 servicios críticos');
         console.log('- Análisis de capacidad y recursos');
         console.log('- Centro de reportes ejecutivos');
-        console.log('- Actualización automática cada 8 segundos');
+        console.log('- ⚡ Actualización automática cada 5 segundos');
+        console.log('- ➕ Nuevos datos agregados automáticamente');
         console.log('- Modo claro/oscuro');
         console.log('- Responsive design');
         console.log('\n⌨️ Atajos de teclado:');
         console.log('- Ctrl/Cmd + 1/2/3: Cambiar entre tabs');
         console.log('- Ctrl/Cmd + N: Nuevo incidente (en tab de incidentes)');
         console.log('- ESC: Cerrar modal');
+        console.log('\n🔄 Actualizaciones Automáticas:');
+        console.log('- Incidentes nuevos agregados aleatoriamente');
+        console.log('- Cambios de estado automáticos');
+        console.log('- Actualización de métricas en tiempo real');
+        console.log('- Timeline de actividad en vivo');
         console.log('\n✅ Sistema inicializado correctamente');
     </script>
 </body>
