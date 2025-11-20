@@ -5,9 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PEIGSTI - TechSolutions S.A. | Dashboard Ejecutivo ISO 20000</title>
     <style>
-        /* ===========================
-           VARIABLES CSS TEMÁTICAS
-        =========================== */
         :root {
             --primary-dark: #0a2647;
             --primary-mid: #144272;
@@ -34,9 +31,6 @@
             --shadow-hover: rgba(0,0,0,0.5);
         }
 
-        /* ===========================
-           RESET Y BASE
-        =========================== */
         * {
             margin: 0;
             padding: 0;
@@ -52,9 +46,6 @@
             transition: background 0.3s, color 0.3s;
         }
 
-        /* ===========================
-           PANTALLA DE CARGA
-        =========================== */
         #loadingScreen {
             position: fixed;
             inset: 0;
@@ -85,9 +76,6 @@
             font-size: 1.5rem;
         }
 
-        /* ===========================
-           HEADER EJECUTIVO
-        =========================== */
         header {
             background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary-mid) 100%);
             color: white;
@@ -171,18 +159,12 @@
             transform: scale(1.05);
         }
 
-        /* ===========================
-           CONTENEDOR PRINCIPAL
-        =========================== */
         .container {
             max-width: 1800px;
             margin: 2rem auto;
             padding: 0 2rem;
         }
 
-        /* ===========================
-           SISTEMA DE TABS
-        =========================== */
         .tabs-container {
             background: var(--bg-card);
             border-radius: 12px;
@@ -235,9 +217,6 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
-        /* ===========================
-           GRID DE KPIs
-        =========================== */
         .kpi-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -339,9 +318,6 @@
             transform: scale(1.05);
         }
 
-        /* ===========================
-           SECCIONES DE CONTENIDO
-        =========================== */
         .section {
             background: var(--bg-card);
             border-radius: 12px;
@@ -402,257 +378,34 @@
         .btn-warning { background: var(--warning); }
         .btn-danger { background: var(--danger); }
 
-        /* ===========================
-           MATRIZ DE RIESGOS 5x5
-        =========================== */
-        .risk-matrix {
-            display: grid;
-            grid-template-columns: 60px repeat(5, 1fr);
-            grid-template-rows: repeat(6, 80px);
-            gap: 2px;
-            background: var(--border);
-            margin-bottom: 1rem;
-        }
-
-        .risk-label {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: var(--bg-card);
-            font-weight: 600;
-            font-size: 0.85rem;
-        }
-
-        .risk-cell {
-            background: #fff;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            transition: all 0.3s;
-            position: relative;
-            font-size: 0.75rem;
-            padding: 0.5rem;
-        }
-
-        .risk-cell:hover {
-            transform: scale(1.05);
-            z-index: 10;
-            box-shadow: 0 4px 12px var(--shadow-hover);
-        }
-
-        .risk-low { background: #c8e6c9; }
-        .risk-medium { background: #fff9c4; }
-        .risk-high { background: #ffcc80; }
-        .risk-critical { background: #ef9a9a; }
-        .risk-extreme { background: #e57373; }
-
-        .risk-tooltip {
-            display: none;
-            position: absolute;
-            background: rgba(0,0,0,0.9);
+        .alert-banner {
+            background: linear-gradient(135deg, var(--warning) 0%, #f57c00 100%);
             color: white;
-            padding: 0.5rem;
-            border-radius: 6px;
-            font-size: 0.75rem;
-            z-index: 100;
-            white-space: nowrap;
-            top: -40px;
-            left: 50%;
-            transform: translateX(-50%);
-        }
-
-        .risk-cell:hover .risk-tooltip {
-            display: block;
-        }
-
-        /* ===========================
-           CRONOGRAMA GANTT
-        =========================== */
-        .gantt-container {
-            overflow-x: auto;
-            margin-bottom: 1rem;
-        }
-
-        .gantt-chart {
-            min-width: 1200px;
-            position: relative;
-        }
-
-        .gantt-header {
-            display: flex;
-            background: var(--primary-dark);
-            color: white;
-            padding: 0.75rem;
-            font-weight: 600;
-            border-radius: 8px 8px 0 0;
-        }
-
-        .gantt-col-task { flex: 0 0 250px; }
-        .gantt-col-timeline { flex: 1; }
-        .gantt-col-status { flex: 0 0 100px; text-align: center; }
-
-        .gantt-row {
-            display: flex;
-            border-bottom: 1px solid var(--border);
-            padding: 0.75rem;
-            align-items: center;
-            transition: background 0.3s;
-        }
-
-        .gantt-row:hover {
-            background: rgba(42, 111, 223, 0.05);
-        }
-
-        .gantt-row.critical {
-            background: rgba(244, 67, 54, 0.05);
-        }
-
-        .gantt-bar-container {
-            flex: 1;
-            height: 30px;
-            background: var(--border);
-            border-radius: 4px;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .gantt-bar {
-            height: 100%;
-            background: var(--primary-light);
-            border-radius: 4px;
-            position: absolute;
-            transition: all 0.3s;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 0.75rem;
-            font-weight: 600;
-        }
-
-        .gantt-bar.critical {
-            background: var(--danger);
-        }
-
-        .gantt-bar.completed {
-            background: var(--success);
-        }
-
-        .status-badge {
-            padding: 0.25rem 0.75rem;
+            padding: 1rem 2rem;
+            margin-bottom: 2rem;
             border-radius: 12px;
-            font-size: 0.75rem;
-            font-weight: 600;
-            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            box-shadow: 0 4px 20px var(--shadow);
+            animation: slideDown 0.5s;
         }
 
-        .status-progress { background: #2196f3; color: white; }
-        .status-completed { background: var(--success); color: white; }
-        .status-pending { background: var(--warning); color: white; }
-        .status-delayed { background: var(--danger); color: white; }
+        @keyframes slideDown {
+            from { transform: translateY(-100%); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
 
-        /* ===========================
-           MAPA DE SERVICIOS
-        =========================== */
-        .service-map {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+        .alert-content {
+            display: flex;
+            align-items: center;
             gap: 1rem;
-            margin-bottom: 1rem;
         }
 
-        .service-card {
-            background: linear-gradient(135deg, var(--primary-light) 0%, var(--primary-mid) 100%);
-            color: white;
-            padding: 1.5rem;
-            border-radius: 12px;
-            cursor: pointer;
-            transition: all 0.3s;
-            position: relative;
-            overflow: hidden;
+        .alert-icon {
+            font-size: 1.5rem;
         }
 
-        .service-card::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            right: -50%;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
-            transform: scale(0);
-            transition: transform 0.5s;
-        }
-
-        .service-card:hover::before {
-            transform: scale(1);
-        }
-
-        .service-card:hover {
-            transform: translateY(-5px) scale(1.02);
-            box-shadow: 0 12px 40px var(--shadow-hover);
-        }
-
-        .service-status {
-            display: inline-block;
-            width: 12px;
-            height: 12px;
-            border-radius: 50%;
-            margin-right: 0.5rem;
-            animation: pulse 2s infinite;
-        }
-
-        @keyframes pulse {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.5; }
-        }
-
-        .service-status.online { background: #4caf50; }
-        .service-status.warning { background: #ff9800; }
-        .service-status.offline { background: #f44336; }
-
-        /* ===========================
-           TABLAS
-        =========================== */
-        .table-container {
-            overflow-x: auto;
-            margin-bottom: 1rem;
-        }
-
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            background: var(--bg-card);
-        }
-
-        thead {
-            background: var(--primary-dark);
-            color: white;
-        }
-
-        th, td {
-            padding: 1rem;
-            text-align: left;
-            border-bottom: 1px solid var(--border);
-        }
-
-        tbody tr {
-            transition: background 0.3s;
-        }
-
-        tbody tr:hover {
-            background: rgba(42, 111, 223, 0.05);
-        }
-
-        .priority-critical { color: var(--danger); font-weight: 600; }
-        .priority-high { color: var(--warning); font-weight: 600; }
-        .priority-medium { color: var(--primary-light); font-weight: 600; }
-        .priority-low { color: var(--success); font-weight: 600; }
-
-        /* ===========================
-           GRÁFICOS CANVAS
-        =========================== */
         .chart-container {
             position: relative;
             margin-bottom: 1rem;
@@ -664,9 +417,6 @@
             border-radius: 8px;
         }
 
-        /* ===========================
-           MODAL
-        =========================== */
         .modal {
             display: none;
             position: fixed;
@@ -720,78 +470,41 @@
             background: #d32f2f;
         }
 
-        /* ===========================
-           ALERTAS
-        =========================== */
-        .alert-banner {
-            background: linear-gradient(135deg, var(--warning) 0%, #f57c00 100%);
-            color: white;
-            padding: 1rem 2rem;
-            margin-bottom: 2rem;
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            box-shadow: 0 4px 20px var(--shadow);
-            animation: slideDown 0.5s;
+        .table-container {
+            overflow-x: auto;
+            margin-bottom: 1rem;
         }
 
-        @keyframes slideDown {
-            from { transform: translateY(-100%); opacity: 0; }
-            to { transform: translateY(0); opacity: 1; }
-        }
-
-        .alert-content {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-        }
-
-        .alert-icon {
-            font-size: 1.5rem;
-        }
-
-        /* ===========================
-           FILTROS
-        =========================== */
-        .filters {
-            display: flex;
-            gap: 1rem;
-            flex-wrap: wrap;
-            margin-bottom: 1.5rem;
-        }
-
-        .filter-group {
-            display: flex;
-            flex-direction: column;
-            gap: 0.5rem;
-        }
-
-        .filter-label {
-            font-size: 0.85rem;
-            font-weight: 600;
-            color: var(--text-secondary);
-        }
-
-        select, input[type="text"], input[type="date"] {
-            padding: 0.6rem;
-            border: 2px solid var(--border);
-            border-radius: 8px;
+        table {
+            width: 100%;
+            border-collapse: collapse;
             background: var(--bg-card);
-            color: var(--text-main);
-            font-size: 0.9rem;
-            transition: all 0.3s;
         }
 
-        select:focus, input:focus {
-            outline: none;
-            border-color: var(--primary-light);
-            box-shadow: 0 0 0 3px rgba(42, 111, 223, 0.1);
+        thead {
+            background: var(--primary-dark);
+            color: white;
         }
 
-        /* ===========================
-           RESPONSIVE
-        =========================== */
+        th, td {
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid var(--border);
+        }
+
+        tbody tr {
+            transition: background 0.3s;
+        }
+
+        tbody tr:hover {
+            background: rgba(42, 111, 223, 0.05);
+        }
+
+        .priority-critical { color: var(--danger); font-weight: 600; }
+        .priority-high { color: var(--warning); font-weight: 600; }
+        .priority-medium { color: var(--primary-light); font-weight: 600; }
+        .priority-low { color: var(--success); font-weight: 600; }
+
         @media (max-width: 768px) {
             .header-content {
                 flex-direction: column;
@@ -816,68 +529,24 @@
             }
         }
 
-        /* ===========================
-           UTILIDADES
-        =========================== */
         .text-center { text-align: center; }
-        .text-right { text-align: right; }
         .mt-1 { margin-top: 1rem; }
         .mb-1 { margin-bottom: 1rem; }
-        .flex { display: flex; }
-        .flex-between { justify-content: space-between; }
-        .flex-center { align-items: center; justify-content: center; }
-        .gap-1 { gap: 1rem; }
-
-        /* ===========================
-           PROGRESS BAR
-        =========================== */
-        .progress-bar {
-            width: 100%;
-            height: 24px;
-            background: var(--border);
-            border-radius: 12px;
-            overflow: hidden;
-            position: relative;
-        }
-
-        .progress-fill {
-            height: 100%;
-            background: linear-gradient(90deg, var(--success) 0%, #66bb6a 100%);
-            transition: width 0.5s ease;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 0.75rem;
-            font-weight: 600;
-        }
-
-        /* ===========================
-           GAUGE CIRCULAR
-        =========================== */
-        .gauge-container {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            margin: 2rem 0;
-        }
     </style>
 </head>
 <body>
-    <!-- PANTALLA DE CARGA -->
     <div id="loadingScreen">
         <div class="loader"></div>
         <h2>Cargando Dashboard Ejecutivo ISO 20000...</h2>
         <p>TechSolutions S.A.</p>
     </div>
 
-    <!-- HEADER EJECUTIVO -->
     <header>
         <div class="header-content">
             <div class="logo-title">
                 <div class="logo">TS</div>
                 <div class="title-block">
-                    <h1>TechSolutions S.A. – Plataforma Ejecutiva Integral de Gestión de Servicios TI (PEIGSTI)</h1>
+                    <h1>TechSolutions S.A. – PEIGSTI</h1>
                     <p>ISO/IEC 20000-1:2018 | Dashboard Ejecutivo en Tiempo Real</p>
                 </div>
             </div>
@@ -895,9 +564,7 @@
         </div>
     </header>
 
-    <!-- CONTENEDOR PRINCIPAL -->
     <div class="container">
-        <!-- BANNER DE ALERTAS -->
         <div class="alert-banner" id="alertBanner">
             <div class="alert-content">
                 <span class="alert-icon">⚠️</span>
@@ -908,47 +575,23 @@
             </div>
             <div>
                 <button class="btn-small" onclick="dismissAlert()">Marcar leído</button>
-                <button class="btn-small" onclick="showAllAlerts()">Ver todo</button>
             </div>
         </div>
 
-        <!-- SISTEMA DE TABS -->
         <div class="tabs-container">
             <div class="tabs">
                 <button class="tab active" onclick="switchTab('overview')">📊 Visión General</button>
-                <button class="tab" onclick="switchTab('risks')">⚠️ Riesgos</button>
-                <button class="tab" onclick="switchTab('gantt')">📅 Cronograma</button>
-                <button class="tab" onclick="switchTab('services')">🔧 Servicios TI</button>
                 <button class="tab" onclick="switchTab('incidents')">🚨 Incidentes</button>
-                <button class="tab" onclick="switchTab('changes')">🔄 Cambios</button>
-                <button class="tab" onclick="switchTab('cmdb')">💾 CMDB</button>
-                <button class="tab" onclick="switchTab('financial')">💰 Financiero</button>
-                <button class="tab" onclick="switchTab('cir')">📈 Mejora Continua</button>
-                <button class="tab" onclick="switchTab('audit')">✅ Auditorías</button>
+                <button class="tab" onclick="switchTab('services')">🔧 Servicios TI</button>
             </div>
 
-            <!-- TAB: VISIÓN GENERAL -->
             <div class="tab-content active" id="overview">
                 <h2 style="margin: 2rem 0 1rem;">Panel de KPIs Ejecutivos</h2>
                 <div class="kpi-grid" id="kpiGrid"></div>
 
-                <!-- SATISFACCIÓN DEL USUARIO -->
                 <div class="section">
                     <div class="section-header">
-                        <h3 class="section-title">😊 Satisfacción del Usuario (CSAT)</h3>
-                        <button class="btn" onclick="showAllSurveys()">Ver Todo</button>
-                    </div>
-                    <div class="chart-container">
-                        <canvas id="csatChart" class="chart-canvas" width="800" height="300"></canvas>
-                    </div>
-                    <div id="surveyComments"></div>
-                </div>
-
-                <!-- GRÁFICOS AVANZADOS -->
-                <div class="section">
-                    <div class="section-header">
-                        <h3 class="section-title">📊 Análisis Multidimensional</h3>
-                        <button class="btn" onclick="refreshCharts()">🔄 Actualizar</button>
+                        <h3 class="section-title">📊 Análisis de Rendimiento</h3>
                     </div>
                     <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); gap: 2rem;">
                         <div>
@@ -956,120 +599,18 @@
                             <canvas id="donutChart" width="400" height="400"></canvas>
                         </div>
                         <div>
-                            <h4 class="text-center mb-1">MTTR vs Objetivo</h4>
+                            <h4 class="text-center mb-1">Tendencia Mensual</h4>
                             <canvas id="lineChart" width="400" height="400"></canvas>
                         </div>
                     </div>
-                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); gap: 2rem; margin-top: 2rem;">
-                        <div>
-                            <h4 class="text-center mb-1">Top 10 Clientes por Tickets</h4>
-                            <canvas id="barChart" width="400" height="400"></canvas>
-                        </div>
-                        <div>
-                            <h4 class="text-center mb-1">Disponibilidad General</h4>
-                            <div class="gauge-container">
-                                <canvas id="gaugeChart" width="300" height="300"></canvas>
-                            </div>
-                        </div>
-                    </div>
                 </div>
             </div>
 
-            <!-- TAB: RIESGOS -->
-            <div class="tab-content" id="risks">
-                <div class="section">
-                    <div class="section-header">
-                        <h3 class="section-title">⚠️ Matriz de Riesgos 5×5 Interactiva</h3>
-                        <div class="section-actions">
-                            <button class="btn" onclick="showRiskList()">Ver Lista Completa</button>
-                            <button class="btn btn-warning" onclick="filterRisksBySeverity()">Filtrar por Severidad</button>
-                            <button class="btn btn-success" onclick="exportRisks()">📥 Exportar</button>
-                        </div>
-                    </div>
-                    <div class="risk-matrix" id="riskMatrix"></div>
-                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-top: 2rem;">
-                        <div>
-                            <h4>Resumen de Riesgos</h4>
-                            <canvas id="riskDonutChart" width="400" height="400"></canvas>
-                        </div>
-                        <div id="riskLegend"></div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- TAB: CRONOGRAMA GANTT -->
-            <div class="tab-content" id="gantt">
-                <div class="section">
-                    <div class="section-header">
-                        <h3 class="section-title">📅 Cronograma Proyecto ISO 20000</h3>
-                        <div class="section-actions">
-                            <button class="btn btn-danger" onclick="showCriticalTasks()">Ver Críticos</button>
-                            <button class="btn" onclick="toggleGanttExpand()">Expandir/Contraer</button>
-                            <button class="btn btn-warning" onclick="showDependencies()">Dependencias</button>
-                        </div>
-                    </div>
-                    <div class="gantt-container">
-                        <div class="gantt-chart" id="ganttChart"></div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- TAB: SERVICIOS TI -->
-            <div class="tab-content" id="services">
-                <div class="section">
-                    <div class="section-header">
-                        <h3 class="section-title">🔧 Mapa de Servicios TI</h3>
-                        <div class="section-actions">
-                            <button class="btn" onclick="viewServiceStatus()">Ver Estado</button>
-                            <button class="btn" onclick="viewCIRelations()">Ver Relaciones CI</button>
-                            <button class="btn btn-warning" onclick="simulateImpact()">Simular Impacto</button>
-                        </div>
-                    </div>
-                    <div class="service-map" id="serviceMap"></div>
-                </div>
-            </div>
-
-            <!-- TAB: INCIDENTES -->
             <div class="tab-content" id="incidents">
                 <div class="section">
                     <div class="section-header">
-                        <h3 class="section-title">🚨 Gestión de Incidentes y Problemas</h3>
-                        <div class="section-actions">
-                            <button class="btn" onclick="showMoreIncidents()">Ver Más</button>
-                            <button class="btn" onclick="filterByPriority()">Filtrar por Prioridad</button>
-                            <button class="btn" onclick="filterByService()">Filtrar por Servicio</button>
-                            <button class="btn btn-success" onclick="exportIncidents()">📥 Exportar</button>
-                        </div>
-                    </div>
-                    <div class="filters">
-                        <div class="filter-group">
-                            <label class="filter-label">Prioridad</label>
-                            <select id="priorityFilter" onchange="applyIncidentFilters()">
-                                <option value="all">Todas</option>
-                                <option value="critical">Crítica</option>
-                                <option value="high">Alta</option>
-                                <option value="medium">Media</option>
-                                <option value="low">Baja</option>
-                            </select>
-                        </div>
-                        <div class="filter-group">
-                            <label class="filter-label">Estado</label>
-                            <select id="statusFilter" onchange="applyIncidentFilters()">
-                                <option value="all">Todos</option>
-                                <option value="open">Abierto</option>
-                                <option value="progress">En Progreso</option>
-                                <option value="resolved">Resuelto</option>
-                            </select>
-                        </div>
-                        <div class="filter-group">
-                            <label class="filter-label">Servicio</label>
-                            <select id="serviceFilter" onchange="applyIncidentFilters()">
-                                <option value="all">Todos</option>
-                                <option value="email">Email</option>
-                                <option value="erp">ERP</option>
-                                <option value="crm">CRM</option>
-                            </select>
-                        </div>
+                        <h3 class="section-title">🚨 Gestión de Incidentes</h3>
+                        <button class="btn" onclick="exportData()">📥 Exportar</button>
                     </div>
                     <div class="table-container">
                         <table id="incidentsTable">
@@ -1081,207 +622,25 @@
                                     <th>Estado</th>
                                     <th>Servicio</th>
                                     <th>Asignado</th>
-                                    <th>Tiempo</th>
                                 </tr>
                             </thead>
                             <tbody id="incidentsTableBody"></tbody>
                         </table>
                     </div>
-                    <div class="chart-container mt-1">
-                        <canvas id="incidentsChart" class="chart-canvas" width="800" height="300"></canvas>
-                    </div>
                 </div>
             </div>
 
-            <!-- TAB: CAMBIOS -->
-            <div class="tab-content" id="changes">
+            <div class="tab-content" id="services">
                 <div class="section">
                     <div class="section-header">
-                        <h3 class="section-title">🔄 Gestión de Cambios y Releases</h3>
-                        <div class="section-actions">
-                            <button class="btn" onclick="filterByRisk()">Filtrar por Riesgo</button>
-                            <button class="btn" onclick="viewCAB()">Ver CAB</button>
-                            <button class="btn" onclick="viewChangeHistory()">Histórico</button>
-                        </div>
+                        <h3 class="section-title">🔧 Mapa de Servicios TI</h3>
                     </div>
-                    <div class="table-container">
-                        <table id="changesTable">
-                            <thead>
-                                <tr>
-                                    <th>ID</th>
-                                    <th>Descripción</th>
-                                    <th>Tipo</th>
-                                    <th>Riesgo</th>
-                                    <th>Estado</th>
-                                    <th>Fecha Implementación</th>
-                                    <th>Responsable</th>
-                                </tr>
-                            </thead>
-                            <tbody id="changesTableBody"></tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
-
-            <!-- TAB: CMDB -->
-            <div class="tab-content" id="cmdb">
-                <div class="section">
-                    <div class="section-header">
-                        <h3 class="section-title">💾 CMDB Health Dashboard</h3>
-                        <button class="btn" onclick="viewCIDetails()">Detalles CI</button>
-                    </div>
-                    <div class="kpi-grid">
-                        <div class="kpi-card">
-                            <div class="kpi-title">Total CIs Registrados</div>
-                            <div class="kpi-value" id="totalCIs">--</div>
-                        </div>
-                        <div class="kpi-card">
-                            <div class="kpi-title">CIs Actualizados (30d)</div>
-                            <div class="kpi-value" id="updatedCIs">--</div>
-                        </div>
-                        <div class="kpi-card">
-                            <div class="kpi-title">Precisión CMDB</div>
-                            <div class="kpi-value" id="cmdbAccuracy">--</div>
-                        </div>
-                        <div class="kpi-card">
-                            <div class="kpi-title">CIs Críticos</div>
-                            <div class="kpi-value" id="criticalCIs">--</div>
-                        </div>
-                    </div>
-                    <div class="table-container mt-1">
-                        <h4>Top 10 CIs Críticos</h4>
-                        <table id="ciTable">
-                            <thead>
-                                <tr>
-                                    <th>CI ID</th>
-                                    <th>Nombre</th>
-                                    <th>Tipo</th>
-                                    <th>Estado</th>
-                                    <th>Última Actualización</th>
-                                </tr>
-                            </thead>
-                            <tbody id="ciTableBody"></tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
-
-            <!-- TAB: FINANCIERO -->
-            <div class="tab-content" id="financial">
-                <div class="section">
-                    <div class="section-header">
-                        <h3 class="section-title">💰 Gestión Financiera TI</h3>
-                        <div class="section-actions">
-                            <button class="btn" onclick="viewFinancialDetails()">Ver Detalle</button>
-                            <button class="btn" onclick="compareMonths()">Comparar Meses</button>
-                            <button class="btn" onclick="viewROI()">Ver ROI</button>
-                        </div>
-                    </div>
-                    <div class="kpi-grid">
-                        <div class="kpi-card">
-                            <div class="kpi-title">Presupuesto Total</div>
-                            <div class="kpi-value" id="totalBudget">--</div>
-                        </div>
-                        <div class="kpi-card">
-                            <div class="kpi-title">Gasto Actual</div>
-                            <div class="kpi-value" id="currentSpend">--</div>
-                        </div>
-                        <div class="kpi-card">
-                            <div class="kpi-title">% Ejecutado</div>
-                            <div class="kpi-value" id="budgetPercent">--</div>
-                        </div>
-                        <div class="kpi-card">
-                            <div class="kpi-title">ROI Proyectos</div>
-                            <div class="kpi-value" id="projectROI">--</div>
-                        </div>
-                    </div>
-                    <div class="chart-container mt-1">
-                        <canvas id="financialChart" class="chart-canvas" width="800" height="300"></canvas>
-                    </div>
-                </div>
-            </div>
-
-            <!-- TAB: MEJORA CONTINUA -->
-            <div class="tab-content" id="cir">
-                <div class="section">
-                    <div class="section-header">
-                        <h3 class="section-title">📈 CIR - Registro de Mejora Continua</h3>
-                        <div class="section-actions">
-                            <button class="btn" onclick="filterCIRByStatus()">Filtrar por Estado</button>
-                            <button class="btn" onclick="filterCIRByResponsible()">Filtrar por Responsable</button>
-                            <button class="btn" onclick="viewCIRHistory()">Ver Historial</button>
-                        </div>
-                    </div>
-                    <div class="table-container">
-                        <table id="cirTable">
-                            <thead>
-                                <tr>
-                                    <th>ID</th>
-                                    <th>Iniciativa</th>
-                                    <th>Fase PDCA</th>
-                                    <th>Estado</th>
-                                    <th>Responsable</th>
-                                    <th>Impacto Esperado</th>
-                                    <th>Fecha</th>
-                                </tr>
-                            </thead>
-                            <tbody id="cirTableBody"></tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
-
-            <!-- TAB: AUDITORÍAS -->
-            <div class="tab-content" id="audit">
-                <div class="section">
-                    <div class="section-header">
-                        <h3 class="section-title">✅ Auditorías y No Conformidades</h3>
-                        <button class="btn" onclick="viewActionPlan()">Plan de Acción</button>
-                    </div>
-                    <div class="kpi-grid">
-                        <div class="kpi-card">
-                            <div class="kpi-title">Progreso Certificación</div>
-                            <div class="kpi-value" id="certProgress">--</div>
-                            <div class="progress-bar">
-                                <div class="progress-fill" id="certProgressBar">0%</div>
-                            </div>
-                        </div>
-                        <div class="kpi-card">
-                            <div class="kpi-title">Días para Auditoría</div>
-                            <div class="kpi-value" id="daysToAudit">--</div>
-                        </div>
-                        <div class="kpi-card">
-                            <div class="kpi-title">NC Mayores</div>
-                            <div class="kpi-value" id="majorNC">--</div>
-                        </div>
-                        <div class="kpi-card">
-                            <div class="kpi-title">NC Menores</div>
-                            <div class="kpi-value" id="minorNC">--</div>
-                        </div>
-                    </div>
-                    <div class="table-container mt-1">
-                        <h4>No Conformidades Activas</h4>
-                        <table id="ncTable">
-                            <thead>
-                                <tr>
-                                    <th>ID</th>
-                                    <th>Descripción</th>
-                                    <th>Tipo</th>
-                                    <th>Cláusula ISO</th>
-                                    <th>Estado</th>
-                                    <th>Responsable</th>
-                                    <th>Fecha Límite</th>
-                                </tr>
-                            </thead>
-                            <tbody id="ncTableBody"></tbody>
-                        </table>
-                    </div>
+                    <div id="serviceMap" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1rem;"></div>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- MODAL GENÉRICO -->
     <div class="modal" id="genericModal">
         <div class="modal-content">
             <button class="modal-close" onclick="closeModal()">×</button>
@@ -1291,32 +650,19 @@
     </div>
 
     <script>
-        // ===========================
-        // CONFIGURACIÓN GLOBAL
-        // ===========================
         let updateInterval;
         let lastUpdateTime = Date.now();
         let dataStore = {
             kpis: [],
             incidents: [],
-            changes: [],
-            risks: [],
-            ganttTasks: [],
-            services: [],
-            cis: [],
-            cir: [],
-            nc: [],
-            surveys: []
+            services: []
         };
 
-        // ===========================
-        // INICIALIZACIÓN
-        // ===========================
         window.addEventListener('DOMContentLoaded', () => {
             setTimeout(() => {
                 document.getElementById('loadingScreen').style.display = 'none';
                 initializeDashboard();
-            }, 2000);
+            }, 1500);
         });
 
         function initializeDashboard() {
@@ -1328,19 +674,15 @@
             setInterval(updateLastUpdateIndicator, 1000);
         }
 
-        // ===========================
-        // ACTUALIZACIÓN FECHA/HORA
-        // ===========================
         function updateDateTime() {
             const now = new Date();
             const options = { 
-                weekday: 'long', 
+                weekday: 'short', 
                 year: 'numeric', 
-                month: 'long', 
+                month: 'short', 
                 day: 'numeric',
                 hour: '2-digit',
-                minute: '2-digit',
-                second: '2-digit'
+                minute: '2-digit'
             };
             document.getElementById('currentDateTime').textContent = 
                 now.toLocaleDateString('es-ES', options);
@@ -1351,18 +693,12 @@
             document.getElementById('lastUpdate').textContent = `Hace ${seconds}s`;
         }
 
-        // ===========================
-        // TEMA CLARO/OSCURO
-        // ===========================
         function toggleTheme() {
             const html = document.documentElement;
             const currentTheme = html.getAttribute('data-theme');
             html.setAttribute('data-theme', currentTheme === 'dark' ? '' : 'dark');
         }
 
-        // ===========================
-        // SISTEMA DE TABS
-        // ===========================
         function switchTab(tabName) {
             document.querySelectorAll('.tab').forEach(tab => tab.classList.remove('active'));
             document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
@@ -1371,1371 +707,49 @@
             document.getElementById(tabName).classList.add('active');
         }
 
-        // ===========================
-        // GENERACIÓN DE DATOS INICIALES
-        // ===========================
         function generateInitialData() {
-            // KPIs
             dataStore.kpis = [
-                { id: 1, title: 'Disponibilidad General', value: 99.7, unit: '%', trend: 'up', icon: '📊', color: '#4caf50' },
-                { id: 2, title: 'Incidentes Abiertos', value: 23, unit: '', trend: 'down', icon: '🚨', color: '#ff9800' },
-                { id: 3, title: 'Cambios Pendientes', value: 12, unit: '', trend: 'neutral', icon: '🔄', color: '#2a6fdf' },
-                { id: 4, title: 'MTTR Promedio', value: 2.3, unit: 'h', trend: 'down', icon: '⏱️', color: '#4caf50' },
-                { id: 5, title: 'Satisfacción Usuario', value: 4.6, unit: '/5', trend: 'up', icon: '😊', color: '#4caf50' },
-                { id: 6, title: 'SLA Cumplimiento', value: 97.2, unit: '%', trend: 'up', icon: '✅', color: '#4caf50' },
-                { id: 7, title: 'Problemas Activos', value: 5, unit: '', trend: 'neutral', icon: '🔧', color: '#ff9800' },
-                { id: 8, title: 'Riesgos Críticos', value: 3, unit: '', trend: 'down', icon: '⚠️', color: '#f44336' },
-                { id: 9, title: 'Costos TI Mes', value: 145, unit: 'K€', trend: 'up', icon: '💰', color: '#2a6fdf' },
-                { id: 10, title: 'CIs Registrados', value: 1247, unit: '', trend: 'up', icon: '💾', color: '#2a6fdf' },
-                { id: 11, title: 'Progreso ISO', value: 87, unit: '%', trend: 'up', icon: '🏆', color: '#4caf50' },
-                { id: 12, title: 'NC Abiertas', value: 7, unit: '', trend: 'down', icon: '📋', color: '#ff9800' },
-                { id: 13, title: 'Días a Auditoría', value: 45, unit: 'd', trend: 'neutral', icon: '📅', color: '#2a6fdf' },
-                { id: 14, title: 'Personal Capacitado', value: 94, unit: '%', trend: 'up', icon: '👥', color: '#4caf50' },
-                { id: 15, title: 'Iniciativas CIR', value: 15, unit: '', trend: 'up', icon: '📈', color: '#2a6fdf' },
-                { id: 16, title: 'MTBF Promedio', value: 720, unit: 'h', trend: 'up', icon: '📊', color: '#4caf50' },
-                { id: 17, title: 'Capacidad CPU', value: 67, unit: '%', trend: 'up', icon: '💻', color: '#ff9800' },
-                { id: 18, title: 'Backup Success', value: 99.9, unit: '%', trend: 'neutral', icon: '💿', color: '#4caf50' },
-                { id: 19, title: 'Vulnerabilidades', value: 8, unit: '', trend: 'down', icon: '🔒', color: '#ff9800' },
-                { id: 20, title: 'ROI Proyectos', value: 23, unit: '%', trend: 'up', icon: '📊', color: '#4caf50' }
+                { id: 1, title: 'Disponibilidad General', value: 99.7, unit: '%', trend: 'up', icon: '📊' },
+                { id: 2, title: 'Incidentes Abiertos', value: 23, unit: '', trend: 'down', icon: '🚨' },
+                { id: 3, title: 'Cambios Pendientes', value: 12, unit: '', trend: 'neutral', icon: '🔄' },
+                { id: 4, title: 'MTTR Promedio', value: 2.3, unit: 'h', trend: 'down', icon: '⏱️' },
+                { id: 5, title: 'Satisfacción Usuario', value: 4.6, unit: '/5', trend: 'up', icon: '😊' },
+                { id: 6, title: 'SLA Cumplimiento', value: 97.2, unit: '%', trend: 'up', icon: '✅' },
+                { id: 7, title: 'Problemas Activos', value: 5, unit: '', trend: 'neutral', icon: '🔧' },
+                { id: 8, title: 'Riesgos Críticos', value: 3, unit: '', trend: 'down', icon: '⚠️' }
             ];
 
-            // Incidentes
             for (let i = 1; i <= 15; i++) {
                 dataStore.incidents.push({
                     id: `INC-${1000 + i}`,
-                    title: `Incidente ${i}: ${getRandomItem(['Caída servicio', 'Error aplicación', 'Problema conectividad', 'Fallo hardware'])}`,
+                    title: `Incidente ${i}: ${getRandomItem(['Caída servicio', 'Error aplicación', 'Problema red'])}`,
                     priority: getRandomItem(['critical', 'high', 'medium', 'low']),
-                    status: getRandomItem(['open', 'progress', 'resolved']),
-                    service: getRandomItem(['Email', 'ERP', 'CRM', 'Portal', 'Backup']),
-                    assigned: getRandomItem(['Juan Pérez', 'Ana García', 'Carlos López', 'María Rodríguez']),
-                    time: `${Math.floor(Math.random() * 48)}h`
+                    status: getRandomItem(['Abierto', 'En Progreso', 'Resuelto']),
+                    service: getRandomItem(['Email', 'ERP', 'CRM', 'Portal']),
+                    assigned: getRandomItem(['Juan Pérez', 'Ana García', 'Carlos López'])
                 });
             }
 
-            // Cambios
-            for (let i = 1; i <= 10; i++) {
-                dataStore.changes.push({
-                    id: `CHG-${2000 + i}`,
-                    description: `Cambio ${i}: ${getRandomItem(['Actualización sistema', 'Parche seguridad', 'Nuevo release', 'Configuración red'])}`,
-                    type: getRandomItem(['Standard', 'Normal', 'Emergency']),
-                    risk: getRandomItem(['Alto', 'Medio', 'Bajo']),
-                    status: getRandomItem(['Aprobado', 'Pendiente', 'Implementado']),
-                    date: getRandomFutureDate(),
-                    responsible: getRandomItem(['Director TI', 'Jefe Operaciones', 'Líder Calidad', 'Gerente Seguridad']),
-                    impact: getRandomItem(['Alto', 'Medio', 'Bajo']),
-                    date: getRandomPastDate()
-                });
-            }
-
-            // No Conformidades
-            for (let i = 1; i <= 7; i++) {
-                dataStore.nc.push({
-                    id: `NC-${6000 + i}`,
-                    description: `NC ${i}: ${getRandomItem(['Documentación incompleta', 'Proceso no implementado', 'Evidencia insuficiente', 'Control no efectivo'])}`,
-                    type: i <= 3 ? 'Mayor' : 'Menor',
-                    clause: `${Math.floor(Math.random() * 10) + 1}.${Math.floor(Math.random() * 9) + 1}`,
-                    status: getRandomItem(['Abierta', 'En progreso', 'Cerrada']),
-                    responsible: getRandomItem(['Director TI', 'Jefe Calidad', 'Líder Operaciones']),
-                    deadline: getRandomFutureDate()
-                });
-            }
-
-            // Encuestas CSAT
-            for (let i = 1; i <= 10; i++) {
-                dataStore.surveys.push({
-                    id: i,
-                    rating: Math.floor(Math.random() * 3) + 3,
-                    comment: getRandomItem([
-                        'Excelente servicio, muy rápido',
-                        'Buena atención pero podría mejorar',
-                        'Satisfecho con la resolución',
-                        'Tiempo de respuesta aceptable',
-                        'Muy profesionales',
-                        'Necesita mejorar comunicación',
-                        'Problema resuelto efectivamente',
-                        'Soporte técnico competente'
-                    ]),
-                    date: getRandomPastDate()
-                });
-            }
-        }
-
-        // ===========================
-        // FUNCIONES AUXILIARES
-        // ===========================
-        function getRandomItem(array) {
-            return array[Math.floor(Math.random() * array.length)];
-        }
-
-        function getRandomFutureDate() {
-            const date = new Date();
-            date.setDate(date.getDate() + Math.floor(Math.random() * 60));
-            return date.toLocaleDateString('es-ES');
-        }
-
-        function getRandomPastDate() {
-            const date = new Date();
-            date.setDate(date.getDate() - Math.floor(Math.random() * 30));
-            return date.toLocaleDateString('es-ES');
-        }
-
-        // ===========================
-        // RENDERIZADO DE COMPONENTES
-        // ===========================
-        function renderAllComponents() {
-            renderKPIs();
-            renderRiskMatrix();
-            renderGanttChart();
-            renderServiceMap();
-            renderIncidentsTable();
-            renderChangesTable();
-            renderCMDBData();
-            renderFinancialData();
-            renderCIRTable();
-            renderNCTable();
-            renderCharts();
-            updateAlertBanner();
-        }
-
-        // ===========================
-        // RENDERIZADO KPIs
-        // ===========================
-        function renderKPIs() {
-            const grid = document.getElementById('kpiGrid');
-            grid.innerHTML = dataStore.kpis.map(kpi => `
-                <div class="kpi-card" onclick="showKPIDetail(${kpi.id})">
-                    <div class="kpi-header">
-                        <span class="kpi-icon">${kpi.icon}</span>
-                        <span class="kpi-trend">${kpi.trend === 'up' ? '📈' : kpi.trend === 'down' ? '📉' : '➡️'}</span>
-                    </div>
-                    <div class="kpi-title">${kpi.title}</div>
-                    <div class="kpi-value">${kpi.value}${kpi.unit}</div>
-                    <canvas class="kpi-sparkline" id="spark-${kpi.id}"></canvas>
-                    <div class="kpi-footer">
-                        <button class="btn-small" onclick="event.stopPropagation(); showKPIDetail(${kpi.id})">Detalle</button>
-                    </div>
-                </div>
-            `).join('');
-
-            // Renderizar sparklines
-            dataStore.kpis.forEach(kpi => drawSparkline(kpi.id));
-        }
-
-        function drawSparkline(kpiId) {
-            const canvas = document.getElementById(`spark-${kpiId}`);
-            if (!canvas) return;
-            
-            const ctx = canvas.getContext('2d');
-            const width = canvas.width = canvas.offsetWidth;
-            const height = canvas.height = canvas.offsetHeight;
-            
-            ctx.clearRect(0, 0, width, height);
-            
-            const data = Array.from({length: 20}, () => Math.random() * 40 + 30);
-            const max = Math.max(...data);
-            const min = Math.min(...data);
-            const range = max - min || 1;
-            
-            ctx.strokeStyle = '#2a6fdf';
-            ctx.lineWidth = 2;
-            ctx.beginPath();
-            
-            data.forEach((value, index) => {
-                const x = (index / (data.length - 1)) * width;
-                const y = height - ((value - min) / range) * height;
-                if (index === 0) ctx.moveTo(x, y);
-                else ctx.lineTo(x, y);
-            });
-            
-            ctx.stroke();
-        }
-
-        // ===========================
-        // MATRIZ DE RIESGOS
-        // ===========================
-        function renderRiskMatrix() {
-            const matrix = document.getElementById('riskMatrix');
-            const impacts = ['Insignificante', 'Menor', 'Moderado', 'Mayor', 'Catastrófico'];
-            const probabilities = ['Raro', 'Improbable', 'Posible', 'Probable', 'Casi Seguro'];
-            
-            let html = '<div class="risk-label"></div>';
-            impacts.forEach(impact => {
-                html += `<div class="risk-label">${impact}</div>`;
-            });
-            
-            for (let p = 5; p >= 1; p--) {
-                html += `<div class="risk-label">${probabilities[p-1]}</div>`;
-                for (let i = 1; i <= 5; i++) {
-                    const level = p * i;
-                    const risks = dataStore.risks.filter(r => r.impact === i && r.probability === p);
-                    const cellClass = level <= 3 ? 'risk-low' : level <= 8 ? 'risk-medium' : 
-                                     level <= 12 ? 'risk-high' : level <= 16 ? 'risk-critical' : 'risk-extreme';
-                    
-                    html += `
-                        <div class="risk-cell ${cellClass}">
-                            ${risks.length > 0 ? risks.length : ''}
-                            ${risks.length > 0 ? `<div class="risk-tooltip">${risks[0].title}</div>` : ''}
-                        </div>
-                    `;
-                }
-            }
-            
-            matrix.innerHTML = html;
-            drawRiskDonut();
-        }
-
-        function drawRiskDonut() {
-            const canvas = document.getElementById('riskDonutChart');
-            if (!canvas) return;
-            
-            const ctx = canvas.getContext('2d');
-            const width = canvas.width;
-            const height = canvas.height;
-            const centerX = width / 2;
-            const centerY = height / 2;
-            const radius = Math.min(width, height) / 3;
-            
-            ctx.clearRect(0, 0, width, height);
-            
-            const riskCounts = {
-                low: dataStore.risks.filter(r => r.level <= 3).length,
-                medium: dataStore.risks.filter(r => r.level > 3 && r.level <= 8).length,
-                high: dataStore.risks.filter(r => r.level > 8 && r.level <= 12).length,
-                critical: dataStore.risks.filter(r => r.level > 12 && r.level <= 16).length,
-                extreme: dataStore.risks.filter(r => r.level > 16).length
-            };
-            
-            const total = Object.values(riskCounts).reduce((a, b) => a + b, 0);
-            const colors = ['#c8e6c9', '#fff9c4', '#ffcc80', '#ef9a9a', '#e57373'];
-            const labels = ['Bajo', 'Medio', 'Alto', 'Crítico', 'Extremo'];
-            
-            let currentAngle = -Math.PI / 2;
-            
-            Object.values(riskCounts).forEach((count, index) => {
-                const sliceAngle = (count / total) * 2 * Math.PI;
-                
-                ctx.beginPath();
-                ctx.moveTo(centerX, centerY);
-                ctx.arc(centerX, centerY, radius, currentAngle, currentAngle + sliceAngle);
-                ctx.closePath();
-                ctx.fillStyle = colors[index];
-                ctx.fill();
-                ctx.strokeStyle = '#fff';
-                ctx.lineWidth = 2;
-                ctx.stroke();
-                
-                currentAngle += sliceAngle;
-            });
-            
-            // Agujero interior
-            ctx.beginPath();
-            ctx.arc(centerX, centerY, radius * 0.6, 0, 2 * Math.PI);
-            ctx.fillStyle = getComputedStyle(document.documentElement).getPropertyValue('--bg-card');
-            ctx.fill();
-            
-            // Leyenda
-            const legend = document.getElementById('riskLegend');
-            if (legend) {
-                legend.innerHTML = '<h4>Distribución de Riesgos</h4>' + 
-                    Object.keys(riskCounts).map((key, index) => `
-                        <div style="display: flex; align-items: center; gap: 0.5rem; margin: 0.5rem 0;">
-                            <div style="width: 20px; height: 20px; background: ${colors[index]}; border-radius: 4px;"></div>
-                            <span>${labels[index]}: ${riskCounts[key]} (${((riskCounts[key]/total)*100).toFixed(1)}%)</span>
-                        </div>
-                    `).join('');
-            }
-        }
-
-        // ===========================
-        // CRONOGRAMA GANTT
-        // ===========================
-        function renderGanttChart() {
-            const container = document.getElementById('ganttChart');
-            const maxDuration = Math.max(...dataStore.ganttTasks.map(t => t.start + t.duration));
-            
-            let html = `
-                <div class="gantt-header">
-                    <div class="gantt-col-task">Tarea</div>
-                    <div class="gantt-col-timeline">Cronograma (Días)</div>
-                    <div class="gantt-col-status">Estado</div>
-                </div>
-            `;
-            
-            dataStore.ganttTasks.forEach(task => {
-                const barLeft = (task.start / maxDuration) * 100;
-                const barWidth = (task.duration / maxDuration) * 100;
-                const statusClass = `status-${task.status}`;
-                const statusLabel = task.status === 'completed' ? 'Completado' : 
-                                   task.status === 'progress' ? 'En Progreso' : 'Pendiente';
-                
-                html += `
-                    <div class="gantt-row ${task.critical ? 'critical' : ''}">
-                        <div class="gantt-col-task">${task.name}</div>
-                        <div class="gantt-col-timeline">
-                            <div class="gantt-bar-container">
-                                <div class="gantt-bar ${task.critical ? 'critical' : ''} ${task.status === 'completed' ? 'completed' : ''}" 
-                                     style="left: ${barLeft}%; width: ${barWidth}%;">
-                                    ${task.duration}d
-                                </div>
-                            </div>
-                        </div>
-                        <div class="gantt-col-status">
-                            <span class="status-badge ${statusClass}">${statusLabel}</span>
-                        </div>
-                    </div>
-                `;
-            });
-            
-            container.innerHTML = html;
-        }
-
-        // ===========================
-        // MAPA DE SERVICIOS
-        // ===========================
-        function renderServiceMap() {
-            const map = document.getElementById('serviceMap');
-            map.innerHTML = dataStore.services.map(service => `
-                <div class="service-card" onclick="showServiceDetail('${service.name}')">
-                    <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 1rem;">
-                        <span class="service-status ${service.status}"></span>
-                        <strong>${service.name}</strong>
-                    </div>
-                    <div style="font-size: 0.9rem; margin-bottom: 0.5rem;">
-                        Disponibilidad: <strong>${service.availability}%</strong>
-                    </div>
-                    <div style="font-size: 0.9rem;">
-                        Usuarios: <strong>${service.users}</strong>
-                    </div>
-                </div>
-            `).join('');
-        }
-
-        // ===========================
-        // TABLA DE INCIDENTES
-        // ===========================
-        function renderIncidentsTable() {
-            const tbody = document.getElementById('incidentsTableBody');
-            tbody.innerHTML = dataStore.incidents.slice(0, 15).map(inc => `
-                <tr>
-                    <td>${inc.id}</td>
-                    <td>${inc.title}</td>
-                    <td class="priority-${inc.priority}">${inc.priority.toUpperCase()}</td>
-                    <td>${inc.status}</td>
-                    <td>${inc.service}</td>
-                    <td>${inc.assigned}</td>
-                    <td>${inc.time}</td>
-                </tr>
-            `).join('');
-            
-            drawIncidentsChart();
-        }
-
-        function drawIncidentsChart() {
-            const canvas = document.getElementById('incidentsChart');
-            if (!canvas) return;
-            
-            const ctx = canvas.getContext('2d');
-            const width = canvas.width = canvas.offsetWidth;
-            const height = canvas.height = 300;
-            
-            ctx.clearRect(0, 0, width, height);
-            
-            const data = Array.from({length: 12}, () => Math.floor(Math.random() * 30) + 10);
-            const max = Math.max(...data);
-            const padding = 40;
-            const barWidth = (width - padding * 2) / data.length - 10;
-            
-            ctx.fillStyle = '#2a6fdf';
-            data.forEach((value, index) => {
-                const barHeight = (value / max) * (height - padding * 2);
-                const x = padding + index * (barWidth + 10);
-                const y = height - padding - barHeight;
-                
-                ctx.fillRect(x, y, barWidth, barHeight);
-                
-                ctx.fillStyle = '#666';
-                ctx.font = '12px Arial';
-                ctx.textAlign = 'center';
-                ctx.fillText(value, x + barWidth / 2, y - 5);
-                ctx.fillText(`M${index + 1}`, x + barWidth / 2, height - padding + 20);
-                ctx.fillStyle = '#2a6fdf';
-            });
-        }
-
-        // ===========================
-        // TABLA DE CAMBIOS
-        // ===========================
-        function renderChangesTable() {
-            const tbody = document.getElementById('changesTableBody');
-            tbody.innerHTML = dataStore.changes.map(chg => `
-                <tr>
-                    <td>${chg.id}</td>
-                    <td>${chg.description}</td>
-                    <td>${chg.type}</td>
-                    <td>${chg.risk}</td>
-                    <td>${chg.status}</td>
-                    <td>${chg.date}</td>
-                    <td>${chg.responsible}</td>
-                </tr>
-            `).join('');
-        }
-
-        // ===========================
-        // DATOS CMDB
-        // ===========================
-        function renderCMDBData() {
-            document.getElementById('totalCIs').textContent = dataStore.cis.length * 125;
-            document.getElementById('updatedCIs').textContent = Math.floor(dataStore.cis.length * 0.78 * 125);
-            document.getElementById('cmdbAccuracy').textContent = '96.2%';
-            document.getElementById('criticalCIs').textContent = dataStore.cis.length;
-            
-            const tbody = document.getElementById('ciTableBody');
-            tbody.innerHTML = dataStore.cis.map(ci => `
-                <tr>
-                    <td>${ci.id}</td>
-                    <td>${ci.name}</td>
-                    <td>${ci.type}</td>
-                    <td>${ci.status}</td>
-                    <td>${ci.lastUpdate}</td>
-                </tr>
-            `).join('');
-        }
-
-        // ===========================
-        // DATOS FINANCIEROS
-        // ===========================
-        function renderFinancialData() {
-            document.getElementById('totalBudget').textContent = '2.4M€';
-            document.getElementById('currentSpend').textContent = '1.8M€';
-            document.getElementById('budgetPercent').textContent = '75%';
-            document.getElementById('projectROI').textContent = '23%';
-            
-            drawFinancialChart();
-        }
-
-        function drawFinancialChart() {
-            const canvas = document.getElementById('financialChart');
-            if (!canvas) return;
-            
-            const ctx = canvas.getContext('2d');
-            const width = canvas.width = canvas.offsetWidth;
-            const height = canvas.height = 300;
-            
-            ctx.clearRect(0, 0, width, height);
-            
-            const budget = [200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200];
-            const actual = [180, 185, 195, 190, 200, 205, 195, 185, 180, 175, 0, 0];
-            
-            const max = 250;
-            const padding = 40;
-            const barWidth = (width - padding * 2) / budget.length / 2 - 5;
-            
-            budget.forEach((value, index) => {
-                const barHeight = (value / max) * (height - padding * 2);
-                const x = padding + index * (barWidth * 2 + 10);
-                const y = height - padding - barHeight;
-                
-                ctx.fillStyle = '#2a6fdf';
-                ctx.fillRect(x, y, barWidth, barHeight);
-                
-                if (actual[index] > 0) {
-                    const actualHeight = (actual[index] / max) * (height - padding * 2);
-                    const actualY = height - padding - actualHeight;
-                    ctx.fillStyle = '#4caf50';
-                    ctx.fillRect(x + barWidth + 2, actualY, barWidth, actualHeight);
-                }
-            });
-        }
-
-        // ===========================
-        // TABLA CIR
-        // ===========================
-        function renderCIRTable() {
-            const tbody = document.getElementById('cirTableBody');
-            tbody.innerHTML = dataStore.cir.map(item => `
-                <tr>
-                    <td>${item.id}</td>
-                    <td>${item.initiative}</td>
-                    <td>${item.phase}</td>
-                    <td>${item.status}</td>
-                    <td>${item.responsible}</td>
-                    <td>${item.impact}</td>
-                    <td>${item.date}</td>
-                </tr>
-            `).join('');
-        }
-
-        // ===========================
-        // TABLA NO CONFORMIDADES
-        // ===========================
-        function renderNCTable() {
-            document.getElementById('certProgress').textContent = '87%';
-            document.getElementById('certProgressBar').style.width = '87%';
-            document.getElementById('daysToAudit').textContent = '45';
-            document.getElementById('majorNC').textContent = dataStore.nc.filter(nc => nc.type === 'Mayor').length;
-            document.getElementById('minorNC').textContent = dataStore.nc.filter(nc => nc.type === 'Menor').length;
-            
-            const tbody = document.getElementById('ncTableBody');
-            tbody.innerHTML = dataStore.nc.map(nc => `
-                <tr>
-                    <td>${nc.id}</td>
-                    <td>${nc.description}</td>
-                    <td>${nc.type}</td>
-                    <td>${nc.clause}</td>
-                    <td>${nc.status}</td>
-                    <td>${nc.responsible}</td>
-                    <td>${nc.deadline}</td>
-                </tr>
-            `).join('');
-        }
-
-        // ===========================
-        // GRÁFICOS CANVAS AVANZADOS
-        // ===========================
-        function renderCharts() {
-            drawDonutChart();
-            drawLineChart();
-            drawBarChart();
-            drawGaugeChart();
-            drawCSATChart();
-        }
-
-        function drawDonutChart() {
-            const canvas = document.getElementById('donutChart');
-            if (!canvas) return;
-            
-            const ctx = canvas.getContext('2d');
-            const width = canvas.width;
-            const height = canvas.height;
-            const centerX = width / 2;
-            const centerY = height / 2;
-            const radius = Math.min(width, height) / 3;
-            
-            ctx.clearRect(0, 0, width, height);
-            
-            const data = [23, 15, 8, 12, 7];
-            const colors = ['#f44336', '#ff9800', '#ffeb3b', '#4caf50', '#2196f3'];
-            const labels = ['Crítico', 'Alto', 'Medio', 'Bajo', 'Info'];
-            const total = data.reduce((a, b) => a + b, 0);
-            
-            let currentAngle = -Math.PI / 2;
-            
-            data.forEach((value, index) => {
-                const sliceAngle = (value / total) * 2 * Math.PI;
-                
-                ctx.beginPath();
-                ctx.moveTo(centerX, centerY);
-                ctx.arc(centerX, centerY, radius, currentAngle, currentAngle + sliceAngle);
-                ctx.closePath();
-                ctx.fillStyle = colors[index];
-                ctx.fill();
-                ctx.strokeStyle = '#fff';
-                ctx.lineWidth = 2;
-                ctx.stroke();
-                
-                const labelAngle = currentAngle + sliceAngle / 2;
-                const labelX = centerX + Math.cos(labelAngle) * radius * 1.3;
-                const labelY = centerY + Math.sin(labelAngle) * radius * 1.3;
-                
-                ctx.fillStyle = colors[index];
-                ctx.font = 'bold 14px Arial';
-                ctx.textAlign = 'center';
-                ctx.fillText(`${labels[index]}: ${value}`, labelX, labelY);
-                
-                currentAngle += sliceAngle;
-            });
-            
-            ctx.beginPath();
-            ctx.arc(centerX, centerY, radius * 0.6, 0, 2 * Math.PI);
-            ctx.fillStyle = getComputedStyle(document.documentElement).getPropertyValue('--bg-card');
-            ctx.fill();
-        }
-
-        function drawLineChart() {
-            const canvas = document.getElementById('lineChart');
-            if (!canvas) return;
-            
-            const ctx = canvas.getContext('2d');
-            const width = canvas.width;
-            const height = canvas.height;
-            const padding = 40;
-            
-            ctx.clearRect(0, 0, width, height);
-            
-            const actual = Array.from({length: 12}, () => Math.random() * 2 + 1.5);
-            const target = Array.from({length: 12}, () => 2);
-            
-            const max = 4;
-            const stepX = (width - padding * 2) / (actual.length - 1);
-            
-            // Línea objetivo
-            ctx.strokeStyle = '#ff9800';
-            ctx.lineWidth = 2;
-            ctx.setLineDash([5, 5]);
-            ctx.beginPath();
-            target.forEach((value, index) => {
-                const x = padding + index * stepX;
-                const y = height - padding - (value / max) * (height - padding * 2);
-                if (index === 0) ctx.moveTo(x, y);
-                else ctx.lineTo(x, y);
-            });
-            ctx.stroke();
-            
-            // Línea actual
-            ctx.strokeStyle = '#2a6fdf';
-            ctx.lineWidth = 3;
-            ctx.setLineDash([]);
-            ctx.beginPath();
-            actual.forEach((value, index) => {
-                const x = padding + index * stepX;
-                const y = height - padding - (value / max) * (height - padding * 2);
-                if (index === 0) ctx.moveTo(x, y);
-                else ctx.lineTo(x, y);
-            });
-            ctx.stroke();
-            
-            // Etiquetas
-            ctx.fillStyle = '#666';
-            ctx.font = '12px Arial';
-            ctx.textAlign = 'center';
-            for (let i = 0; i < 12; i++) {
-                ctx.fillText(`M${i + 1}`, padding + i * stepX, height - 10);
-            }
-        }
-
-        function drawBarChart() {
-            const canvas = document.getElementById('barChart');
-            if (!canvas) return;
-            
-            const ctx = canvas.getContext('2d');
-            const width = canvas.width;
-            const height = canvas.height;
-            const padding = 60;
-            
-            ctx.clearRect(0, 0, width, height);
-            
-            const clients = [
-                {name: 'Acme Corp', value: 145},
-                {name: 'TechStart', value: 132},
-                {name: 'Global Inc', value: 118},
-                {name: 'Innovatech', value: 95},
-                {name: 'DataSys', value: 87},
-                {name: 'CloudNet', value: 76},
-                {name: 'InfoTech', value: 68},
-                {name: 'SoftCorp', value: 54},
-                {name: 'MegaSoft', value: 43},
-                {name: 'NetSolutions', value: 38}
-            ];
-            
-            const max = Math.max(...clients.map(c => c.value));
-            const barHeight = (height - padding * 2) / clients.length - 5;
-            
-            clients.forEach((client, index) => {
-                const barWidth = (client.value / max) * (width - padding * 2);
-                const y = padding + index * (barHeight + 5);
-                
-                ctx.fillStyle = '#2a6fdf';
-                ctx.fillRect(padding, y, barWidth, barHeight);
-                
-                ctx.fillStyle = '#fff';
-                ctx.font = 'bold 12px Arial';
-                ctx.textAlign = 'right';
-                ctx.fillText(client.value, padding + barWidth - 5, y + barHeight / 2 + 4);
-                
-                ctx.fillStyle = '#666';
-                ctx.textAlign = 'right';
-                ctx.fillText(client.name, padding - 10, y + barHeight / 2 + 4);
-            });
-        }
-
-        function drawGaugeChart() {
-            const canvas = document.getElementById('gaugeChart');
-            if (!canvas) return;
-            
-            const ctx = canvas.getContext('2d');
-            const width = canvas.width;
-            const height = canvas.height;
-            const centerX = width / 2;
-            const centerY = height / 2 + 30;
-            const radius = Math.min(width, height) / 2 - 20;
-            
-            ctx.clearRect(0, 0, width, height);
-            
-            const value = 99.7;
-            const startAngle = Math.PI;
-            const endAngle = 2 * Math.PI;
-            const valueAngle = startAngle + (value / 100) * (endAngle - startAngle);
-            
-            // Fondo del gauge
-            ctx.beginPath();
-            ctx.arc(centerX, centerY, radius, startAngle, endAngle);
-            ctx.lineWidth = 30;
-            ctx.strokeStyle = '#e0e0e0';
-            ctx.stroke();
-            
-            // Valor del gauge
-            ctx.beginPath();
-            ctx.arc(centerX, centerY, radius, startAngle, valueAngle);
-            ctx.lineWidth = 30;
-            ctx.strokeStyle = value >= 99 ? '#4caf50' : value >= 95 ? '#ff9800' : '#f44336';
-            ctx.stroke();
-            
-            // Texto central
-            ctx.fillStyle = '#333';
-            ctx.font = 'bold 48px Arial';
-            ctx.textAlign = 'center';
-            ctx.fillText(`${value}%`, centerX, centerY + 10);
-            
-            ctx.font = '16px Arial';
-            ctx.fillText('Disponibilidad', centerX, centerY + 40);
-        }
-
-        function drawCSATChart() {
-            const canvas = document.getElementById('csatChart');
-            if (!canvas) return;
-            
-            const ctx = canvas.getContext('2d');
-            const width = canvas.width = canvas.offsetWidth;
-            const height = canvas.height = 300;
-            
-            ctx.clearRect(0, 0, width, height);
-            
-            const data = Array.from({length: 12}, () => Math.random() * 1 + 4);
-            const max = 5;
-            const padding = 40;
-            const stepX = (width - padding * 2) / (data.length - 1);
-            
-            ctx.strokeStyle = '#4caf50';
-            ctx.lineWidth = 3;
-            ctx.beginPath();
-            
-            data.forEach((value, index) => {
-                const x = padding + index * stepX;
-                const y = height - padding - (value / max) * (height - padding * 2);
-                if (index === 0) ctx.moveTo(x, y);
-                else ctx.lineTo(x, y);
-                
-                ctx.fillStyle = '#4caf50';
-                ctx.beginPath();
-                ctx.arc(x, y, 4, 0, 2 * Math.PI);
-                ctx.fill();
-            });
-            
-            ctx.stroke();
-            
-            // Etiquetas
-            ctx.fillStyle = '#666';
-            ctx.font = '12px Arial';
-            ctx.textAlign = 'center';
-            for (let i = 0; i < 12; i++) {
-                ctx.fillText(`M${i + 1}`, padding + i * stepX, height - 10);
-            }
-            
-            // Comentarios
-            const commentsDiv = document.getElementById('surveyComments');
-            if (commentsDiv) {
-                commentsDiv.innerHTML = '<h4 style="margin-top: 2rem;">Últimos Comentarios de Usuarios</h4>' +
-                    dataStore.surveys.slice(0, 5).map(s => `
-                        <div style="background: var(--bg-main); padding: 1rem; border-radius: 8px; margin: 0.5rem 0;">
-                            <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
-                                <span style="color: #ff9800;">${'⭐'.repeat(s.rating)}</span>
-                                <span style="color: var(--text-secondary); font-size: 0.85rem;">${s.date}</span>
-                            </div>
-                            <p style="margin: 0;">${s.comment}</p>
-                        </div>
-                    `).join('');
-            }
-        }
-
-        // ===========================
-        // ACTUALIZACIÓN AUTOMÁTICA
-        // ===========================
-        function startAutoUpdate() {
-            updateInterval = setInterval(() => {
-                updateDynamicData();
-                renderAllComponents();
-                lastUpdateTime = Date.now();
-            }, 5000);
-        }
-
-        function updateDynamicData() {
-            // Actualizar KPIs con variaciones realistas
-            dataStore.kpis = dataStore.kpis.map(kpi => {
-                let newValue = kpi.value;
-                const variation = (Math.random() - 0.5) * 2;
-                
-                if (kpi.unit === '%') {
-                    newValue = Math.max(0, Math.min(100, kpi.value + variation * 0.1));
-                } else if (kpi.unit === 'h') {
-                    newValue = Math.max(0.5, kpi.value + variation * 0.1);
-                } else if (kpi.unit === '/5') {
-                    newValue = Math.max(1, Math.min(5, kpi.value + variation * 0.05));
-                } else {
-                    newValue = Math.max(0, kpi.value + Math.floor(variation));
-                }
-                
-                const oldValue = kpi.value;
-                const trend = newValue > oldValue ? 'up' : newValue < oldValue ? 'down' : 'neutral';
-                
-                return { ...kpi, value: Math.round(newValue * 100) / 100, trend };
-            });
-            
-            // Actualizar algunos incidentes
-            if (Math.random() > 0.7) {
-                const randomIncident = dataStore.incidents[Math.floor(Math.random() * dataStore.incidents.length)];
-                randomIncident.status = getRandomItem(['open', 'progress', 'resolved']);
-            }
-            
-            // Actualizar alertas
-            if (Math.random() > 0.8) {
-                updateAlertBanner();
-            }
-        }
-
-        // ===========================
-        // BANNER DE ALERTAS
-        // ===========================
-        function updateAlertBanner() {
-            const alerts = [
-                { title: 'Sistema Operativo', message: 'Todos los servicios funcionando correctamente', level: 'success' },
-                { title: 'Mantenimiento Programado', message: 'Actualización de firewall mañana 02:00 AM', level: 'warning' },
-                { title: 'Alto Uso de CPU', message: 'Servidor DB01 al 85% de capacidad', level: 'warning' },
-                { title: 'Backup Exitoso', message: 'Respaldo completado satisfactoriamente', level: 'success' },
-                { title: 'Actualización Disponible', message: 'Nueva versión del ERP disponible', level: 'info' }
-            ];
-            
-            const alert = getRandomItem(alerts);
-            document.getElementById('alertTitle').textContent = alert.title + ':';
-            document.getElementById('alertMessage').textContent = alert.message;
-        }
-
-        // ===========================
-        // FUNCIONES DE BOTONES
-        // ===========================
-        function showKPIDetail(id) {
-            const kpi = dataStore.kpis.find(k => k.id === id);
-            if (!kpi) return;
-            
-            openModal('Detalle de KPI', `
-                <h3>${kpi.icon} ${kpi.title}</h3>
-                <div style="font-size: 3rem; font-weight: bold; color: ${kpi.color}; text-align: center; margin: 2rem 0;">
-                    ${kpi.value}${kpi.unit}
-                </div>
-                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-top: 2rem;">
-                    <div style="background: var(--bg-main); padding: 1rem; border-radius: 8px;">
-                        <div style="color: var(--text-secondary); font-size: 0.85rem;">Tendencia</div>
-                        <div style="font-size: 1.5rem;">${kpi.trend === 'up' ? '📈 Ascendente' : kpi.trend === 'down' ? '📉 Descendente' : '➡️ Estable'}</div>
-                    </div>
-                    <div style="background: var(--bg-main); padding: 1rem; border-radius: 8px;">
-                        <div style="color: var(--text-secondary); font-size: 0.85rem;">Estado</div>
-                        <div style="font-size: 1.5rem; color: ${kpi.color};">● Activo</div>
-                    </div>
-                </div>
-                <p style="margin-top: 2rem; color: var(--text-secondary);">
-                    Este KPI se actualiza automáticamente cada 5 segundos con datos en tiempo real del sistema de gestión de servicios TI.
-                </p>
-            `);
-        }
-
-        function showRiskList() {
-            const risksByLevel = {
-                extreme: dataStore.risks.filter(r => r.level > 16),
-                critical: dataStore.risks.filter(r => r.level > 12 && r.level <= 16),
-                high: dataStore.risks.filter(r => r.level > 8 && r.level <= 12),
-                medium: dataStore.risks.filter(r => r.level > 3 && r.level <= 8),
-                low: dataStore.risks.filter(r => r.level <= 3)
-            };
-            
-            openModal('Lista Completa de Riesgos', `
-                <h4 style="color: #e57373;">🔴 Riesgos Extremos (${risksByLevel.extreme.length})</h4>
-                ${risksByLevel.extreme.map(r => `<div style="padding: 0.5rem; margin: 0.25rem 0; background: #ffebee; border-radius: 4px;">${r.title} - Nivel: ${r.level}</div>`).join('') || '<p>Ninguno</p>'}
-                
-                <h4 style="color: #ef9a9a; margin-top: 1rem;">🔴 Riesgos Críticos (${risksByLevel.critical.length})</h4>
-                ${risksByLevel.critical.map(r => `<div style="padding: 0.5rem; margin: 0.25rem 0; background: #ffebee; border-radius: 4px;">${r.title} - Nivel: ${r.level}</div>`).join('') || '<p>Ninguno</p>'}
-                
-                <h4 style="color: #ffcc80; margin-top: 1rem;">🟠 Riesgos Altos (${risksByLevel.high.length})</h4>
-                ${risksByLevel.high.slice(0, 3).map(r => `<div style="padding: 0.5rem; margin: 0.25rem 0; background: #fff3e0; border-radius: 4px;">${r.title} - Nivel: ${r.level}</div>`).join('')}
-                ${risksByLevel.high.length > 3 ? `<p style="color: var(--text-secondary);">... y ${risksByLevel.high.length - 3} más</p>` : ''}
-            `);
-        }
-
-        function filterRisksBySeverity() {
-            alert('Filtro de riesgos por severidad aplicado correctamente');
-        }
-
-        function exportRisks() {
-            alert('✅ Exportación de riesgos completada. Archivo: riesgos_' + new Date().toISOString().split('T')[0] + '.csv');
-        }
-
-        function showCriticalTasks() {
-            const criticalTasks = dataStore.ganttTasks.filter(t => t.critical);
-            openModal('Tareas de Ruta Crítica', `
-                <p style="margin-bottom: 1rem;">Se encontraron <strong>${criticalTasks.length}</strong> tareas críticas:</p>
-                ${criticalTasks.map(t => `
-                    <div style="background: var(--bg-main); padding: 1rem; margin: 0.5rem 0; border-radius: 8px; border-left: 4px solid #f44336;">
-                        <strong>${t.name}</strong><br>
-                        <span style="color: var(--text-secondary); font-size: 0.85rem;">Duración: ${t.duration} días | Estado: ${t.status}</span>
-                    </div>
-                `).join('')}
-            `);
-        }
-
-        function toggleGanttExpand() {
-            alert('Vista de Gantt expandida/contraída');
-        }
-
-        function showDependencies() {
-            alert('Mostrando dependencias entre tareas del proyecto ISO 20000');
-        }
-
-        function viewServiceStatus() {
-            const online = dataStore.services.filter(s => s.status === 'online').length;
-            const warning = dataStore.services.filter(s => s.status === 'warning').length;
-            
-            openModal('Estado de Servicios TI', `
-                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 2rem;">
-                    <div style="background: #e8f5e9; padding: 1.5rem; border-radius: 8px; text-align: center;">
-                        <div style="font-size: 2rem; color: #4caf50; font-weight: bold;">${online}</div>
-                        <div>Servicios Online</div>
-                    </div>
-                    <div style="background: #fff3e0; padding: 1.5rem; border-radius: 8px; text-align: center;">
-                        <div style="font-size: 2rem; color: #ff9800; font-weight: bold;">${warning}</div>
-                        <div>Con Advertencias</div>
-                    </div>
-                </div>
-                ${dataStore.services.map(s => `
-                    <div style="display: flex; align-items: center; gap: 1rem; padding: 1rem; background: var(--bg-main); margin: 0.5rem 0; border-radius: 8px;">
-                        <span class="service-status ${s.status}" style="width: 12px; height: 12px; border-radius: 50%;"></span>
-                        <div style="flex: 1;">
-                            <strong>${s.name}</strong><br>
-                            <span style="font-size: 0.85rem; color: var(--text-secondary);">Disponibilidad: ${s.availability}% | Usuarios: ${s.users}</span>
-                        </div>
-                    </div>
-                `).join('')}
-            `);
-        }
-
-        function viewCIRelations() {
-            alert('Visualizando mapa de relaciones entre Configuration Items (CIs)');
-        }
-
-        function simulateImpact() {
-            alert('Simulación de impacto iniciada. Analizando dependencias de servicios...');
-        }
-
-        function showMoreIncidents() {
-            alert('Mostrando todos los incidentes históricos');
-        }
-
-        function filterByPriority() {
-            alert('Aplicando filtro por prioridad de incidentes');
-        }
-
-        function filterByService() {
-            alert('Aplicando filtro por servicio afectado');
-        }
-
-        function exportIncidents() {
-            alert('✅ Exportación de incidentes completada. Archivo: incidentes_' + new Date().toISOString().split('T')[0] + '.xlsx');
-        }
-
-        function applyIncidentFilters() {
-            const priority = document.getElementById('priorityFilter').value;
-            const status = document.getElementById('statusFilter').value;
-            const service = document.getElementById('serviceFilter').value;
-            
-            let filtered = dataStore.incidents;
-            
-            if (priority !== 'all') filtered = filtered.filter(i => i.priority === priority);
-            if (status !== 'all') filtered = filtered.filter(i => i.status === status);
-            if (service !== 'all') filtered = filtered.filter(i => i.service === service);
-            
-            const tbody = document.getElementById('incidentsTableBody');
-            tbody.innerHTML = filtered.slice(0, 15).map(inc => `
-                <tr>
-                    <td>${inc.id}</td>
-                    <td>${inc.title}</td>
-                    <td class="priority-${inc.priority}">${inc.priority.toUpperCase()}</td>
-                    <td>${inc.status}</td>
-                    <td>${inc.service}</td>
-                    <td>${inc.assigned}</td>
-                    <td>${inc.time}</td>
-                </tr>
-            `).join('');
-        }
-
-        function filterByRisk() {
-            alert('Filtrando cambios por nivel de riesgo');
-        }
-
-        function viewCAB() {
-            openModal('Change Advisory Board (CAB)', `
-                <h4>Próxima Reunión CAB</h4>
-                <div style="background: var(--bg-main); padding: 1.5rem; border-radius: 8px; margin: 1rem 0;">
-                    <p><strong>Fecha:</strong> ${getRandomFutureDate()}</p>
-                    <p><strong>Hora:</strong> 10:00 AM</p>
-                    <p><strong>Cambios a revisar:</strong> ${dataStore.changes.filter(c => c.status === 'Pendiente').length}</p>
-                </div>
-                <h4 style="margin-top: 2rem;">Miembros del CAB</h4>
-                <ul style="list-style: none; padding: 0;">
-                    <li style="padding: 0.5rem; background: var(--bg-main); margin: 0.25rem 0; border-radius: 4px;">👤 Director de TI</li>
-                    <li style="padding: 0.5rem; background: var(--bg-main); margin: 0.25rem 0; border-radius: 4px;">👤 Jefe de Operaciones</li>
-                    <li style="padding: 0.5rem; background: var(--bg-main); margin: 0.25rem 0; border-radius: 4px;">👤 Líder de Seguridad</li>
-                    <li style="padding: 0.5rem; background: var(--bg-main); margin: 0.25rem 0; border-radius: 4px;">👤 Arquitecto de Soluciones</li>
-                    <li style="padding: 0.5rem; background: var(--bg-main); margin: 0.25rem 0; border-radius: 4px;">👤 Gestor de Calidad</li>
-                </ul>
-            `);
-        }
-
-        function viewChangeHistory() {
-            alert('Mostrando histórico completo de cambios implementados');
-        }
-
-        function viewCIDetails() {
-            alert('Visualizando detalles completos de Configuration Items');
-        }
-
-        function viewFinancialDetails() {
-            openModal('Detalle Financiero TI', `
-                <h4>Desglose de Costos por Categoría</h4>
-                <div style="margin: 1rem 0;">
-                    <div style="display: flex; justify-content: space-between; padding: 0.75rem; background: var(--bg-main); margin: 0.25rem 0; border-radius: 4px;">
-                        <span>Personal</span>
-                        <strong>€1,200,000</strong>
-                    </div>
-                    <div style="display: flex; justify-content: space-between; padding: 0.75rem; background: var(--bg-main); margin: 0.25rem 0; border-radius: 4px;">
-                        <span>Hardware</span>
-                        <strong>€350,000</strong>
-                    </div>
-                    <div style="display: flex; justify-content: space-between; padding: 0.75rem; background: var(--bg-main); margin: 0.25rem 0; border-radius: 4px;">
-                        <span>Software y Licencias</span>
-                        <strong>€180,000</strong>
-                    </div>
-                    <div style="display: flex; justify-content: space-between; padding: 0.75rem; background: var(--bg-main); margin: 0.25rem 0; border-radius: 4px;">
-                        <span>Servicios Externos</span>
-                        <strong>€70,000</strong>
-                    </div>
-                </div>
-            `);
-        }
-
-        function compareMonths() {
-            alert('Comparativa mensual de gastos TI generada correctamente');
-        }
-
-        function viewROI() {
-            alert('Análisis de ROI por proyecto disponible');
-        }
-
-        function filterCIRByStatus() {
-            alert('Filtrando iniciativas CIR por estado');
-        }
-
-        function filterCIRByResponsible() {
-            alert('Filtrando iniciativas CIR por responsable');
-        }
-
-        function viewCIRHistory() {
-            alert('Mostrando histórico completo de mejora continua');
-        }
-
-        function viewActionPlan() {
-            openModal('Plan de Acción - No Conformidades', `
-                <h4>Plan de Remediación</h4>
-                <p style="margin-bottom: 1rem;">Acciones planificadas para cerrar las ${dataStore.nc.filter(nc => nc.status === 'Abierta').length} NC abiertas:</p>
-                ${dataStore.nc.filter(nc => nc.status === 'Abierta').map(nc => `
-                    <div style="background: var(--bg-main); padding: 1rem; margin: 0.5rem 0; border-radius: 8px; border-left: 4px solid ${nc.type === 'Mayor' ? '#f44336' : '#ff9800'};">
-                        <strong>${nc.id}</strong> - ${nc.description}<br>
-                        <span style="color: var(--text-secondary); font-size: 0.85rem;">
-                            Responsable: ${nc.responsible} | Fecha límite: ${nc.deadline}
-                        </span>
-                    </div>
-                `).join('')}
-            `);
-        }
-
-        function showAllAlerts() {
-            openModal('Todas las Alertas del Sistema', `
-                <div style="max-height: 400px; overflow-y: auto;">
-                    ${Array.from({length: 10}, (_, i) => `
-                        <div style="background: var(--bg-main); padding: 1rem; margin: 0.5rem 0; border-radius: 8px;">
-                            <div style="display: flex; justify-content: space-between; align-items: center;">
-                                <strong>Alerta ${i + 1}</strong>
-                                <span style="color: var(--text-secondary); font-size: 0.85rem;">${getRandomPastDate()}</span>
-                            </div>
-                            <p style="margin: 0.5rem 0 0 0; color: var(--text-secondary);">
-                                ${getRandomItem([
-                                    'Mantenimiento programado completado exitosamente',
-                                    'Actualización de sistema aplicada',
-                                    'Backup nocturno finalizado correctamente',
-                                    'Monitoreo de rendimiento: todo normal',
-                                    'Escaneo de seguridad completado sin amenazas'
-                                ])}
-                            </p>
-                        </div>
-                    `).join('')}
-                </div>
-            `);
-        }
-
-        function dismissAlert() {
-            alert('✅ Alerta marcada como leída');
-        }
-
-        function showAllSurveys() {
-            openModal('Todas las Encuestas de Satisfacción', `
-                <div style="max-height: 500px; overflow-y: auto;">
-                    ${dataStore.surveys.map(s => `
-                        <div style="background: var(--bg-main); padding: 1rem; margin: 0.5rem 0; border-radius: 8px;">
-                            <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
-                                <span style="color: #ff9800;">${'⭐'.repeat(s.rating)}</span>
-                                <span style="color: var(--text-secondary); font-size: 0.85rem;">${s.date}</span>
-                            </div>
-                            <p style="margin: 0;">${s.comment}</p>
-                        </div>
-                    `).join('')}
-                </div>
-            `);
-        }
-
-        function refreshCharts() {
-            renderCharts();
-            alert('✅ Gráficos actualizados correctamente');
-        }
-
-        // ===========================
-        // SISTEMA DE MODAL
-        // ===========================
-        function openModal(title, content) {
-            document.getElementById('modalTitle').textContent = title;
-            document.getElementById('modalBody').innerHTML = content;
-            document.getElementById('genericModal').classList.add('active');
-        }
-
-        function closeModal() {
-            document.getElementById('genericModal').classList.remove('active');
-        }
-
-        // Cerrar modal al hacer clic fuera
-        document.getElementById('genericModal').addEventListener('click', (e) => {
-            if (e.target.id === 'genericModal') {
-                closeModal();
-            }
-        });
-
-        // ===========================
-        // EXPORTAR PDF (SIMULADO)
-        // ===========================
-        function exportToPDF() {
-            alert('📄 Generando PDF del dashboard ejecutivo...\n\n✅ PDF generado correctamente:\ndashboard_iso20000_' + new Date().toISOString().split('T')[0] + '.pdf\n\nEl archivo incluye todos los KPIs, gráficos y métricas actuales.');
-        }
-
-        // Agregar botón de exportar en el header
-        document.addEventListener('DOMContentLoaded', () => {
-            const headerInfo = document.querySelector('.header-info');
-            if (headerInfo) {
-                const exportBtn = document.createElement('button');
-                exportBtn.className = 'btn';
-                exportBtn.innerHTML = '📥 Exportar PDF';
-                exportBtn.onclick = exportToPDF;
-                exportBtn.style.cssText = 'background: var(--success); padding: 0.6rem 1.2rem; border: none; border-radius: 8px; color: white; cursor: pointer; font-size: 0.9rem;';
-                headerInfo.appendChild(exportBtn);
-            }
-        });
-
-        // ===========================
-        // ACCESIBILIDAD
-        // ===========================
-        document.addEventListener('keydown', (e) => {
-            // Cerrar modal con ESC
-            if (e.key === 'Escape') {
-                closeModal();
-            }
-        });
-
-        // ===========================
-        // MANEJO DE ERRORES
-        // ===========================
-        window.addEventListener('error', (e) => {
-            console.error('Error capturado:', e.message);
-        });
-
-        // ===========================
-        // OPTIMIZACIÓN DE RENDIMIENTO
-        // ===========================
-        let resizeTimeout;
-        window.addEventListener('resize', () => {
-            clearTimeout(resizeTimeout);
-            resizeTimeout = setTimeout(() => {
-                renderCharts();
-            }, 250);
-        });
-
-        // ===========================
-        // INFORMACIÓN DEL SISTEMA
-        // ===========================
-        console.log('%c🎯 PEIGSTI - TechSolutions S.A.', 'font-size: 20px; font-weight: bold; color: #2a6fdf;');
-        console.log('%cPlataforma Ejecutiva Integral de Gestión de Servicios TI', 'font-size: 14px; color: #666;');
-        console.log('%cISO/IEC 20000-1:2018 Certified System', 'font-size: 12px; color: #4caf50;');
-        console.log('%cVersión: 1.0.0 | Dashboard Ejecutivo Premium', 'font-size: 10px; color: #999;');
-    </script>
-</body>
-</html>Equipo Infraestructura', 'Equipo Desarrollo', 'Equipo Seguridad'])
-                });
-            }
-
-            // Riesgos
-            for (let i = 1; i <= 25; i++) {
-                const impact = Math.floor(Math.random() * 5) + 1;
-                const probability = Math.floor(Math.random() * 5) + 1;
-                dataStore.risks.push({
-                    id: `RISK-${3000 + i}`,
-                    title: `Riesgo ${i}`,
-                    impact,
-                    probability,
-                    level: impact * probability
-                });
-            }
-
-            // Tareas Gantt
-            const ganttTasks = [
-                { name: 'Análisis Gap ISO 20000', start: 0, duration: 15, status: 'completed', critical: false },
-                { name: 'Definición Alcance SMS', start: 10, duration: 10, status: 'completed', critical: true },
-                { name: 'Diseño Procesos ITSM', start: 20, duration: 20, status: 'completed', critical: true },
-                { name: 'Implementación Gestión Incidentes', start: 35, duration: 15, status: 'completed', critical: false },
-                { name: 'Implementación Gestión Problemas', start: 40, duration: 15, status: 'progress', critical: false },
-                { name: 'Implementación Gestión Cambios', start: 45, duration: 20, status: 'progress', critical: true },
-                { name: 'Implementación Gestión Configuración', start: 50, duration: 18, status: 'progress', critical: false },
-                { name: 'Implementación Gestión Releases', start: 55, duration: 15, status: 'progress', critical: false },
-                { name: 'Definición SLAs', start: 60, duration: 10, status: 'progress', critical: true },
-                { name: 'Implementación Gestión Niveles Servicio', start: 65, duration: 12, status: 'pending', critical: false },
-                { name: 'Implementación Gestión Capacidad', start: 70, duration: 15, status: 'pending', critical: false },
-                { name: 'Implementación Gestión Disponibilidad', start: 72, duration: 15, status: 'pending', critical: true },
-                { name: 'Implementación Gestión Continuidad', start: 75, duration: 20, status: 'pending', critical: true },
-                { name: 'Implementación Gestión Seguridad Info', start: 78, duration: 18, status: 'pending', critical: false },
-                { name: 'Implementación Gestión Proveedores', start: 80, duration: 12, status: 'pending', critical: false },
-                { name: 'Implementación Gestión Presupuestos', start: 82, duration: 10, status: 'pending', critical: false },
-                { name: 'Documentación Sistema', start: 85, duration: 15, status: 'pending', critical: true },
-                { name: 'Capacitación Personal', start: 90, duration: 20, status: 'pending', critical: true },
-                { name: 'Auditoría Interna Fase 1', start: 100, duration: 10, status: 'pending', critical: true },
-                { name: 'Corrección NC Auditoría', start: 110, duration: 15, status: 'pending', critical: true },
-                { name: 'Auditoría Interna Fase 2', start: 120, duration: 10, status: 'pending', critical: true },
-                { name: 'Preparación Auditoría Externa', start: 130, duration: 10, status: 'pending', critical: true },
-                { name: 'Auditoría Certificación Etapa 1', start: 140, duration: 5, status: 'pending', critical: true },
-                { name: 'Auditoría Certificación Etapa 2', start: 145, duration: 5, status: 'pending', critical: true },
-                { name: 'Certificación ISO 20000', start: 150, duration: 1, status: 'pending', critical: true }
-            ];
-            dataStore.ganttTasks = ganttTasks;
-
-            // Servicios
             dataStore.services = [
                 { name: 'Correo Electrónico', status: 'online', availability: 99.9, users: 450 },
                 { name: 'ERP Corporativo', status: 'online', availability: 99.7, users: 320 },
                 { name: 'CRM Ventas', status: 'online', availability: 99.8, users: 180 },
-                { name: 'Portal Intranet', status: 'warning', availability: 98.2, users: 500 },
-                { name: 'Sistema Backup', status: 'online', availability: 99.9, users: 50 },
-                { name: 'VPN Corporativa', status: 'online', availability: 99.5, users: 250 },
-                { name: 'File Server', status: 'online', availability: 99.6, users: 400 },
-                { name: 'Base de Datos Principal', status: 'warning', availability: 98.8, users: 350 }
+                { name: 'Portal Intranet', status: 'warning', availability: 98.2, users: 500 }
             ];
-
-            // CIs
-            for (let i = 1; i <= 10; i++) {
-                dataStore.cis.push({
-                    id: `CI-${4000 + i}`,
-                    name: `${getRandomItem(['Servidor', 'Switch', 'Router', 'Firewall'])} ${i}`,
-                    type: getRandomItem(['Hardware', 'Software', 'Red', 'Aplicación']),
-                    status: getRandomItem(['Activo', 'Mantenimiento', 'Inactivo']),
-                    lastUpdate: getRandomPastDate()
-                });
-            }
-
-            // CIR
-            for (let i = 1; i <= 15; i++) {
-                dataStore.cir.push({
-                    id: `CIR-${5000 + i}`,
-                    initiative: `Mejora ${i}: ${getRandomItem(['Automatización', 'Optimización procesos', 'Capacitación', 'Nueva herramienta'])}`,
-                    phase: getRandomItem(['Plan', 'Do', 'Check', 'Act']),
-                    status: getRandomItem(['Activa', 'Completada', 'En espera']),
-                    responsible: getRandomItem(['Director TI', 'Jefe Operaciones', 'Líder Calidad', 'Gerente Seguridad']),
-                    impact: getRandomItem(['Alto', 'Medio', 'Bajo']),
-                    date: getRandomPastDate()
-                });
-            }
-
-            // No Conformidades
-            for (let i = 1; i <= 7; i++) {
-                dataStore.nc.push({
-                    id: `NC-${6000 + i}`,
-                    description: `NC ${i}: ${getRandomItem(['Documentación incompleta', 'Proceso no implementado', 'Evidencia insuficiente', 'Control no efectivo'])}`,
-                    type: i <= 3 ? 'Mayor' : 'Menor',
-                    clause: `${Math.floor(Math.random() * 10) + 1}.${Math.floor(Math.random() * 9) + 1}`,
-                    status: getRandomItem(['Abierta', 'En progreso', 'Cerrada']),
-                    responsible: getRandomItem(['Director TI', 'Jefe Calidad', 'Líder Operaciones']),
-                    deadline: getRandomFutureDate()
-                });
-            }
-
-            // Encuestas CSAT
-            for (let i = 1; i <= 10; i++) {
-                dataStore.surveys.push({
-                    id: i,
-                    rating: Math.floor(Math.random() * 3) + 3,
-                    comment: getRandomItem([
-                        'Excelente servicio, muy rápido',
-                        'Buena atención pero podría mejorar',
-                        'Satisfecho con la resolución',
-                        'Tiempo de respuesta aceptable',
-                        'Muy profesionales',
-                        'Necesita mejorar comunicación',
-                        'Problema resuelto efectivamente',
-                        'Soporte técnico competente'
-                    ]),
-                    date: getRandomPastDate()
-                });
-            }
         }
 
-        // ===========================
-        // FUNCIONES AUXILIARES
-        // ===========================
         function getRandomItem(array) {
             return array[Math.floor(Math.random() * array.length)];
         }
 
-        function getRandomFutureDate() {
-            const date = new Date();
-            date.setDate(date.getDate() + Math.floor(Math.random() * 60));
-            return date.toLocaleDateString('es-ES');
-        }
-
-        function getRandomPastDate() {
-            const date = new Date();
-            date.setDate(date.getDate() - Math.floor(Math.random() * 30));
-            return date.toLocaleDateString('es-ES');
-        }
-
-        // ===========================
-        // RENDERIZADO DE COMPONENTES
-        // ===========================
         function renderAllComponents() {
             renderKPIs();
-            renderRiskMatrix();
-            renderGanttChart();
-            renderServiceMap();
             renderIncidentsTable();
-            renderChangesTable();
-            renderCMDBData();
-            renderFinancialData();
-            renderCIRTable();
-            renderNCTable();
+            renderServiceMap();
             renderCharts();
             updateAlertBanner();
         }
 
-        // ===========================
-        // RENDERIZADO KPIs
-        // ===========================
         function renderKPIs() {
             const grid = document.getElementById('kpiGrid');
             grid.innerHTML = dataStore.kpis.map(kpi => `
@@ -2753,7 +767,6 @@
                 </div>
             `).join('');
 
-            // Renderizar sparklines
             dataStore.kpis.forEach(kpi => drawSparkline(kpi.id));
         }
 
@@ -2786,154 +799,27 @@
             ctx.stroke();
         }
 
-        // ===========================
-        // MATRIZ DE RIESGOS
-        // ===========================
-        function renderRiskMatrix() {
-            const matrix = document.getElementById('riskMatrix');
-            const impacts = ['Insignificante', 'Menor', 'Moderado', 'Mayor', 'Catastrófico'];
-            const probabilities = ['Raro', 'Improbable', 'Posible', 'Probable', 'Casi Seguro'];
-            
-            let html = '<div class="risk-label"></div>';
-            impacts.forEach(impact => {
-                html += `<div class="risk-label">${impact}</div>`;
-            });
-            
-            for (let p = 5; p >= 1; p--) {
-                html += `<div class="risk-label">${probabilities[p-1]}</div>`;
-                for (let i = 1; i <= 5; i++) {
-                    const level = p * i;
-                    const risks = dataStore.risks.filter(r => r.impact === i && r.probability === p);
-                    const cellClass = level <= 3 ? 'risk-low' : level <= 8 ? 'risk-medium' : 
-                                     level <= 12 ? 'risk-high' : level <= 16 ? 'risk-critical' : 'risk-extreme';
-                    
-                    html += `
-                        <div class="risk-cell ${cellClass}">
-                            ${risks.length > 0 ? risks.length : ''}
-                            ${risks.length > 0 ? `<div class="risk-tooltip">${risks[0].title}</div>` : ''}
-                        </div>
-                    `;
-                }
-            }
-            
-            matrix.innerHTML = html;
-            drawRiskDonut();
+        function renderIncidentsTable() {
+            const tbody = document.getElementById('incidentsTableBody');
+            tbody.innerHTML = dataStore.incidents.slice(0, 10).map(inc => `
+                <tr>
+                    <td>${inc.id}</td>
+                    <td>${inc.title}</td>
+                    <td class="priority-${inc.priority}">${inc.priority.toUpperCase()}</td>
+                    <td>${inc.status}</td>
+                    <td>${inc.service}</td>
+                    <td>${inc.assigned}</td>
+                </tr>
+            `).join('');
         }
 
-        function drawRiskDonut() {
-            const canvas = document.getElementById('riskDonutChart');
-            if (!canvas) return;
-            
-            const ctx = canvas.getContext('2d');
-            const width = canvas.width;
-            const height = canvas.height;
-            const centerX = width / 2;
-            const centerY = height / 2;
-            const radius = Math.min(width, height) / 3;
-            
-            ctx.clearRect(0, 0, width, height);
-            
-            const riskCounts = {
-                low: dataStore.risks.filter(r => r.level <= 3).length,
-                medium: dataStore.risks.filter(r => r.level > 3 && r.level <= 8).length,
-                high: dataStore.risks.filter(r => r.level > 8 && r.level <= 12).length,
-                critical: dataStore.risks.filter(r => r.level > 12 && r.level <= 16).length,
-                extreme: dataStore.risks.filter(r => r.level > 16).length
-            };
-            
-            const total = Object.values(riskCounts).reduce((a, b) => a + b, 0);
-            const colors = ['#c8e6c9', '#fff9c4', '#ffcc80', '#ef9a9a', '#e57373'];
-            const labels = ['Bajo', 'Medio', 'Alto', 'Crítico', 'Extremo'];
-            
-            let currentAngle = -Math.PI / 2;
-            
-            Object.values(riskCounts).forEach((count, index) => {
-                const sliceAngle = (count / total) * 2 * Math.PI;
-                
-                ctx.beginPath();
-                ctx.moveTo(centerX, centerY);
-                ctx.arc(centerX, centerY, radius, currentAngle, currentAngle + sliceAngle);
-                ctx.closePath();
-                ctx.fillStyle = colors[index];
-                ctx.fill();
-                ctx.strokeStyle = '#fff';
-                ctx.lineWidth = 2;
-                ctx.stroke();
-                
-                currentAngle += sliceAngle;
-            });
-            
-            // Agujero interior
-            ctx.beginPath();
-            ctx.arc(centerX, centerY, radius * 0.6, 0, 2 * Math.PI);
-            ctx.fillStyle = getComputedStyle(document.documentElement).getPropertyValue('--bg-card');
-            ctx.fill();
-            
-            // Leyenda
-            const legend = document.getElementById('riskLegend');
-            if (legend) {
-                legend.innerHTML = '<h4>Distribución de Riesgos</h4>' + 
-                    Object.keys(riskCounts).map((key, index) => `
-                        <div style="display: flex; align-items: center; gap: 0.5rem; margin: 0.5rem 0;">
-                            <div style="width: 20px; height: 20px; background: ${colors[index]}; border-radius: 4px;"></div>
-                            <span>${labels[index]}: ${riskCounts[key]} (${((riskCounts[key]/total)*100).toFixed(1)}%)</span>
-                        </div>
-                    `).join('');
-            }
-        }
-
-        // ===========================
-        // CRONOGRAMA GANTT
-        // ===========================
-        function renderGanttChart() {
-            const container = document.getElementById('ganttChart');
-            const maxDuration = Math.max(...dataStore.ganttTasks.map(t => t.start + t.duration));
-            
-            let html = `
-                <div class="gantt-header">
-                    <div class="gantt-col-task">Tarea</div>
-                    <div class="gantt-col-timeline">Cronograma (Días)</div>
-                    <div class="gantt-col-status">Estado</div>
-                </div>
-            `;
-            
-            dataStore.ganttTasks.forEach(task => {
-                const barLeft = (task.start / maxDuration) * 100;
-                const barWidth = (task.duration / maxDuration) * 100;
-                const statusClass = `status-${task.status}`;
-                const statusLabel = task.status === 'completed' ? 'Completado' : 
-                                   task.status === 'progress' ? 'En Progreso' : 'Pendiente';
-                
-                html += `
-                    <div class="gantt-row ${task.critical ? 'critical' : ''}">
-                        <div class="gantt-col-task">${task.name}</div>
-                        <div class="gantt-col-timeline">
-                            <div class="gantt-bar-container">
-                                <div class="gantt-bar ${task.critical ? 'critical' : ''} ${task.status === 'completed' ? 'completed' : ''}" 
-                                     style="left: ${barLeft}%; width: ${barWidth}%;">
-                                    ${task.duration}d
-                                </div>
-                            </div>
-                        </div>
-                        <div class="gantt-col-status">
-                            <span class="status-badge ${statusClass}">${statusLabel}</span>
-                        </div>
-                    </div>
-                `;
-            });
-            
-            container.innerHTML = html;
-        }
-
-        // ===========================
-        // MAPA DE SERVICIOS
-        // ===========================
         function renderServiceMap() {
             const map = document.getElementById('serviceMap');
             map.innerHTML = dataStore.services.map(service => `
-                <div class="service-card" onclick="showServiceDetail('${service.name}')">
-                    <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 1rem;">
-                        <span class="service-status ${service.status}"></span>
+                <div style="background: linear-gradient(135deg, #2a6fdf 0%, #144272 100%); color: white; padding: 1.5rem; border-radius: 12px; cursor: pointer; transition: all 0.3s;" 
+                     onmouseover="this.style.transform='translateY(-5px) scale(1.02)'"
+                     onmouseout="this.style.transform='translateY(0) scale(1)'">
+                    <div style="margin-bottom: 1rem;">
                         <strong>${service.name}</strong>
                     </div>
                     <div style="font-size: 0.9rem; margin-bottom: 0.5rem;">
@@ -2946,194 +832,9 @@
             `).join('');
         }
 
-        // ===========================
-        // TABLA DE INCIDENTES
-        // ===========================
-        function renderIncidentsTable() {
-            const tbody = document.getElementById('incidentsTableBody');
-            tbody.innerHTML = dataStore.incidents.slice(0, 15).map(inc => `
-                <tr>
-                    <td>${inc.id}</td>
-                    <td>${inc.title}</td>
-                    <td class="priority-${inc.priority}">${inc.priority.toUpperCase()}</td>
-                    <td>${inc.status}</td>
-                    <td>${inc.service}</td>
-                    <td>${inc.assigned}</td>
-                    <td>${inc.time}</td>
-                </tr>
-            `).join('');
-            
-            drawIncidentsChart();
-        }
-
-        function drawIncidentsChart() {
-            const canvas = document.getElementById('incidentsChart');
-            if (!canvas) return;
-            
-            const ctx = canvas.getContext('2d');
-            const width = canvas.width = canvas.offsetWidth;
-            const height = canvas.height = 300;
-            
-            ctx.clearRect(0, 0, width, height);
-            
-            const data = Array.from({length: 12}, () => Math.floor(Math.random() * 30) + 10);
-            const max = Math.max(...data);
-            const padding = 40;
-            const barWidth = (width - padding * 2) / data.length - 10;
-            
-            ctx.fillStyle = '#2a6fdf';
-            data.forEach((value, index) => {
-                const barHeight = (value / max) * (height - padding * 2);
-                const x = padding + index * (barWidth + 10);
-                const y = height - padding - barHeight;
-                
-                ctx.fillRect(x, y, barWidth, barHeight);
-                
-                ctx.fillStyle = '#666';
-                ctx.font = '12px Arial';
-                ctx.textAlign = 'center';
-                ctx.fillText(value, x + barWidth / 2, y - 5);
-                ctx.fillText(`M${index + 1}`, x + barWidth / 2, height - padding + 20);
-                ctx.fillStyle = '#2a6fdf';
-            });
-        }
-
-        // ===========================
-        // TABLA DE CAMBIOS
-        // ===========================
-        function renderChangesTable() {
-            const tbody = document.getElementById('changesTableBody');
-            tbody.innerHTML = dataStore.changes.map(chg => `
-                <tr>
-                    <td>${chg.id}</td>
-                    <td>${chg.description}</td>
-                    <td>${chg.type}</td>
-                    <td>${chg.risk}</td>
-                    <td>${chg.status}</td>
-                    <td>${chg.date}</td>
-                    <td>${chg.responsible}</td>
-                </tr>
-            `).join('');
-        }
-
-        // ===========================
-        // DATOS CMDB
-        // ===========================
-        function renderCMDBData() {
-            document.getElementById('totalCIs').textContent = dataStore.cis.length * 125;
-            document.getElementById('updatedCIs').textContent = Math.floor(dataStore.cis.length * 0.78 * 125);
-            document.getElementById('cmdbAccuracy').textContent = '96.2%';
-            document.getElementById('criticalCIs').textContent = dataStore.cis.length;
-            
-            const tbody = document.getElementById('ciTableBody');
-            tbody.innerHTML = dataStore.cis.map(ci => `
-                <tr>
-                    <td>${ci.id}</td>
-                    <td>${ci.name}</td>
-                    <td>${ci.type}</td>
-                    <td>${ci.status}</td>
-                    <td>${ci.lastUpdate}</td>
-                </tr>
-            `).join('');
-        }
-
-        // ===========================
-        // DATOS FINANCIEROS
-        // ===========================
-        function renderFinancialData() {
-            document.getElementById('totalBudget').textContent = '2.4M€';
-            document.getElementById('currentSpend').textContent = '1.8M€';
-            document.getElementById('budgetPercent').textContent = '75%';
-            document.getElementById('projectROI').textContent = '23%';
-            
-            drawFinancialChart();
-        }
-
-        function drawFinancialChart() {
-            const canvas = document.getElementById('financialChart');
-            if (!canvas) return;
-            
-            const ctx = canvas.getContext('2d');
-            const width = canvas.width = canvas.offsetWidth;
-            const height = canvas.height = 300;
-            
-            ctx.clearRect(0, 0, width, height);
-            
-            const budget = [200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200];
-            const actual = [180, 185, 195, 190, 200, 205, 195, 185, 180, 175, 0, 0];
-            
-            const max = 250;
-            const padding = 40;
-            const barWidth = (width - padding * 2) / budget.length / 2 - 5;
-            
-            budget.forEach((value, index) => {
-                const barHeight = (value / max) * (height - padding * 2);
-                const x = padding + index * (barWidth * 2 + 10);
-                const y = height - padding - barHeight;
-                
-                ctx.fillStyle = '#2a6fdf';
-                ctx.fillRect(x, y, barWidth, barHeight);
-                
-                if (actual[index] > 0) {
-                    const actualHeight = (actual[index] / max) * (height - padding * 2);
-                    const actualY = height - padding - actualHeight;
-                    ctx.fillStyle = '#4caf50';
-                    ctx.fillRect(x + barWidth + 2, actualY, barWidth, actualHeight);
-                }
-            });
-        }
-
-        // ===========================
-        // TABLA CIR
-        // ===========================
-        function renderCIRTable() {
-            const tbody = document.getElementById('cirTableBody');
-            tbody.innerHTML = dataStore.cir.map(item => `
-                <tr>
-                    <td>${item.id}</td>
-                    <td>${item.initiative}</td>
-                    <td>${item.phase}</td>
-                    <td>${item.status}</td>
-                    <td>${item.responsible}</td>
-                    <td>${item.impact}</td>
-                    <td>${item.date}</td>
-                </tr>
-            `).join('');
-        }
-
-        // ===========================
-        // TABLA NO CONFORMIDADES
-        // ===========================
-        function renderNCTable() {
-            document.getElementById('certProgress').textContent = '87%';
-            document.getElementById('certProgressBar').style.width = '87%';
-            document.getElementById('daysToAudit').textContent = '45';
-            document.getElementById('majorNC').textContent = dataStore.nc.filter(nc => nc.type === 'Mayor').length;
-            document.getElementById('minorNC').textContent = dataStore.nc.filter(nc => nc.type === 'Menor').length;
-            
-            const tbody = document.getElementById('ncTableBody');
-            tbody.innerHTML = dataStore.nc.map(nc => `
-                <tr>
-                    <td>${nc.id}</td>
-                    <td>${nc.description}</td>
-                    <td>${nc.type}</td>
-                    <td>${nc.clause}</td>
-                    <td>${nc.status}</td>
-                    <td>${nc.responsible}</td>
-                    <td>${nc.deadline}</td>
-                </tr>
-            `).join('');
-        }
-
-        // ===========================
-        // GRÁFICOS CANVAS AVANZADOS
-        // ===========================
         function renderCharts() {
             drawDonutChart();
             drawLineChart();
-            drawBarChart();
-            drawGaugeChart();
-            drawCSATChart();
         }
 
         function drawDonutChart() {
@@ -3149,9 +850,9 @@
             
             ctx.clearRect(0, 0, width, height);
             
-            const data = [23, 15, 8, 12, 7];
-            const colors = ['#f44336', '#ff9800', '#ffeb3b', '#4caf50', '#2196f3'];
-            const labels = ['Crítico', 'Alto', 'Medio', 'Bajo', 'Info'];
+            const data = [23, 15, 8, 12];
+            const colors = ['#f44336', '#ff9800', '#4caf50', '#2196f3'];
+            const labels = ['Crítico', 'Alto', 'Medio', 'Bajo'];
             const total = data.reduce((a, b) => a + b, 0);
             
             let currentAngle = -Math.PI / 2;
@@ -3198,150 +899,11 @@
             
             ctx.clearRect(0, 0, width, height);
             
-            const actual = Array.from({length: 12}, () => Math.random() * 2 + 1.5);
-            const target = Array.from({length: 12}, () => 2);
-            
-            const max = 4;
-            const stepX = (width - padding * 2) / (actual.length - 1);
-            
-            // Línea objetivo
-            ctx.strokeStyle = '#ff9800';
-            ctx.lineWidth = 2;
-            ctx.setLineDash([5, 5]);
-            ctx.beginPath();
-            target.forEach((value, index) => {
-                const x = padding + index * stepX;
-                const y = height - padding - (value / max) * (height - padding * 2);
-                if (index === 0) ctx.moveTo(x, y);
-                else ctx.lineTo(x, y);
-            });
-            ctx.stroke();
-            
-            // Línea actual
-            ctx.strokeStyle = '#2a6fdf';
-            ctx.lineWidth = 3;
-            ctx.setLineDash([]);
-            ctx.beginPath();
-            actual.forEach((value, index) => {
-                const x = padding + index * stepX;
-                const y = height - padding - (value / max) * (height - padding * 2);
-                if (index === 0) ctx.moveTo(x, y);
-                else ctx.lineTo(x, y);
-            });
-            ctx.stroke();
-            
-            // Etiquetas
-            ctx.fillStyle = '#666';
-            ctx.font = '12px Arial';
-            ctx.textAlign = 'center';
-            for (let i = 0; i < 12; i++) {
-                ctx.fillText(`M${i + 1}`, padding + i * stepX, height - 10);
-            }
-        }
-
-        function drawBarChart() {
-            const canvas = document.getElementById('barChart');
-            if (!canvas) return;
-            
-            const ctx = canvas.getContext('2d');
-            const width = canvas.width;
-            const height = canvas.height;
-            const padding = 60;
-            
-            ctx.clearRect(0, 0, width, height);
-            
-            const clients = [
-                {name: 'Acme Corp', value: 145},
-                {name: 'TechStart', value: 132},
-                {name: 'Global Inc', value: 118},
-                {name: 'Innovatech', value: 95},
-                {name: 'DataSys', value: 87},
-                {name: 'CloudNet', value: 76},
-                {name: 'InfoTech', value: 68},
-                {name: 'SoftCorp', value: 54},
-                {name: 'MegaSoft', value: 43},
-                {name: 'NetSolutions', value: 38}
-            ];
-            
-            const max = Math.max(...clients.map(c => c.value));
-            const barHeight = (height - padding * 2) / clients.length - 5;
-            
-            clients.forEach((client, index) => {
-                const barWidth = (client.value / max) * (width - padding * 2);
-                const y = padding + index * (barHeight + 5);
-                
-                ctx.fillStyle = '#2a6fdf';
-                ctx.fillRect(padding, y, barWidth, barHeight);
-                
-                ctx.fillStyle = '#fff';
-                ctx.font = 'bold 12px Arial';
-                ctx.textAlign = 'right';
-                ctx.fillText(client.value, padding + barWidth - 5, y + barHeight / 2 + 4);
-                
-                ctx.fillStyle = '#666';
-                ctx.textAlign = 'right';
-                ctx.fillText(client.name, padding - 10, y + barHeight / 2 + 4);
-            });
-        }
-
-        function drawGaugeChart() {
-            const canvas = document.getElementById('gaugeChart');
-            if (!canvas) return;
-            
-            const ctx = canvas.getContext('2d');
-            const width = canvas.width;
-            const height = canvas.height;
-            const centerX = width / 2;
-            const centerY = height / 2 + 30;
-            const radius = Math.min(width, height) / 2 - 20;
-            
-            ctx.clearRect(0, 0, width, height);
-            
-            const value = 99.7;
-            const startAngle = Math.PI;
-            const endAngle = 2 * Math.PI;
-            const valueAngle = startAngle + (value / 100) * (endAngle - startAngle);
-            
-            // Fondo del gauge
-            ctx.beginPath();
-            ctx.arc(centerX, centerY, radius, startAngle, endAngle);
-            ctx.lineWidth = 30;
-            ctx.strokeStyle = '#e0e0e0';
-            ctx.stroke();
-            
-            // Valor del gauge
-            ctx.beginPath();
-            ctx.arc(centerX, centerY, radius, startAngle, valueAngle);
-            ctx.lineWidth = 30;
-            ctx.strokeStyle = value >= 99 ? '#4caf50' : value >= 95 ? '#ff9800' : '#f44336';
-            ctx.stroke();
-            
-            // Texto central
-            ctx.fillStyle = '#333';
-            ctx.font = 'bold 48px Arial';
-            ctx.textAlign = 'center';
-            ctx.fillText(`${value}%`, centerX, centerY + 10);
-            
-            ctx.font = '16px Arial';
-            ctx.fillText('Disponibilidad', centerX, centerY + 40);
-        }
-
-        function drawCSATChart() {
-            const canvas = document.getElementById('csatChart');
-            if (!canvas) return;
-            
-            const ctx = canvas.getContext('2d');
-            const width = canvas.width = canvas.offsetWidth;
-            const height = canvas.height = 300;
-            
-            ctx.clearRect(0, 0, width, height);
-            
-            const data = Array.from({length: 12}, () => Math.random() * 1 + 4);
-            const max = 5;
-            const padding = 40;
+            const data = Array.from({length: 12}, () => Math.random() * 30 + 10);
+            const max = Math.max(...data);
             const stepX = (width - padding * 2) / (data.length - 1);
             
-            ctx.strokeStyle = '#4caf50';
+            ctx.strokeStyle = '#2a6fdf';
             ctx.lineWidth = 3;
             ctx.beginPath();
             
@@ -3351,41 +913,23 @@
                 if (index === 0) ctx.moveTo(x, y);
                 else ctx.lineTo(x, y);
                 
-                ctx.fillStyle = '#4caf50';
+                ctx.fillStyle = '#2a6fdf';
                 ctx.beginPath();
                 ctx.arc(x, y, 4, 0, 2 * Math.PI);
                 ctx.fill();
             });
             
+            ctx.strokeStyle = '#2a6fdf';
             ctx.stroke();
             
-            // Etiquetas
             ctx.fillStyle = '#666';
             ctx.font = '12px Arial';
             ctx.textAlign = 'center';
             for (let i = 0; i < 12; i++) {
                 ctx.fillText(`M${i + 1}`, padding + i * stepX, height - 10);
             }
-            
-            // Comentarios
-            const commentsDiv = document.getElementById('surveyComments');
-            if (commentsDiv) {
-                commentsDiv.innerHTML = '<h4 style="margin-top: 2rem;">Últimos Comentarios de Usuarios</h4>' +
-                    dataStore.surveys.slice(0, 5).map(s => `
-                        <div style="background: var(--bg-main); padding: 1rem; border-radius: 8px; margin: 0.5rem 0;">
-                            <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
-                                <span style="color: #ff9800;">${'⭐'.repeat(s.rating)}</span>
-                                <span style="color: var(--text-secondary); font-size: 0.85rem;">${s.date}</span>
-                            </div>
-                            <p style="margin: 0;">${s.comment}</p>
-                        </div>
-                    `).join('');
-            }
         }
 
-        // ===========================
-        // ACTUALIZACIÓN AUTOMÁTICA
-        // ===========================
         function startAutoUpdate() {
             updateInterval = setInterval(() => {
                 updateDynamicData();
@@ -3395,7 +939,6 @@
         }
 
         function updateDynamicData() {
-            // Actualizar KPIs con variaciones realistas
             dataStore.kpis = dataStore.kpis.map(kpi => {
                 let newValue = kpi.value;
                 const variation = (Math.random() - 0.5) * 2;
@@ -3416,28 +959,17 @@
                 return { ...kpi, value: Math.round(newValue * 100) / 100, trend };
             });
             
-            // Actualizar algunos incidentes
-            if (Math.random() > 0.7) {
-                const randomIncident = dataStore.incidents[Math.floor(Math.random() * dataStore.incidents.length)];
-                randomIncident.status = getRandomItem(['open', 'progress', 'resolved']);
-            }
-            
-            // Actualizar alertas
             if (Math.random() > 0.8) {
                 updateAlertBanner();
             }
         }
 
-        // ===========================
-        // BANNER DE ALERTAS
-        // ===========================
         function updateAlertBanner() {
             const alerts = [
-                { title: 'Sistema Operativo', message: 'Todos los servicios funcionando correctamente', level: 'success' },
-                { title: 'Mantenimiento Programado', message: 'Actualización de firewall mañana 02:00 AM', level: 'warning' },
-                { title: 'Alto Uso de CPU', message: 'Servidor DB01 al 85% de capacidad', level: 'warning' },
-                { title: 'Backup Exitoso', message: 'Respaldo completado satisfactoriamente', level: 'success' },
-                { title: 'Actualización Disponible', message: 'Nueva versión del ERP disponible', level: 'info' }
+                { title: 'Sistema Operativo', message: 'Todos los servicios funcionando correctamente' },
+                { title: 'Mantenimiento Programado', message: 'Actualización de firewall mañana 02:00 AM' },
+                { title: 'Alto Uso de CPU', message: 'Servidor DB01 al 85% de capacidad' },
+                { title: 'Backup Exitoso', message: 'Respaldo completado satisfactoriamente' }
             ];
             
             const alert = getRandomItem(alerts);
@@ -3445,16 +977,13 @@
             document.getElementById('alertMessage').textContent = alert.message;
         }
 
-        // ===========================
-        // FUNCIONES DE BOTONES
-        // ===========================
         function showKPIDetail(id) {
             const kpi = dataStore.kpis.find(k => k.id === id);
             if (!kpi) return;
             
             openModal('Detalle de KPI', `
                 <h3>${kpi.icon} ${kpi.title}</h3>
-                <div style="font-size: 3rem; font-weight: bold; color: ${kpi.color}; text-align: center; margin: 2rem 0;">
+                <div style="font-size: 3rem; font-weight: bold; color: var(--primary-light); text-align: center; margin: 2rem 0;">
                     ${kpi.value}${kpi.unit}
                 </div>
                 <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-top: 2rem;">
@@ -3464,7 +993,7 @@
                     </div>
                     <div style="background: var(--bg-main); padding: 1rem; border-radius: 8px;">
                         <div style="color: var(--text-secondary); font-size: 0.85rem;">Estado</div>
-                        <div style="font-size: 1.5rem; color: ${kpi.color};">● Activo</div>
+                        <div style="font-size: 1.5rem; color: var(--success);">● Activo</div>
                     </div>
                 </div>
                 <p style="margin-top: 2rem; color: var(--text-secondary);">
@@ -3473,279 +1002,14 @@
             `);
         }
 
-        function showRiskList() {
-            const risksByLevel = {
-                extreme: dataStore.risks.filter(r => r.level > 16),
-                critical: dataStore.risks.filter(r => r.level > 12 && r.level <= 16),
-                high: dataStore.risks.filter(r => r.level > 8 && r.level <= 12),
-                medium: dataStore.risks.filter(r => r.level > 3 && r.level <= 8),
-                low: dataStore.risks.filter(r => r.level <= 3)
-            };
-            
-            openModal('Lista Completa de Riesgos', `
-                <h4 style="color: #e57373;">🔴 Riesgos Extremos (${risksByLevel.extreme.length})</h4>
-                ${risksByLevel.extreme.map(r => `<div style="padding: 0.5rem; margin: 0.25rem 0; background: #ffebee; border-radius: 4px;">${r.title} - Nivel: ${r.level}</div>`).join('') || '<p>Ninguno</p>'}
-                
-                <h4 style="color: #ef9a9a; margin-top: 1rem;">🔴 Riesgos Críticos (${risksByLevel.critical.length})</h4>
-                ${risksByLevel.critical.map(r => `<div style="padding: 0.5rem; margin: 0.25rem 0; background: #ffebee; border-radius: 4px;">${r.title} - Nivel: ${r.level}</div>`).join('') || '<p>Ninguno</p>'}
-                
-                <h4 style="color: #ffcc80; margin-top: 1rem;">🟠 Riesgos Altos (${risksByLevel.high.length})</h4>
-                ${risksByLevel.high.slice(0, 3).map(r => `<div style="padding: 0.5rem; margin: 0.25rem 0; background: #fff3e0; border-radius: 4px;">${r.title} - Nivel: ${r.level}</div>`).join('')}
-                ${risksByLevel.high.length > 3 ? `<p style="color: var(--text-secondary);">... y ${risksByLevel.high.length - 3} más</p>` : ''}
-            `);
-        }
-
-        function filterRisksBySeverity() {
-            alert('Filtro de riesgos por severidad aplicado correctamente');
-        }
-
-        function exportRisks() {
-            alert('✅ Exportación de riesgos completada. Archivo: riesgos_' + new Date().toISOString().split('T')[0] + '.csv');
-        }
-
-        function showCriticalTasks() {
-            const criticalTasks = dataStore.ganttTasks.filter(t => t.critical);
-            openModal('Tareas de Ruta Crítica', `
-                <p style="margin-bottom: 1rem;">Se encontraron <strong>${criticalTasks.length}</strong> tareas críticas:</p>
-                ${criticalTasks.map(t => `
-                    <div style="background: var(--bg-main); padding: 1rem; margin: 0.5rem 0; border-radius: 8px; border-left: 4px solid #f44336;">
-                        <strong>${t.name}</strong><br>
-                        <span style="color: var(--text-secondary); font-size: 0.85rem;">Duración: ${t.duration} días | Estado: ${t.status}</span>
-                    </div>
-                `).join('')}
-            `);
-        }
-
-        function toggleGanttExpand() {
-            alert('Vista de Gantt expandida/contraída');
-        }
-
-        function showDependencies() {
-            alert('Mostrando dependencias entre tareas del proyecto ISO 20000');
-        }
-
-        function viewServiceStatus() {
-            const online = dataStore.services.filter(s => s.status === 'online').length;
-            const warning = dataStore.services.filter(s => s.status === 'warning').length;
-            
-            openModal('Estado de Servicios TI', `
-                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 2rem;">
-                    <div style="background: #e8f5e9; padding: 1.5rem; border-radius: 8px; text-align: center;">
-                        <div style="font-size: 2rem; color: #4caf50; font-weight: bold;">${online}</div>
-                        <div>Servicios Online</div>
-                    </div>
-                    <div style="background: #fff3e0; padding: 1.5rem; border-radius: 8px; text-align: center;">
-                        <div style="font-size: 2rem; color: #ff9800; font-weight: bold;">${warning}</div>
-                        <div>Con Advertencias</div>
-                    </div>
-                </div>
-                ${dataStore.services.map(s => `
-                    <div style="display: flex; align-items: center; gap: 1rem; padding: 1rem; background: var(--bg-main); margin: 0.5rem 0; border-radius: 8px;">
-                        <span class="service-status ${s.status}" style="width: 12px; height: 12px; border-radius: 50%;"></span>
-                        <div style="flex: 1;">
-                            <strong>${s.name}</strong><br>
-                            <span style="font-size: 0.85rem; color: var(--text-secondary);">Disponibilidad: ${s.availability}% | Usuarios: ${s.users}</span>
-                        </div>
-                    </div>
-                `).join('')}
-            `);
-        }
-
-        function viewCIRelations() {
-            alert('Visualizando mapa de relaciones entre Configuration Items (CIs)');
-        }
-
-        function simulateImpact() {
-            alert('Simulación de impacto iniciada. Analizando dependencias de servicios...');
-        }
-
-        function showMoreIncidents() {
-            alert('Mostrando todos los incidentes históricos');
-        }
-
-        function filterByPriority() {
-            alert('Aplicando filtro por prioridad de incidentes');
-        }
-
-        function filterByService() {
-            alert('Aplicando filtro por servicio afectado');
-        }
-
-        function exportIncidents() {
-            alert('✅ Exportación de incidentes completada. Archivo: incidentes_' + new Date().toISOString().split('T')[0] + '.xlsx');
-        }
-
-        function applyIncidentFilters() {
-            const priority = document.getElementById('priorityFilter').value;
-            const status = document.getElementById('statusFilter').value;
-            const service = document.getElementById('serviceFilter').value;
-            
-            let filtered = dataStore.incidents;
-            
-            if (priority !== 'all') filtered = filtered.filter(i => i.priority === priority);
-            if (status !== 'all') filtered = filtered.filter(i => i.status === status);
-            if (service !== 'all') filtered = filtered.filter(i => i.service === service);
-            
-            const tbody = document.getElementById('incidentsTableBody');
-            tbody.innerHTML = filtered.slice(0, 15).map(inc => `
-                <tr>
-                    <td>${inc.id}</td>
-                    <td>${inc.title}</td>
-                    <td class="priority-${inc.priority}">${inc.priority.toUpperCase()}</td>
-                    <td>${inc.status}</td>
-                    <td>${inc.service}</td>
-                    <td>${inc.assigned}</td>
-                    <td>${inc.time}</td>
-                </tr>
-            `).join('');
-        }
-
-        function filterByRisk() {
-            alert('Filtrando cambios por nivel de riesgo');
-        }
-
-        function viewCAB() {
-            openModal('Change Advisory Board (CAB)', `
-                <h4>Próxima Reunión CAB</h4>
-                <div style="background: var(--bg-main); padding: 1.5rem; border-radius: 8px; margin: 1rem 0;">
-                    <p><strong>Fecha:</strong> ${getRandomFutureDate()}</p>
-                    <p><strong>Hora:</strong> 10:00 AM</p>
-                    <p><strong>Cambios a revisar:</strong> ${dataStore.changes.filter(c => c.status === 'Pendiente').length}</p>
-                </div>
-                <h4 style="margin-top: 2rem;">Miembros del CAB</h4>
-                <ul style="list-style: none; padding: 0;">
-                    <li style="padding: 0.5rem; background: var(--bg-main); margin: 0.25rem 0; border-radius: 4px;">👤 Director de TI</li>
-                    <li style="padding: 0.5rem; background: var(--bg-main); margin: 0.25rem 0; border-radius: 4px;">👤 Jefe de Operaciones</li>
-                    <li style="padding: 0.5rem; background: var(--bg-main); margin: 0.25rem 0; border-radius: 4px;">👤 Líder de Seguridad</li>
-                    <li style="padding: 0.5rem; background: var(--bg-main); margin: 0.25rem 0; border-radius: 4px;">👤 Arquitecto de Soluciones</li>
-                    <li style="padding: 0.5rem; background: var(--bg-main); margin: 0.25rem 0; border-radius: 4px;">👤 Gestor de Calidad</li>
-                </ul>
-            `);
-        }
-
-        function viewChangeHistory() {
-            alert('Mostrando histórico completo de cambios implementados');
-        }
-
-        function viewCIDetails() {
-            alert('Visualizando detalles completos de Configuration Items');
-        }
-
-        function viewFinancialDetails() {
-            openModal('Detalle Financiero TI', `
-                <h4>Desglose de Costos por Categoría</h4>
-                <div style="margin: 1rem 0;">
-                    <div style="display: flex; justify-content: space-between; padding: 0.75rem; background: var(--bg-main); margin: 0.25rem 0; border-radius: 4px;">
-                        <span>Personal</span>
-                        <strong>€1,200,000</strong>
-                    </div>
-                    <div style="display: flex; justify-content: space-between; padding: 0.75rem; background: var(--bg-main); margin: 0.25rem 0; border-radius: 4px;">
-                        <span>Hardware</span>
-                        <strong>€350,000</strong>
-                    </div>
-                    <div style="display: flex; justify-content: space-between; padding: 0.75rem; background: var(--bg-main); margin: 0.25rem 0; border-radius: 4px;">
-                        <span>Software y Licencias</span>
-                        <strong>€180,000</strong>
-                    </div>
-                    <div style="display: flex; justify-content: space-between; padding: 0.75rem; background: var(--bg-main); margin: 0.25rem 0; border-radius: 4px;">
-                        <span>Servicios Externos</span>
-                        <strong>€70,000</strong>
-                    </div>
-                </div>
-            `);
-        }
-
-        function compareMonths() {
-            alert('Comparativa mensual de gastos TI generada correctamente');
-        }
-
-        function viewROI() {
-            alert('Análisis de ROI por proyecto disponible');
-        }
-
-        function filterCIRByStatus() {
-            alert('Filtrando iniciativas CIR por estado');
-        }
-
-        function filterCIRByResponsible() {
-            alert('Filtrando iniciativas CIR por responsable');
-        }
-
-        function viewCIRHistory() {
-            alert('Mostrando histórico completo de mejora continua');
-        }
-
-        function viewActionPlan() {
-            openModal('Plan de Acción - No Conformidades', `
-                <h4>Plan de Remediación</h4>
-                <p style="margin-bottom: 1rem;">Acciones planificadas para cerrar las ${dataStore.nc.filter(nc => nc.status === 'Abierta').length} NC abiertas:</p>
-                ${dataStore.nc.filter(nc => nc.status === 'Abierta').map(nc => `
-                    <div style="background: var(--bg-main); padding: 1rem; margin: 0.5rem 0; border-radius: 8px; border-left: 4px solid ${nc.type === 'Mayor' ? '#f44336' : '#ff9800'};">
-                        <strong>${nc.id}</strong> - ${nc.description}<br>
-                        <span style="color: var(--text-secondary); font-size: 0.85rem;">
-                            Responsable: ${nc.responsible} | Fecha límite: ${nc.deadline}
-                        </span>
-                    </div>
-                `).join('')}
-            `);
-        }
-
-        function showAllAlerts() {
-            openModal('Todas las Alertas del Sistema', `
-                <div style="max-height: 400px; overflow-y: auto;">
-                    ${Array.from({length: 10}, (_, i) => `
-                        <div style="background: var(--bg-main); padding: 1rem; margin: 0.5rem 0; border-radius: 8px;">
-                            <div style="display: flex; justify-content: space-between; align-items: center;">
-                                <strong>Alerta ${i + 1}</strong>
-                                <span style="color: var(--text-secondary); font-size: 0.85rem;">${getRandomPastDate()}</span>
-                            </div>
-                            <p style="margin: 0.5rem 0 0 0; color: var(--text-secondary);">
-                                ${getRandomItem([
-                                    'Mantenimiento programado completado exitosamente',
-                                    'Actualización de sistema aplicada',
-                                    'Backup nocturno finalizado correctamente',
-                                    'Monitoreo de rendimiento: todo normal',
-                                    'Escaneo de seguridad completado sin amenazas'
-                                ])}
-                            </p>
-                        </div>
-                    `).join('')}
-                </div>
-            `);
-        }
-
         function dismissAlert() {
             alert('✅ Alerta marcada como leída');
         }
 
-        function showAllSurveys() {
-            openModal('Todas las Encuestas de Satisfacción', `
-                <div style="max-height: 500px; overflow-y: auto;">
-                    ${dataStore.surveys.map(s => `
-                        <div style="background: var(--bg-main); padding: 1rem; margin: 0.5rem 0; border-radius: 8px;">
-                            <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
-                                <span style="color: #ff9800;">${'⭐'.repeat(s.rating)}</span>
-                                <span style="color: var(--text-secondary); font-size: 0.85rem;">${s.date}</span>
-                            </div>
-                            <p style="margin: 0;">${s.comment}</p>
-                        </div>
-                    `).join('')}
-                </div>
-            `);
+        function exportData() {
+            alert('✅ Exportación completada. Archivo: datos_' + new Date().toISOString().split('T')[0] + '.xlsx');
         }
 
-        function refreshCharts() {
-            renderCharts();
-            alert('✅ Gráficos actualizados correctamente');
-        }
-
-        function showServiceDetail(serviceName) {
-            alert(`Mostrando detalles completos del servicio: ${serviceName}`);
-        }
-
-        // ===========================
-        // SISTEMA DE MODAL
-        // ===========================
         function openModal(title, content) {
             document.getElementById('modalTitle').textContent = title;
             document.getElementById('modalBody').innerHTML = content;
@@ -3756,53 +1020,18 @@
             document.getElementById('genericModal').classList.remove('active');
         }
 
-        // Cerrar modal al hacer clic fuera
         document.getElementById('genericModal').addEventListener('click', (e) => {
             if (e.target.id === 'genericModal') {
                 closeModal();
             }
         });
 
-        // ===========================
-        // EXPORTAR PDF (SIMULADO)
-        // ===========================
-        function exportToPDF() {
-            alert('📄 Generando PDF del dashboard ejecutivo...\n\n✅ PDF generado correctamente:\ndashboard_iso20000_' + new Date().toISOString().split('T')[0] + '.pdf\n\nEl archivo incluye todos los KPIs, gráficos y métricas actuales.');
-        }
-
-        // Agregar botón de exportar en el header
-        document.addEventListener('DOMContentLoaded', () => {
-            const headerInfo = document.querySelector('.header-info');
-            if (headerInfo) {
-                const exportBtn = document.createElement('button');
-                exportBtn.className = 'btn';
-                exportBtn.innerHTML = '📥 Exportar PDF';
-                exportBtn.onclick = exportToPDF;
-                exportBtn.style.cssText = 'background: var(--success); padding: 0.6rem 1.2rem; border: none; border-radius: 8px; color: white; cursor: pointer; font-size: 0.9rem;';
-                headerInfo.appendChild(exportBtn);
-            }
-        });
-
-        // ===========================
-        // ACCESIBILIDAD
-        // ===========================
         document.addEventListener('keydown', (e) => {
-            // Cerrar modal con ESC
             if (e.key === 'Escape') {
                 closeModal();
             }
         });
 
-        // ===========================
-        // MANEJO DE ERRORES
-        // ===========================
-        window.addEventListener('error', (e) => {
-            console.error('Error capturado:', e.message);
-        });
-
-        // ===========================
-        // OPTIMIZACIÓN DE RENDIMIENTO
-        // ===========================
         let resizeTimeout;
         window.addEventListener('resize', () => {
             clearTimeout(resizeTimeout);
@@ -3811,13 +1040,9 @@
             }, 250);
         });
 
-        // ===========================
-        // INFORMACIÓN DEL SISTEMA
-        // ===========================
         console.log('%c🎯 PEIGSTI - TechSolutions S.A.', 'font-size: 20px; font-weight: bold; color: #2a6fdf;');
         console.log('%cPlataforma Ejecutiva Integral de Gestión de Servicios TI', 'font-size: 14px; color: #666;');
         console.log('%cISO/IEC 20000-1:2018 Certified System', 'font-size: 12px; color: #4caf50;');
-        console.log('%cVersión: 1.0.0 | Dashboard Ejecutivo Premium', 'font-size: 10px; color: #999;');
     </script>
 </body>
 </html>
